@@ -1,0 +1,76 @@
+.heroImg {
+  width: 100%;
+  height: auto;
+  min-height: 800px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* ปรับ path ให้ถูกต้องจากตำแหน่งไฟล์นี้ไปยัง src/assets */
+  background-image: url("../assets/Gemini_Generated_Image_b5hoz2b5hoz2b5ho(1).png");
+  margin-top: 150px;
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  padding-bottom: 40px;
+}
+.textHero {
+  margin-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 50px;
+  width: 30%;
+}
+
+.textHero h1 {
+  font-size: 3.5em;
+  font-weight: 800;
+  color: rgb(0, 0, 0);
+  margin-bottom: 20px;
+}
+
+.textHero p {
+  font-size: 1.2em;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  margin-bottom: 30px;
+}
+
+.textHero button {
+  width: 150px;
+  height: 50px;
+  background-color: rgb(126, 255, 119);
+  border: 1px solid black;
+  border: none;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  font-size: 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .heroImg {
+    min-height: 400px;
+    margin-top: 100px;
+    padding-bottom: 20px;
+  }
+  .textHero {
+    margin-bottom: 100px;
+    padding-left: 20px;
+    width: 80%;
+  }
+  .textHero h1 {
+    font-size: 2em;
+  }
+  .textHero p {
+    font-size: 1em;
+  }
+  .textHero button {
+    width: 120px;
+    height: 40px;
+    font-size: 1em;
+  }
+}

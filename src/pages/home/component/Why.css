@@ -1,0 +1,28 @@
+.ContainerPosition {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.ContainerTextWhy {
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.TextWhy {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: start;
+}
+.ContentTextWhy {
+  font-size: 1.2em;
+  font-weight: 400;
+  width: 100%;
+  text-align: start;
+}
