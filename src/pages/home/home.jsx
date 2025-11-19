@@ -3,6 +3,8 @@ import "./component/heroSection.jsx";
 import HeroSection from "./component/heroSection.jsx";
 import Showcase from "./component/Showcase.jsx";
 import Why from "./component/Why.jsx";
+import AuthPage from "../Login/AuthPage.jsx";
+import Spoiler from "./component/Spoiler.jsx";
 
 const home = () => {
   return (
@@ -10,6 +12,7 @@ const home = () => {
       <HeroSection />
       <Showcase />
       <Why />
+      <Spoiler></Spoiler>
     </div>
   );
 };

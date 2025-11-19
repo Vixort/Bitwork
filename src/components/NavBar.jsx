@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { Link } from "react-router";
 
 const NavBar = () => {
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    // ดึงขอมูลผู้ใช้ตรงนี้ ต้องทำใน  useEffect นะ เพราะว่า มันต้อง ReRender เพื่อเปลี่ยนชื่อเมื่อมีการอัพเดท
+  });
   return (
     <div>
       <div className="Navfixed">
@@ -21,7 +25,7 @@ const NavBar = () => {
               One Platform for All Your Tech Needs
             </div>
             <div className="ProfileSetting">
-              <div className="TextProfile">User</div>
+              <div className="TextProfile">{username}</div>
               <div className="Profile">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png"

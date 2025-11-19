@@ -1,0 +1,51 @@
+.ContainerPosition {
+  width: 100;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Gp2 {
+  width: 100%;
+  font-size: 0.7rem;
+  margin-bottom: 50px;
+}
+
+.Container-Card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 80%;
+  height: auto;
+}
+.Content {
+  display: flex;
+  flex-direction: column;
+}
+
+.Card {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 350px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.imgG {
+  object-fit: cover;
+  width: 330px;
+  height: 274px;
+  border-radius: 15px;
+}
+
+/* .Content > p {
+    he
+} */
+
+/* .price {
+  font-size: 1.5rem;
+  justify-content: end;
+} */
