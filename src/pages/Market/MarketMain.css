@@ -1,0 +1,283 @@
+.ContainerMarketUi {
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.PostionItemFillter {
+  width: 100%;
+  height: auto;
+}
+
+.ShopMenu {
+  width: 90%;
+  display: flex;
+  flex-direction: column; /* stack filter area above market */
+  align-items: stretch;
+  gap: 18px;
+  border: 1px solid black;
+  border-radius: 20px;
+  height: auto; /* let content determine height */
+  overflow: visible;
+}
+.ContainerItemFillter {
+  width: 98%;
+  border: 1px solid black;
+  border-radius: 20px;
+  align-items: center;
+  display: flex;
+  min-height: 64px;
+  margin: 12px auto;
+  padding: 8px 12px;
+  overflow: visible;
+  background-color: #00b894;
+}
+
+/* จัดการกล่อง List ให้เลื่อนได้ */
+.MenuItem .scroll-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  overflow-x: scroll;
+  gap: 10px;
+  padding: 10px 0;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.MenuItem {
+  width: auto;
+}
+
+.scroll-list {
+  width: 50%;
+  border-radius: 100px;
+}
+
+/* ซ่อน Scrollbar สำหรับ Chrome/Safari */
+.MenuItem .scroll-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* จัดการตัวปุ่ม */
+.filter-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.filter-btn:hover {
+  background-color: #1eb80d;
+}
+
+/* cursor hints for drag-to-scroll */
+.MenuItem .scroll-list {
+  cursor: grab;
+}
+.MenuItem .scroll-list.dragging {
+  cursor: grabbing;
+}
+
+/* ensure buttons inside list don't swallow pointer events while dragging */
+.MenuItem .scroll-list .filter-btn {
+  touch-action: none; /* prevent default touch action while dragging */
+}
+
+.SearchBox,
+.searchArea {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  padding-right: 8px;
+}
+
+.SearchBox input,
+.searchForm .market-search-input {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #dfeee6;
+  min-width: 220px;
+  background: #ffffff;
+  outline: none;
+  transition: box-shadow 180ms ease, transform 120ms ease;
+  font-size: 0.95rem;
+}
+
+.SearchBox input::placeholder,
+.searchForm .market-search-input::placeholder {
+  color: #98bfb0;
+}
+
+.SearchBox input:focus,
+.searchForm .market-search-input:focus {
+  box-shadow: 0 6px 18px rgba(0, 184, 148, 0.12);
+  border-color: #00b894;
+  transform: translateY(-1px);
+}
+
+.SearchBox button,
+.searchForm .market-search-btn {
+  background: linear-gradient(90deg, #00b894 0%, #00a47a 100%);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(0, 184, 148, 0.15);
+}
+
+.SearchBox button:hover,
+.searchForm .market-search-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.Market {
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 12px 24px 28px;
+  background: transparent;
+}
+
+.CardShop {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 0;
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: all 240ms ease;
+  padding: 0;
+}
+
+.product-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 184, 148, 0.15);
+}
+
+.product-image-area {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, #e8f9f5 0%, #d4f1e9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-image-placeholder {
+  font-size: 3rem;
+  opacity: 0.5;
+  transition: transform 240ms ease;
+}
+
+.product-card:hover .product-image-placeholder {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+.product-body {
+  padding: 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+}
+
+.product-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0b4f3b;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: #5a8d7f;
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #e8f3ef;
+  gap: 12px;
+}
+
+.product-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #00a884;
+}
+
+.product-btn-buy {
+  background: linear-gradient(90deg, #00d09a 0%, #00b894 100%);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 18px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 12px rgba(0, 184, 148, 0.2);
+}
+
+.product-btn-buy:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(0, 184, 148, 0.3);
+}
+
+.product-btn-buy:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 720px) {
+  .SearchBox input,
+  .searchForm .market-search-input {
+    min-width: 140px;
+  }
+  .SearchBox,
+  .searchArea {
+    margin-left: 8px;
+  }
+  .CardShop {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .product-body {
+    padding: 16px;
+  }
+}

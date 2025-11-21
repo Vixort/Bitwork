@@ -62,3 +62,42 @@
   color: rgb(0, 0, 0);
   margin-bottom: 200px;
 }
+
+/* Marquee / infinite horizontal scroll for cards */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee__inner {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  /* duplicated content means inner width ~= 200% of visible area */
+  animation: marquee var(--marquee-duration, 18s) linear infinite;
+}
+
+.marquee__inner > .Card {
+  flex: 0 0 auto; /* keep natural width from .Card rule */
+}
+
+.marquee:hover .marquee__inner {
+  animation-play-state: paused; /* pause on hover for accessibility */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* move left by half (the duplicate set) */
+  }
+}
+
+/* small responsive tweak */
+@media (max-width: 600px) {
+  .Card {
+    width: 160px;
+    height: 240px;
+  }
+}

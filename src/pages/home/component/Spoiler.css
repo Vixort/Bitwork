@@ -1,15 +1,19 @@
-.ContainerPosition {
-  width: 100;
+.ContainerPositionCard {
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* background-color: #00b894; */
+  flex-direction: column;
+  padding-bottom: 50px;
+  margin-bottom: 200px;
 }
 
 .Gp2 {
-  width: 100%;
-  font-size: 0.7rem;
-  margin-bottom: 50px;
+  font-size: 1.7rem;
+  color: white;
+  padding: 30px;
 }
 
 .Container-Card {
@@ -49,3 +53,12 @@
   font-size: 1.5rem;
   justify-content: end;
 } */
+
+.BannerImg-1 > img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 275px;
+  max-width: 1918px;
+  min-height: 275px;
+}

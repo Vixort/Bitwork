@@ -1,0 +1,36 @@
+.ExpSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.Line {
+  width: 95%;
+  height: 10px;
+  border-radius: 20px;
+  margin: 40px;
+  background-color: #00b894;
+}
+
+.PageExp {
+  display: flex;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.PageExp > p {
+  font-size: 1.4rem;
+  text-align: right;
+  margin: 20px;
+}
+
+.ImgExp > img {
+  width: 610px;
+  height: 506px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
+}

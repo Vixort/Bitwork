@@ -43,6 +43,12 @@ const AuthPage = () => {
       <div className="auth-form-section">
         <div className="form-wrapper" data-aos="fade-right">
           {/* Header */}
+          {/* <div className="brand-header">
+            <h1 className="brand-logo">
+              Bitwork<span className="dot">.</span>
+            </h1>
+            <p className="brand-tagline">One Platform for Tech Needs</p>
+          </div> */}
 
           {/* Toggle Switch (ปุ่มสลับ Login/Register) */}
           <div className="auth-toggle-container">
@@ -61,7 +67,7 @@ const AuthPage = () => {
           </div>
 
           <div className="auth-header">
-            <h2>{isLogin ? "ยินดีต้อนรับกลับมา" : "สร้างบัญชีใหม่"}</h2>
+            $<h2>{isLogin ? "ยินดีต้อนรับกลับมา" : "สร้างบัญชีใหม่"}</h2>
             <p>
               {isLogin
                 ? "เข้าสู่ระบบเพื่อจัดการงานและร้านค้าของคุณ"

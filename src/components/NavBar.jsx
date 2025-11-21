@@ -37,12 +37,11 @@ const NavBar = () => {
         </div>
         <div className="navtwo">
           <div className="Container_NavBarTwo">
-            <div className="MarketPlace">MarketPlace</div>
+            <div className="MarketPlace">
+              <Link to="/market">MarketPlace</Link>
+            </div>
             <div className="JobBoard">JobBoard</div>
             <div className="Community">Community</div>
-            <div className="Home">
-              <Link to="/home">Home</Link>
-            </div>
           </div>
         </div>
       </div>

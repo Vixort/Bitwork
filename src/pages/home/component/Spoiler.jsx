@@ -1,10 +1,11 @@
 import React from "react";
 import "./Spoiler.css";
+import "../assets/Banner.png";
 
 const Spoiler = () => {
   return (
     <div>
-      <div className="ContainerPosition">
+      <div className="ContainerPositionCard">
         <h1 className="Gp2">การ์ดจอมือสอง</h1>
         <div className="Container-Card">
           <div className="Card">
@@ -64,6 +65,12 @@ const Spoiler = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="BannerImg-1">
+        <img
+          src="https://cdn.discordapp.com/attachments/841252955554316300/1441165821346058312/Gemini_Generated_Image_ju4mvjju4mvjju4m.png?ex=6920cdc3&is=691f7c43&hm=81efb1f26dae55350b2c0b4d92158e4ca578e59151649ba9fd08b78bded5ed58&"
+          alt=""
+        />
       </div>
     </div>
   );
