@@ -351,7 +351,7 @@ const JobListing = () => {
                   {filter === "Remote"
                     ? jobs.filter((j) => j.isRemote).length // นับงาน Remote
                     : jobs.filter((j) => j.type === filter).length}{" "}
-                  // นับตามประเภท
+                  {/* // นับตามประเภท */}
                 </span>
               )}
             </button>
