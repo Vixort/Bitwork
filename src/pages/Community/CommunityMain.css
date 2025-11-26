@@ -1,0 +1,38 @@
+:root {
+  --primary: #10b981;
+  --primary-dark: #059669;
+  --primary-light: #d1fae5;
+}
+
+.community-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8fafb 0%, #f0f4f8 100%);
+}
+
+.community-main {
+  padding: 60px 40px 80px;
+  background: linear-gradient(180deg, #f8fafb 0%, #f0f4f8 100%);
+}
+
+.community-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: 30px;
+}
+
+@media (max-width: 1200px) {
+  .community-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .community-main {
+    padding: 40px 20px 60px;
+  }
+
+  .community-container {
+    gap: 24px;
+  }
+}

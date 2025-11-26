@@ -1,7 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./MarketMain.css";
 
 const MarketMain = () => {
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: "ease-out-cubic",
+      offset: 50,
+    });
+  }, []);
+
   // รายการหมวดหมู่สินค้าที่ใช้สร้างปุ่มตัวกรองด้านบน
   const fillter = [
     "คอมพิวเตอร์",
@@ -30,6 +42,8 @@ const MarketMain = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   // state สำหรับคำค้นหา
   const [searchTerm, setSearchTerm] = useState("");
+  // state สำหรับเก็บสินค้าที่เลือกดูรายละเอียด
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   // เมื่อกดเมาส์/นิ้วลง ให้บันทึกจุดเริ่มลากและ lock pointer ไว้กับ list
   const onPointerDown = (e) => {
@@ -83,12 +97,26 @@ const MarketMain = () => {
   };
 
   // รองรับการใช้ล้อเมาส์เลื่อนแนวนอน (แปลง deltaY -> scrollLeft)
+  // เฉพาะเมื่อยังมีพื้นที่ให้เลื่อนได้ ถ้าถึงขอบแล้วจะปล่อยให้หน้าเว็บเลื่อนตามปกติ
   const onWheel = (e) => {
     const el = menuRef.current;
     if (!el) return;
-    e.preventDefault();
+
     const delta = e.deltaY;
-    el.scrollLeft += delta * 1.2;
+    const maxScrollLeft = el.scrollWidth - el.clientWidth;
+    const currentScrollLeft = el.scrollLeft;
+
+    // ถ้าเลื่อนไปทางขวา (delta > 0) และยังไม่ถึงขอบขวา
+    // หรือถ้าเลื่อนไปทางซ้าย (delta < 0) และยังไม่ถึงขอบซ้าย
+    // ให้ป้องกันการเลื่อนหน้าเว็บและเลื่อน filter แทน
+    const canScrollRight = delta > 0 && currentScrollLeft < maxScrollLeft;
+    const canScrollLeft = delta < 0 && currentScrollLeft > 0;
+
+    if (canScrollRight || canScrollLeft) {
+      e.preventDefault();
+      el.scrollLeft += delta * 1.2;
+    }
+    // ถ้าถึงขอบแล้ว ไม่ต้องทำอะไร ปล่อยให้หน้าเว็บเลื่อนตามปกติ
   };
 
   // เพิ่มสินค้าลงตะกร้า หากมีอยู่แล้วก็เพิ่มจำนวน
@@ -126,7 +154,7 @@ const MarketMain = () => {
   // คำนวณจำนวนรวมสำหรับ badge และยอดรวมราคาเพื่อสรุปท้ายตะกร้า
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cart.reduce((sum, item) => {
-    const price = parseFloat(item.price.replace(/[$,]/g, ""));
+    const price = parseFloat(item.price.replace(/[฿,]/g, ""));
     return sum + price * item.quantity;
   }, 0);
 
@@ -136,44 +164,125 @@ const MarketMain = () => {
       id: 1,
       title: "RTX 4090",
       description: "การ์ดจอประสิทธิภาพสูงสำหรับการเล่นเกมและเรนเดอร์",
-      price: "$1,599",
+      fullDescription:
+        "NVIDIA GeForce RTX 4090 เป็นการ์ดจอที่ทรงพลังที่สุดในตระกูล Ada Lovelace ให้ประสิทธิภาพการเล่นเกมที่เหนือชั้น รองรับ Ray Tracing และ DLSS 3.0 เหมาะสำหรับเกมเมอร์และครีเอเตอร์มืออาชีพ",
+      price: "฿55,900",
       category: "การ์ดจอ",
+      brand: "NVIDIA",
+      warranty: "3 ปี",
+      specs: {
+        memory: "24GB GDDR6X",
+        coreClock: "2520 MHz",
+        tdp: "450W",
+        interface: "PCIe 4.0 x16",
+      },
+      rating: 4.9,
+      reviews: 1250,
+      sold: 3420,
     },
     {
       id: 2,
       title: "RTX 4080",
       description: "GPU ทรงพลังสำหรับงานระดับมืออาชีพและการเล่นเกม",
-      price: "$1,199",
+      fullDescription:
+        "GeForce RTX 4080 มาพร้อมสถาปัตยกรรม Ada Lovelace รุ่นใหม่ล่าสุด ให้ประสิทธิภาพที่ยอดเยี่ยมทั้งการเล่นเกมและงานสร้างสรรค์ รองรับ 4K gaming ได้อย่างลื่นไหล",
+      price: "฿41,900",
       category: "การ์ดจอ",
+      brand: "NVIDIA",
+      warranty: "3 ปี",
+      specs: {
+        memory: "16GB GDDR6X",
+        coreClock: "2505 MHz",
+        tdp: "320W",
+        interface: "PCIe 4.0 x16",
+      },
+      rating: 4.8,
+      reviews: 890,
+      sold: 2150,
     },
     {
       id: 3,
       title: "RTX 4070",
       description: "ประสิทธิภาพสมดุล เหมาะสำหรับครีเอเตอร์และเกมเมอร์",
-      price: "$799",
+      fullDescription:
+        "RTX 4070 เป็นตัวเลือกที่คุ้มค่าสำหรับเกมเมอร์ที่ต้องการเล่นเกมที่ความละเอียด 1440p พร้อมประสิทธิภาพ Ray Tracing ที่ยอดเยี่ยม และการใช้พลังงานที่ประหยัด",
+      price: "฿27,900",
       category: "การ์ดจอ",
+      brand: "NVIDIA",
+      warranty: "3 ปี",
+      specs: {
+        memory: "12GB GDDR6X",
+        coreClock: "2475 MHz",
+        tdp: "200W",
+        interface: "PCIe 4.0 x16",
+      },
+      rating: 4.7,
+      reviews: 1520,
+      sold: 4890,
     },
     {
       id: 4,
-      title: "GTX 1660",
+      title: "GTX 1660 Super",
       description:
         "GPU ระดับเริ่มต้น ประหยัดพลังงาน เหมาะสำหรับการเล่นเกมทั่วไป",
-      price: "$229",
+      fullDescription:
+        "GeForce GTX 1660 Super เป็นการ์ดจอระดับเริ่มต้นที่ให้ประสิทธิภาพคุ้มค่า เหมาะสำหรับเล่นเกมที่ความละเอียด 1080p ได้อย่างลื่นไหล ใช้พลังงานต่ำและราคาเข้าถึงง่าย",
+      price: "฿7,990",
       category: "การ์ดจอ",
+      brand: "NVIDIA",
+      warranty: "3 ปี",
+      specs: {
+        memory: "6GB GDDR6",
+        coreClock: "1785 MHz",
+        tdp: "125W",
+        interface: "PCIe 3.0 x16",
+      },
+      rating: 4.5,
+      reviews: 2340,
+      sold: 8920,
     },
     {
       id: 5,
-      title: "Intel i9-14900K",
+      title: "Intel Core i9-14900K",
       description: "โปรเซสเซอร์ระดับท็อปพร้อมประสิทธิภาพที่ยอดเยี่ยม",
-      price: "$689",
+      fullDescription:
+        "Intel Core i9-14900K เป็น CPU รุ่นเรือธงจาก Intel ที่มาพร้อม 24 cores (8P + 16E) และความเร็วสูงสุดถึง 6.0 GHz เหมาะสำหรับงานหนักทุกประเภท ไม่ว่าจะเป็นเกมหรืองานตัดต่อ",
+      price: "฿23,900",
       category: "ซีพียู",
+      brand: "Intel",
+      warranty: "3 ปี",
+      specs: {
+        cores: "24 Cores (8P + 16E)",
+        threads: "32 Threads",
+        baseClock: "3.2 GHz",
+        boostClock: "6.0 GHz",
+        tdp: "125W",
+      },
+      rating: 4.8,
+      reviews: 680,
+      sold: 1890,
     },
     {
       id: 6,
-      title: "Ryzen 9 7950X3D",
+      title: "AMD Ryzen 9 7950X3D",
       description: "CPU เกมมิ่งที่ดีที่สุดพร้อมเทคโนโลยี 3D V-Cache",
-      price: "$599",
+      fullDescription:
+        "Ryzen 9 7950X3D คือ CPU ที่ดีที่สุดสำหรับการเล่นเกมด้วยเทคโนโลยี 3D V-Cache ที่เพิ่ม L3 Cache มหาศาล ให้ประสิทธิภาพเกมที่เหนือชั้น พร้อมความสามารถ multitasking ระดับเทพ",
+      price: "฿20,900",
       category: "ซีพียู",
+      brand: "AMD",
+      warranty: "3 ปี",
+      specs: {
+        cores: "16 Cores",
+        threads: "32 Threads",
+        baseClock: "4.2 GHz",
+        boostClock: "5.7 GHz",
+        cache: "128MB L3 3D V-Cache",
+        tdp: "120W",
+      },
+      rating: 4.9,
+      reviews: 920,
+      sold: 2450,
     },
   ];
 
@@ -252,7 +361,9 @@ const MarketMain = () => {
               {/* ส่วนสรุปราคาและปุ่ม Checkout */}
               <div className="cart-total">
                 <span>ยอดรวม:</span>
-                <span className="total-price">${totalPrice.toFixed(2)}</span>
+                <span className="total-price">
+                  ฿{totalPrice.toLocaleString()}
+                </span>
               </div>
               <button className="checkout-btn" disabled={cart.length === 0}>
                 ชำระเงิน
@@ -264,7 +375,7 @@ const MarketMain = () => {
 
       <div className="ContainerMarketUi">
         <div className="ShopMenu">
-          <div className="PostionItemFillter">
+          <div className="PostionItemFillter" data-aos="fade-down">
             <div className="ContainerItemFillter">
               <div className="MenuItem">
                 {/* รายการปุ่มหมวดหมู่ที่ลากได้ */}
@@ -308,11 +419,13 @@ const MarketMain = () => {
             <div className="CardShop">
               {/* วน products เพื่อสร้าง ProductCard แต่ละใบ */}
               {filteredProducts.length > 0 ? (
-                filteredProducts.map((product) => (
+                filteredProducts.map((product, index) => (
                   <ProductCard
                     key={product.id}
                     product={product}
                     onAddToCart={addToCart}
+                    onViewDetail={() => setSelectedProduct(product)}
+                    aosDelay={index * 100}
                   />
                 ))
               ) : (
@@ -321,14 +434,28 @@ const MarketMain = () => {
             </div>
           </div>
         </div>
+
+        {/* Product Detail Modal */}
+        {selectedProduct && (
+          <ProductDetailModal
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+            onAddToCart={addToCart}
+          />
+        )}
       </div>
     </div>
   );
 };
 
-function ProductCard({ product, onAddToCart }) {
+function ProductCard({ product, onAddToCart, onViewDetail, aosDelay = 0 }) {
   return (
-    <div className="product-card">
+    <div
+      className="product-card"
+      onClick={onViewDetail}
+      data-aos="fade-up"
+      data-aos-delay={aosDelay}
+    >
       {/* ส่วนรูป (ตอนนี้ใช้ emoji แทน) */}
       <div className="product-image-area">
         <div className="product-image-placeholder">📦</div>
@@ -344,7 +471,10 @@ function ProductCard({ product, onAddToCart }) {
           <span className="product-price">{product.price}</span>
           <button
             className="product-btn-buy"
-            onClick={() => onAddToCart(product)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToCart(product);
+            }}
           >
             ซื้อเลย
           </button>
@@ -352,6 +482,144 @@ function ProductCard({ product, onAddToCart }) {
       </div>
     </div>
   );
+}
+
+// Modal สำหรับแสดงรายละเอียดสินค้า
+function ProductDetailModal({ product, onClose, onAddToCart }) {
+  const [quantity, setQuantity] = useState(1);
+
+  const handleAddToCart = () => {
+    for (let i = 0; i < quantity; i++) {
+      onAddToCart(product);
+    }
+    onClose();
+  };
+
+  return (
+    <div className="product-detail-overlay" onClick={onClose}>
+      <div
+        className="product-detail-modal"
+        onClick={(e) => e.stopPropagation()}
+        data-aos="zoom-in"
+        data-aos-duration="300"
+      >
+        <button className="detail-close" onClick={onClose}>
+          ✕
+        </button>
+
+        <div className="detail-image-area">
+          <div className="detail-image-placeholder">📦</div>
+          {product.category && (
+            <span className="detail-tag">{product.category}</span>
+          )}
+          {product.brand && (
+            <span className="detail-brand-tag">{product.brand}</span>
+          )}
+        </div>
+
+        <div className="detail-content">
+          <div className="detail-header">
+            <h2 className="detail-title">{product.title}</h2>
+            {product.rating && (
+              <div className="detail-rating">
+                <span className="rating-stars">⭐ {product.rating}</span>
+                <span className="rating-count">({product.reviews} รีวิว)</span>
+              </div>
+            )}
+          </div>
+
+          <p className="detail-description">
+            {product.fullDescription || product.description}
+          </p>
+
+          {/* Specifications */}
+          {product.specs && (
+            <div className="detail-specs">
+              <h4 className="specs-title">📋 สเปคสินค้า</h4>
+              <div className="specs-grid">
+                {Object.entries(product.specs).map(([key, value]) => (
+                  <div key={key} className="spec-item">
+                    <span className="spec-label">{formatSpecLabel(key)}</span>
+                    <span className="spec-value">{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="detail-info">
+            <div className="detail-info-item">
+              <span className="detail-label">หมวดหมู่</span>
+              <span className="detail-value">{product.category}</span>
+            </div>
+            <div className="detail-info-item">
+              <span className="detail-label">แบรนด์</span>
+              <span className="detail-value">{product.brand || "ไม่ระบุ"}</span>
+            </div>
+            <div className="detail-info-item">
+              <span className="detail-label">ประกัน</span>
+              <span className="detail-value">{product.warranty || "1 ปี"}</span>
+            </div>
+            <div className="detail-info-item">
+              <span className="detail-label">ขายแล้ว</span>
+              <span className="detail-value detail-sold">
+                {product.sold ? product.sold.toLocaleString() : "0"} ชิ้น
+              </span>
+            </div>
+          </div>
+
+          <div className="detail-status">
+            <span className="status-badge in-stock">✓ มีสินค้า</span>
+            <span className="status-shipping">🚚 จัดส่งฟรีทั่วประเทศ</span>
+          </div>
+
+          <div className="detail-footer">
+            <div className="detail-price-section">
+              <span className="detail-price">{product.price}</span>
+              <span className="detail-price-note">ราคารวม VAT แล้ว</span>
+            </div>
+
+            <div className="detail-actions">
+              <div className="quantity-selector">
+                <button
+                  className="qty-control-btn"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                >
+                  −
+                </button>
+                <span className="qty-value">{quantity}</span>
+                <button
+                  className="qty-control-btn"
+                  onClick={() => setQuantity(quantity + 1)}
+                >
+                  +
+                </button>
+              </div>
+              <button className="detail-btn-buy" onClick={handleAddToCart}>
+                🛒 เพิ่มลงตะกร้า
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Helper function สำหรับแปลง key เป็นชื่อที่อ่านง่าย
+function formatSpecLabel(key) {
+  const labels = {
+    memory: "หน่วยความจำ",
+    coreClock: "ความเร็ว Core",
+    tdp: "TDP",
+    interface: "Interface",
+    cores: "จำนวน Cores",
+    threads: "จำนวน Threads",
+    baseClock: "Base Clock",
+    boostClock: "Boost Clock",
+    cache: "Cache",
+  };
+  return labels[key] || key;
 }
 
 export default MarketMain;

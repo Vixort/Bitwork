@@ -1,0 +1,372 @@
+/**
+ * HeroSection.css
+ * Styles สำหรับ Hero Section ของหน้า Community
+ */
+
+/* ==================== Hero Section ==================== */
+.community-hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 140px 40px 60px;
+  overflow: hidden;
+}
+
+.community-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.community-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.92) 0%,
+    rgba(6, 95, 70, 0.95) 50%,
+    rgba(4, 47, 46, 0.97) 100%
+  );
+}
+
+.community-hero-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.community-hero-content {
+  max-width: 850px;
+  margin: 0 auto 50px;
+}
+
+.community-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.community-hero-badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.community-hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 24px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.community-hero-title .community-highlight {
+  display: block;
+  background: linear-gradient(135deg, #a7f3d0, #6ee7b7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 5px 0;
+}
+
+.community-hero-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto 32px;
+}
+
+.community-hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.community-primary-btn,
+.community-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.community-primary-btn {
+  background: #fff;
+  color: var(--primary);
+  border: none;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.community-primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.community-secondary-btn {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.community-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Stats Cards Grid */
+.community-hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.community-stats-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.community-stats-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+.stats-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stats-card-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #a7f3d0;
+}
+
+.stats-card-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.stats-card-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.stats-card-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hero Search Container */
+.community-hero-search-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  width: 100%;
+  margin: 50px auto 0;
+}
+
+.community-search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 8px 8px 8px 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  gap: 12px;
+}
+
+.community-search-icon {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.community-search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #1f2937;
+  background: transparent;
+}
+
+.community-search-box input::placeholder {
+  color: #9ca3af;
+}
+
+.community-search-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.community-search-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* Popular Tags */
+.community-popular-tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.tags-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.tags-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.popular-tag {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popular-tag:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 1024px) {
+  .community-hero-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .community-hero {
+    padding: 120px 20px 40px;
+    min-height: 100vh;
+  }
+
+  .community-hero-title {
+    font-size: 2.2rem;
+  }
+
+  .community-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .community-hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .community-primary-btn,
+  .community-secondary-btn {
+    width: 100%;
+    justify-content: center;
+    max-width: 300px;
+  }
+
+  .community-hero-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .community-stats-card {
+    padding: 16px;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .stats-card-info {
+    text-align: center;
+  }
+
+  .stats-card-number {
+    font-size: 1.2rem;
+  }
+
+  .community-search-box {
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .community-search-box input {
+    width: 100%;
+    text-align: center;
+  }
+
+  .community-search-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .community-popular-tags {
+    flex-direction: column;
+  }
+}
