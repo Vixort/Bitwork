@@ -81,6 +81,14 @@ import JobMain from "./pages/JobBoard/JobMain.jsx";
  */
 import CommunityMain from "./pages/Community/CommunityMain.jsx";
 
+/**
+ * SettingMain - หน้าตั้งค่าบัญชี
+ * - ข้อมูลบัญชีผู้ใช้, ความปลอดภัย, การเงิน
+ * - จัดการร้านค้า, การแจ้งเตือน, ธีม
+ * - เชื่อมต่อ Social Login
+ */
+import SettingMain from "./pages/Setting/SettingMain.jsx";
+
 // =============================================================================
 // APP COMPONENT - Component หลักของแอปพลิเคชัน
 // =============================================================================
@@ -160,6 +168,14 @@ const App = () => {
           - URL: http://localhost:5173/register
         */}
         <Route path="/register" element={<AuthPage />} />
+
+        {/* 
+          Route: หน้าตั้งค่าบัญชี (/settings)
+          - จัดการข้อมูลบัญชี ความปลอดภัย การเงิน
+          - ตั้งค่าร้านค้า การแจ้งเตือน ธีม
+          - URL: http://localhost:5173/settings
+        */}
+        <Route path="/settings" element={<SettingMain />} />
       </Routes>
     </div>
   );

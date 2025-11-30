@@ -1,0 +1,67 @@
+/**
+ * InputField.css - Input Field Styles
+ */
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.input-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.required-star {
+  color: #e74c3c;
+  margin-left: 4px;
+}
+
+.input-control {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.input-control:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+}
+
+.input-control::placeholder {
+  color: #999;
+}
+
+.input-control.input-error {
+  border-color: #e74c3c;
+}
+
+.input-control.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+}
+
+.input-control.input-disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  color: #888;
+}
+
+.error-text {
+  font-size: 12px;
+  color: #e74c3c;
+}
+
+.helper-text {
+  font-size: 12px;
+  color: #888;
+}
