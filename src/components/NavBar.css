@@ -1,0 +1,25 @@
+.nav-bar {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.navigation {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navigation .logo {
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.user-profile {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}

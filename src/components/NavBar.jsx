@@ -1,20 +1,28 @@
-import React from "react";
-import Link from "react";
+import React, { useState } from "react";
+import { Link } from "react-router";
+import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({ isLoggedIn = false, user = null }) => {
   return (
     <div>
       <div className="nav-bar">
-        <div className="logo"></div>
-        <div className="store"></div>
-        <div className="JobBoard"></div>
-        <div className="Community"></div>
+        <div className="navigation">
+          <div className="logo">Logo</div>
+          <div className="store">Store</div>
+          <div className="JobBoard">Job Board</div>
+          <div className="Community">Community</div>
+        </div>
         <div className="user-profile">
-          <div className="login">Login</div>
-          <div className="signin">Sign In</div>
-          <div className="if-login">Logout</div>
-          <div className="username">Username</div>
-          <div className="avatar"></div>
+          {isLoggedIn ? (
+            <>
+              <div className="username">{user?.username || "Username"}</div>
+              <div className="avatar">{user?.avatar || "Logo"}</div>
+            </>
+          ) : (
+            <Link to="/login" className="signin">
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
     </div>
