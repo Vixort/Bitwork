@@ -1,0 +1,222 @@
+/**
+ * =============================================================================
+ * BusinessSteps.css - How It Works Section Styles
+ * =============================================================================
+ */
+
+/* Section Container */
+.steps-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #ecfdf5 100%);
+  position: relative;
+}
+
+.steps-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header */
+.steps-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.steps-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.steps-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.steps-title .highlight {
+  color: #10b981;
+}
+
+.steps-subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Timeline */
+.steps-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.steps-timeline::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 3px;
+  background: linear-gradient(90deg, #10b981 0%, #34d399 50%, #10b981 100%);
+  z-index: 0;
+}
+
+/* Step Item */
+.step-item {
+  position: relative;
+  text-align: center;
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 auto 24px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.step-connector {
+  display: none;
+}
+
+.step-content {
+  background: white;
+  border-radius: 16px;
+  padding: 32px 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+  transition: all 0.3s ease;
+}
+
+.step-item:hover .step-content {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+}
+
+.step-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: #10b981;
+  transition: all 0.3s ease;
+}
+
+.step-item:hover .step-icon {
+  background: #10b981;
+  color: white;
+  transform: scale(1.1);
+}
+
+.step-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.step-description {
+  font-size: 0.9375rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.steps-cta {
+  text-align: center;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.cta-btn.primary {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.cta-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+}
+
+.cta-note {
+  margin-top: 16px;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .steps-timeline {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .steps-timeline::before {
+    display: none;
+  }
+
+  .step-number {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .steps-section {
+    padding: 60px 0;
+  }
+
+  .steps-title {
+    font-size: 1.875rem;
+  }
+
+  .steps-timeline {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .step-content {
+    padding: 24px 20px;
+  }
+
+  .step-icon {
+    width: 56px;
+    height: 56px;
+  }
+}

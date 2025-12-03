@@ -1,152 +1,166 @@
 /**
  * =============================================================================
- * heroSection.jsx - Hero Section Component (ส่วน Hero ของหน้า Home)
+ * HeroSection.jsx - Hero Section Component
  * =============================================================================
- *
- * Component นี้แสดงส่วน Hero ที่อยู่ด้านบนสุดของหน้า Home
- * เป็นส่วนแรกที่ผู้ใช้เห็นเมื่อเข้าเว็บไซต์
- *
- * ทำหน้าที่:
- * 1. แสดงข้อความหลัก (Headline) ของเว็บไซต์
- * 2. แสดงคำอธิบายสั้นๆ (Description)
- * 3. แสดงปุ่ม Call to Action (CTA) "Get Started"
- * 4. มี Animation เมื่อ scroll เข้ามา (AOS - Animate On Scroll)
- *
- * โครงสร้าง:
- * └── heroImg (Background Container)
- *     └── textHero (Text Content)
- *         ├── h1 - Headline "Bitwork Bitkub"
- *         ├── p - Description
- *         └── button - "Get Started"
- *
  */
-
-// =============================================================================
-// IMPORTS - นำเข้า Dependencies
-// =============================================================================
 
 import React from "react";
-
-/**
- * heroSection.css - Styles สำหรับ Hero Section
- * - กำหนด Background Image
- * - กำหนด Layout และ Typography
- * - กำหนด Button Styles
- */
+import { useNavigate } from "react-router";
 import "./heroSection.css";
 
-/**
- * AOS (Animate On Scroll) Library
- * - ใช้สำหรับสร้าง Animation เมื่อ scroll
- * - องค์ประกอบจะ animate เมื่อเลื่อนเข้ามาในหน้าจอ
- *
- * การใช้งาน:
- * - data-aos="fade-up" = Animation แบบ fade ขึ้นมา
- * - data-aos-duration="1000" = ระยะเวลา Animation 1000ms (1 วินาที)
- */
-import AOS from "aos";
-import "aos/dist/aos.css"; // CSS สำหรับ AOS Animations
+const HeroSection = () => {
+  const navigate = useNavigate();
 
-// =============================================================================
-// AOS INITIALIZATION - เริ่มต้น AOS
-// =============================================================================
-
-/**
- * AOS.init() - เริ่มต้นการทำงานของ AOS
- *
- * หมายเหตุ:
- * - เรียก init() ที่ระดับ Module Level (นอก Component)
- * - ทำให้ AOS พร้อมใช้งานทันทีเมื่อไฟล์ถูก import
- * - อาจย้ายไปใน useEffect() เพื่อควบคุมการ init ได้ดีกว่า
- *
- * ตัวอย่างการย้ายไป useEffect:
- * useEffect(() => {
- *   AOS.init({
- *     duration: 800,
- *     once: true,
- *     easing: "ease-out-cubic"
- *   });
- * }, []);
- */
-AOS.init();
-
-// =============================================================================
-// HERO SECTION COMPONENT
-// =============================================================================
-
-/**
- * HeroSection Component
- *
- * @description แสดงส่วน Hero ของหน้า Home พร้อม Animation
- * @returns {JSX.Element} - Hero Section พร้อม Headline, Description และ CTA Button
- *
- * Animation ที่ใช้:
- * - fade-up: องค์ประกอบจะ fade in และเลื่อนขึ้นมา
- * - duration 1000ms: Animation ใช้เวลา 1 วินาที
- *
- * การทำงาน:
- * 1. แสดง Background Image (กำหนดใน CSS)
- * 2. แสดง Text Content ตรงกลาง
- * 3. เมื่อ scroll เข้ามา จะมี Animation แสดงทีละองค์ประกอบ
- */
-const heroSection = () => {
   return (
-    <div>
-      <div>
-        {/* =================================================================
-            HERO IMAGE CONTAINER
-            - ใช้เป็น Background Container
-            - มี Background Image หรือ Gradient (กำหนดใน CSS)
-            - เป็น Full Width Section
-        ================================================================= */}
-        <div className="heroImg">
-          {/* =================================================================
-              TEXT HERO - ส่วนเนื้อหาตัวอักษร
-              - จัดกลางหน้าจอ
-              - ซ้อนทับบน Background Image
-          ================================================================= */}
-          <div className="textHero">
-            {/* ----- HEADLINE ----- */}
-            {/* 
-              ข้อความหลักของ Hero Section
-              - data-aos="fade-up": Animation แบบ fade ขึ้นมา
-              - data-aos-duration="1000": ใช้เวลา 1 วินาที
-            */}
-            <h1 data-aos="fade-up" data-aos-duration="1000">
-              Bitwork Bitkub
-            </h1>
+    <section className="hero-section">
+      <div className="hero-background">
+        <div className="hero-overlay"></div>
+        <div className="hero-pattern"></div>
+      </div>
 
-            {/* ----- DESCRIPTION ----- */}
-            {/* 
-              คำอธิบายสั้นๆ เกี่ยวกับ Bitwork
-              - Lorem Ipsum = ข้อความตัวอย่าง (ควรเปลี่ยนเป็นข้อความจริง)
-              - มี Animation เหมือน Headline
-            */}
-            <p data-aos="fade-up" data-aos-duration="1000">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Doloremque, in officiis? Vero alias in repellat porro temporibus
-              mollitia, blanditiis fuga corrupti eaque nulla impedit esse
-              eveniet deserunt ut quas nemo?
-            </p>
+      <div className="hero-container">
+        <div className="hero-content" data-aos="fade-up">
+          <span className="hero-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            แพลตฟอร์มสำหรับคนรักคอมพิวเตอร์
+          </span>
 
-            {/* ----- CTA BUTTON ----- */}
-            {/* 
-              ปุ่ม Call to Action "Get Started"
-              - ชวนให้ผู้ใช้เริ่มต้นใช้งาน
-              - มี Animation เหมือนกัน
-              
-              TODO: เพิ่ม onClick handler เพื่อนำทางไปหน้า Register หรือ Market
-              ตัวอย่าง: onClick={() => navigate('/register')}
-            */}
-            <button data-aos="fade-up" data-aos-duration="1000">
-              Get Started
+          <h1 className="hero-title">
+            <span className="title-line">ยินดีต้อนรับสู่</span>
+            <span className="title-highlight">Bitwork</span>
+          </h1>
+
+          <p className="hero-description">
+            แพลตฟอร์มครบวงจรสำหรับคนรักคอมพิวเตอร์ ซื้อขายอุปกรณ์มือสอง
+            จ้างงานซ่อมแซม และแลกเปลี่ยนความรู้กับชุมชนที่ใหญ่ที่สุดในประเทศไทย
+          </p>
+
+          <div className="hero-stats" data-aos="fade-up" data-aos-delay="100">
+            <div className="stat-item">
+              <span className="stat-number">10K+</span>
+              <span className="stat-label">ผู้ใช้งาน</span>
+            </div>
+            <div className="stat-divider"></div>
+            <div className="stat-item">
+              <span className="stat-number">5K+</span>
+              <span className="stat-label">สินค้า</span>
+            </div>
+            <div className="stat-divider"></div>
+            <div className="stat-item">
+              <span className="stat-number">2K+</span>
+              <span className="stat-label">งานบริการ</span>
+            </div>
+          </div>
+
+          <div className="hero-cta" data-aos="fade-up" data-aos-delay="200">
+            <button className="cta-primary" onClick={() => navigate("/market")}>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              เริ่มช้อปปิ้ง
+            </button>
+            <button
+              className="cta-secondary"
+              onClick={() => navigate("/jobboard")}
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              </svg>
+              หางาน / จ้างงาน
             </button>
           </div>
         </div>
+
+        <div className="hero-visual" data-aos="fade-left" data-aos-delay="300">
+          <div className="visual-card card-1">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+            <span>คอมพิวเตอร์</span>
+          </div>
+          <div className="visual-card card-2">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+              <line x1="12" y1="22.08" x2="12" y2="12" />
+            </svg>
+            <span>การ์ดจอ</span>
+          </div>
+          <div className="visual-card card-3">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+            </svg>
+            <span>ซ่อมบำรุง</span>
+          </div>
+          <div className="visual-card card-4">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span>ชุมชน</span>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div className="scroll-indicator" data-aos="fade-up" data-aos-delay="500">
+        <div className="mouse">
+          <div className="wheel"></div>
+        </div>
+        <span>เลื่อนลง</span>
+      </div>
+    </section>
   );
 };
 
-// Export heroSection Component เพื่อใช้ใน home.jsx
-export default heroSection;
+export default HeroSection;

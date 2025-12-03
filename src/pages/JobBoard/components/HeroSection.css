@@ -29,7 +29,7 @@
     135deg,
     var(--primary-bg) 0%,
     var(--white) 40%,
-    rgba(240, 253, 244, 0.5) 70%,
+    rgba(240, 253, 244, 0.5) 10%,
     var(--white) 100%
   );
   padding: 80px 24px 60px;
@@ -50,7 +50,7 @@
   background-image: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200");
   background-size: cover;
   background-position: center;
-  opacity: 0.04;
+  /* opacity: 0.04; */
   mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
   -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
   pointer-events: none;

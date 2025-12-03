@@ -22,6 +22,7 @@
   right: 0;
   bottom: 0;
   background-image: url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80");
+  filter: blur(5px);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -30,14 +31,15 @@
 .community-hero-overlay {
   position: absolute;
   top: 0;
+
   left: 0;
   right: 0;
   bottom: 0;
   background: linear-gradient(
     135deg,
-    rgba(16, 185, 129, 0.92) 0%,
+    /* rgba(16, 185, 129, 0.92) 30%,
     rgba(6, 95, 70, 0.95) 50%,
-    rgba(4, 47, 46, 0.97) 100%
+    rgba(4, 47, 46, 0.97) 100% */
   );
 }
 

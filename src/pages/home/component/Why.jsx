@@ -1,119 +1,128 @@
 /**
  * =============================================================================
- * Why.jsx - Why Bitwork Section Component (ส่วนทำไมต้อง Bitwork)
+ * Why.jsx - Why Bitwork Section Component
  * =============================================================================
- *
- * Component นี้แสดงเหตุผลว่าทำไมผู้ใช้ควรเลือกใช้ Bitwork
- * เป็นส่วนสำคัญในการสร้างความน่าเชื่อถือและอธิบายคุณค่าของ Platform
- *
- * ทำหน้าที่:
- * 1. แสดงคำถาม "ทำไมต้องใช้ Bitwork?"
- * 2. อธิบายจุดเด่นและบริการหลักของ Bitwork
- * 3. แสดง Tagline สรุปท้าย Section
- *
- * โครงสร้าง:
- * └── ContainerPosition
- *     ├── ContainerTextWhy
- *     │   ├── h1 - "ทำไมต้องใช้ Bitwork ?"
- *     │   └── p - คำอธิบายรายละเอียด
- *     └── h1 - Tagline สรุป
- *
- * Content:
- * - ซื้อขายอุปกรณ์คอมพิวเตอร์
- * - จ้างงานซ่อมแซม
- * - แลกเปลี่ยนความรู้กับชุมชน
- * - ระบบใช้งานง่ายและปลอดภัย
- *
  */
-
-// =============================================================================
-// IMPORTS - นำเข้า Dependencies
-// =============================================================================
 
 import React from "react";
-
-/**
- * Why.css - Styles สำหรับ Why Section
- * - กำหนด Layout และ Typography
- * - กำหนดสีและ Spacing
- * - กำหนด Background (ถ้ามี)
- */
 import "./Why.css";
 
-// =============================================================================
-// WHY COMPONENT
-// =============================================================================
-
-/**
- * Why Component
- *
- * @description แสดงเหตุผลที่ควรใช้ Bitwork และจุดเด่นของ Platform
- * @returns {JSX.Element} - Why Section พร้อมคำอธิบายและ Tagline
- *
- * การทำงาน:
- * 1. แสดงคำถาม "ทำไมต้องใช้ Bitwork?"
- * 2. แสดงคำตอบ/คำอธิบายที่ครอบคลุมบริการทั้งหมด
- * 3. แสดง Tagline ที่สรุปคุณค่าของ Platform
- *
- * หมายเหตุ:
- * - ส่วนนี้เป็น Static Content ไม่มี State หรือ Logic ซับซ้อน
- * - เน้นการแสดงข้อความ (Copy Writing)
- * - สามารถเพิ่ม Animation (AOS) ได้ในอนาคต
- */
 const Why = () => {
-  return (
-    <div>
-      {/* =================================================================
-          CONTAINER POSITION
-          - Container หลักของ Section
-          - จัดตำแหน่งเนื้อหาทั้งหมด
-      ================================================================= */}
-      <div className="ContainerPosition">
-        {/* =================================================================
-            TEXT WHY CONTAINER
-            - ส่วนข้อความหลัก (คำถามและคำตอบ)
-        ================================================================= */}
-        <div className="ContainerTextWhy">
-          {/* ----- QUESTION HEADLINE ----- */}
-          {/* คำถามหลักที่ดึงดูดความสนใจ */}
-          <h1 className="TextWhy">ทำไมต้องใช้ Bitwork ?</h1>
+  const features = [
+    {
+      icon: (
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
+          <circle cx="9" cy="21" r="1" />
+          <circle cx="20" cy="21" r="1" />
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+        </svg>
+      ),
+      title: "ซื้อขายอุปกรณ์",
+      description: "ซื้อขายคอมพิวเตอร์และอุปกรณ์มือสองคุณภาพดี ราคาถูก",
+    },
+    {
+      icon: (
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        </svg>
+      ),
+      title: "จ้างงานซ่อมแซม",
+      description: "หาช่างซ่อมคอมพิวเตอร์มืออาชีพ พร้อมรับประกันงาน",
+    },
+    {
+      icon: (
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      ),
+      title: "ชุมชนคนไอที",
+      description: "แลกเปลี่ยนความรู้กับผู้เชี่ยวชาญและผู้ใช้งานทั่วประเทศ",
+    },
+    {
+      icon: (
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <polyline points="9 12 11 14 15 10" />
+        </svg>
+      ),
+      title: "ปลอดภัย 100%",
+      description: "ระบบรักษาความปลอดภัยสูง มั่นใจได้ทุกการทำธุรกรรม",
+    },
+  ];
 
-          {/* ----- ANSWER DESCRIPTION ----- */}
-          {/* 
-            คำตอบที่อธิบายจุดเด่นของ Bitwork
-            
-            จุดเด่นที่กล่าวถึง:
-            1. รวมบริการด้านคอมพิวเตอร์ไว้ในที่เดียว
-            2. ซื้อขายอุปกรณ์คอมพิวเตอร์
-            3. จ้างงานซ่อมแซม
-            4. แลกเปลี่ยนความรู้กับชุมชน
-            5. ระบบใช้งานง่ายและปลอดภัย
-            6. ประหยัดเวลาและค่าใช้จ่าย
-          */}
-          <p className="ContentTextWhy">
-            เพราะเราคือแพลตฟอร์มที่รวบรวมบริการด้านคอมพิวเตอร์ไว้ในที่เดียว
-            ไม่ว่าคุณจะต้องการซื้อขายอุปกรณ์คอมพิวเตอร์ จ้างงานซ่อมแซม
-            หรือแลกเปลี่ยนความรู้กับชุมชนผู้ใช้คอมพิวเตอร์ Bitwork
-            มีทุกอย่างที่คุณต้องการ ด้วยระบบที่ใช้งานง่ายและปลอดภัย
-            เราช่วยให้คุณประหยัดเวลาและค่าใช้จ่ายในการค้นหาบริการต่างๆ
-            มาเป็นส่วนหนึ่งของชุมชน Bitwork วันนี้!
+  return (
+    <section className="why-section">
+      <div className="why-container">
+        <div className="why-header" data-aos="fade-up">
+          <span className="why-badge">ทำไมต้องเลือกเรา</span>
+          <h2 className="why-title">
+            ทำไมต้องใช้ <span className="highlight">Bitwork</span> ?
+          </h2>
+          <p className="why-subtitle">
+            เราคือแพลตฟอร์มที่รวบรวมบริการด้านคอมพิวเตอร์ไว้ในที่เดียว
+            ช่วยให้คุณประหยัดเวลาและค่าใช้จ่าย
           </p>
         </div>
 
-        {/* ----- TAGLINE / VALUE PROPOSITION ----- */}
-        {/* 
-          ข้อความสรุปคุณค่าของ Bitwork
-          - สั้น กระชับ จดจำง่าย
-          - สรุปสิ่งที่ผู้ใช้จะได้รับ
-        */}
-        <h1>
-          ซื้อขายง่าย ปลอดภัย สนุกได้ทุกการช็อป —
-          ครบทุกความต้องการด้านไอทีในที่เดียว
-        </h1>
+        <div className="why-features">
+          {features.map((feature, index) => (
+            <div
+              className="feature-card"
+              key={index}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <div className="feature-icon">{feature.icon}</div>
+              <h3 className="feature-title">{feature.title}</h3>
+              <p className="feature-description">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="why-tagline" data-aos="fade-up">
+          <p>
+            ซื้อขายง่าย ปลอดภัย สนุกได้ทุกการช็อป —
+            <span className="tagline-highlight">
+              {" "}
+              ครบทุกความต้องการด้านไอทีในที่เดียว
+            </span>
+          </p>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-// Export Why Component เพื่อใช้ใน home.jsx
 export default Why;

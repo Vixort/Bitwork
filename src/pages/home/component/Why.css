@@ -1,36 +1,151 @@
-.ContainerPosition {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
+/* =============================================================================
+   WHY SECTION - Features & Benefits
+   ============================================================================= */
+
+.why-section {
+  padding: 100px 5%;
+  background: #ffffff;
 }
 
-.ContainerTextWhy {
-  width: 80%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  text-align: center;
-  margin-bottom: 10rem;
+.why-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.TextWhy {
-  font-size: 2rem;
+
+/* Header */
+.why-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.why-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: #ecfdf5;
+  color: #10b981;
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: 20px;
-  width: 100%;
-  text-align: start;
-}
-.ContentTextWhy {
-  padding: 10px;
-  font-size: 1.2em;
-  font-weight: 400;
-  width: 80%;
-  text-align: start;
+  border-radius: 50px;
+  margin-bottom: 16px;
 }
 
-.ContainerPosition > h1 {
-  font-size: 2rem;
+.why-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.why-title .highlight {
+  color: #10b981;
+}
+
+.why-subtitle {
+  font-size: 1.1rem;
+  color: #6b7280;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Features Grid */
+.why-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.feature-card {
+  background: #f9fafb;
+  padding: 32px 24px;
+  border-radius: 16px;
   text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.feature-card:hover {
+  background: white;
+  border-color: #10b981;
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.1);
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ecfdf5;
+  border-radius: 16px;
+  margin: 0 auto 20px;
+  color: #10b981;
+}
+
+.feature-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.feature-description {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* Tagline */
+.why-tagline {
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-radius: 20px;
+}
+
+.why-tagline p {
+  font-size: 1.25rem;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.tagline-highlight {
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .why-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .why-section {
+    padding: 60px 20px;
+  }
+
+  .why-title {
+    font-size: 1.75rem;
+  }
+
+  .why-features {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .feature-card {
+    padding: 24px 20px;
+  }
+
+  .why-tagline {
+    padding: 24px;
+  }
+
+  .why-tagline p {
+    font-size: 1rem;
+  }
 }
