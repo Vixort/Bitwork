@@ -79,6 +79,8 @@ import App from "./App.jsx";
  */
 import "./pages/home/home.jsx";
 
+import Footer from "./components/Footer.jsx";
+
 // =============================================================================
 // APPLICATION RENDER - การ Render แอปพลิเคชัน
 // =============================================================================
@@ -104,6 +106,7 @@ createRoot(document.getElementById("root")).render(
       <NavBar />
       {/* App - Routes Component ที่จัดการหน้าต่างๆ */}
       <App />
+      <Footer />
     </BrowserRouter>
   </StrictMode>
 );

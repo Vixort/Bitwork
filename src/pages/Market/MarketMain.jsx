@@ -441,19 +441,19 @@ const MarketMain = () => {
 
       <div className="ContainerMarketUi">
         {/* Promo Banner Ads */}
-        <section className="promo-banners">
+        <section className="market-promo-banners">
           <div
-            className="promo-card promo-primary"
+            className="market-promo-card market-promo-primary"
             data-aos="fade-up"
             data-aos-delay="0"
           >
-            <div className="promo-content">
-              <span className="promo-tag">สินค้าใหม่</span>
+            <div className="market-promo-content">
+              <span className="market-promo-tag">สินค้าใหม่</span>
               <h3>RTX 40 Series</h3>
               <p>การ์ดจอรุ่นใหม่ล่าสุด ประสิทธิภาพสูงสุด</p>
-              <button className="promo-btn">ดูสินค้า →</button>
+              <button className="market-promo-btn">ดูสินค้า →</button>
             </div>
-            <div className="promo-icon">
+            <div className="market-promo-icon">
               <svg
                 width="80"
                 height="80"
@@ -466,17 +466,17 @@ const MarketMain = () => {
             </div>
           </div>
           <div
-            className="promo-card promo-secondary"
+            className="market-promo-card market-promo-secondary"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            <div className="promo-content">
-              <span className="promo-tag">ลดสูงสุด 30%</span>
+            <div className="market-promo-content">
+              <span className="market-promo-tag">ลดสูงสุด 30%</span>
               <h3>Flash Sale</h3>
               <p>สินค้าลดราคาพิเศษ เฉพาะวันนี้เท่านั้น!</p>
-              <button className="promo-btn">ช้อปเลย →</button>
+              <button className="market-promo-btn">ช้อปเลย →</button>
             </div>
-            <div className="promo-icon">
+            <div className="market-promo-icon">
               <svg
                 width="80"
                 height="80"
@@ -489,15 +489,15 @@ const MarketMain = () => {
             </div>
           </div>
           <div
-            className="promo-card promo-accent"
+            className="market-promo-card market-promo-accent"
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            <div className="promo-content">
-              <span className="promo-tag">ฟรีค่าส่ง</span>
+            <div className="market-promo-content">
+              <span className="market-promo-tag">ฟรีค่าส่ง</span>
               <h3>ส่งฟรีทั่วไทย</h3>
               <p>สั่งซื้อครบ ฿1,500 ส่งฟรีทันที</p>
-              <button className="promo-btn">เริ่มช้อป →</button>
+              <button className="market-promo-btn">เริ่มช้อป →</button>
             </div>
             <div className="promo-icon">
               <svg

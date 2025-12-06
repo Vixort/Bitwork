@@ -78,7 +78,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.5s ease;
+  display: block;
 }
 
 .product-card:hover .product-image img {
@@ -176,12 +178,17 @@
 .promo-banner {
   position: relative;
   padding: 50px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  /* background: linear-gradient(135deg, #10b981 0%, #059669 100%); */
+  background-image: url(https://cdn.discordapp.com/attachments/884799982694174781/1446724409397346451/BannerHome.png?ex=6935069a&is=6933b51a&hm=0aff6067e5a8f749850f869858b8ad26d47be79f9b782843a9ba48ee65152309&);
+  background-position: center;
+  background-size: cover;
   border-radius: 24px;
+  background-repeat: no-repeat;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 250px;
 }
 
 .promo-content {
@@ -194,12 +201,14 @@
   font-weight: 700;
   color: white;
   margin-bottom: 8px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
 }
 
 .promo-content p {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: white;
   margin-bottom: 20px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 0, 0, 0.6);
 }
 
 .promo-content button {
@@ -230,6 +239,11 @@
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .promo-banner {
+    background: url(https://cdn.discordapp.com/attachments/884799982694174781/1446730226309795840/Banner865px.png?ex=69350c04&is=6933ba84&hm=0df705f6e2644cd75a5e5d17136567ebb985982c0fd5740aeee27c6417a2f953&);
+    background-position: center;
+    background-size: cover;
+  }
 }
 
 @media (max-width: 768px) {
@@ -247,11 +261,18 @@
   }
 
   .product-image {
-    height: 180px;
+    height: 200px;
+  }
+
+  .product-image img {
+    object-fit: cover;
   }
 
   .promo-banner {
     padding: 30px 20px;
+    min-height: 200px;
+    background-size: cover;
+    background-position: center;
   }
 
   .promo-content h3 {
@@ -260,5 +281,24 @@
 
   .promo-decoration {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-image {
+    height: 180px;
+  }
+
+  .promo-banner {
+    padding: 24px 16px;
+    min-height: 180px;
+  }
+
+  .promo-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .promo-content p {
+    font-size: 0.875rem;
   }
 }

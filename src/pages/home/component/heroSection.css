@@ -36,7 +36,16 @@
 .hero-pattern {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("https://cdn.discordapp.com/attachments/884799982694174781/1446718252867911691/HeroSection.png?ex=693500de&is=6933af5e&hm=73899fbb06f7fa952d42a428e3532dbf992675c7560eae84c60b40fc52693b68&");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* opacity: 0.1; */
+  /* filter: blur(5px); */
+  /* Fallback gradient if image fails to load */
+  background-color: var(--hero-bg);
+  /* Ensure proper scaling on all devices */
+  background-attachment: scroll;
 }
 
 /* Container */
