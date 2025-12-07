@@ -13,6 +13,9 @@ import AccountPanel from "./components/AccountPanel";
 import SecurityPanel from "./components/SecurityPanel";
 import PaymentPanel from "./components/PaymentPanel";
 import StorePanel from "./components/StorePanel";
+import StoreDashboard from "./components/StoreDashboard";
+import StoreProducts from "./components/StoreProducts";
+import StoreSalesHistory from "./components/StoreSalesHistory";
 import NotificationPanel from "./components/NotificationPanel";
 import ThemePanel from "./components/ThemePanel";
 import SocialPanel from "./components/SocialPanel";
@@ -491,6 +494,44 @@ const SettingMain = () => {
             hasChanges={hasStoreChanges}
             onOpenModal={openModal}
           />
+        );
+      case "store-dashboard":
+        return <StoreDashboard />;
+      case "store-products":
+        return <StoreProducts />;
+      case "store-orders":
+        return (
+          <div className="settings-panel">
+            <div className="panel-header">
+              <h2 className="panel-title">คำสั่งซื้อ</h2>
+              <p className="panel-description">จัดการคำสั่งซื้อและการจัดส่ง</p>
+            </div>
+            <div className="panel-content">
+              <p
+                style={{ textAlign: "center", color: "#666", padding: "40px" }}
+              >
+                กำลังพัฒนา...
+              </p>
+            </div>
+          </div>
+        );
+      case "store-sales-history":
+        return <StoreSalesHistory />;
+      case "store-analytics":
+        return (
+          <div className="settings-panel">
+            <div className="panel-header">
+              <h2 className="panel-title">สถิติและรายงาน</h2>
+              <p className="panel-description">วิเคราะห์ข้อมูลและสถิติการขาย</p>
+            </div>
+            <div className="panel-content">
+              <p
+                style={{ textAlign: "center", color: "#666", padding: "40px" }}
+              >
+                กำลังพัฒนา...
+              </p>
+            </div>
+          </div>
         );
       case "notification":
         return (

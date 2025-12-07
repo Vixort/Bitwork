@@ -1,7 +1,7 @@
 /**
  * SettingsSidebar.jsx - Settings Navigation Sidebar
  */
-import React from "react";
+import React, { useState } from "react";
 import "./SettingsSidebar.css";
 
 const SettingsSidebar = ({
@@ -10,6 +10,8 @@ const SettingsSidebar = ({
   isMobileOpen,
   onMobileClose,
 }) => {
+  const [expandedMenu, setExpandedMenu] = useState("store");
+
   const menuItems = [
     {
       id: "account",
@@ -95,6 +97,15 @@ const SettingsSidebar = ({
           <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
       ),
+      hasSubmenu: true,
+      submenu: [
+        { id: "store", label: "ตั้งค่าร้านค้า" },
+        { id: "store-dashboard", label: "Dashboard" },
+        { id: "store-products", label: "สินค้าที่ขายอยู่" },
+        { id: "store-orders", label: "คำสั่งซื้อ" },
+        { id: "store-sales-history", label: "ประวัติการขาย" },
+        { id: "store-analytics", label: "สถิติและรายงาน" },
+      ],
     },
     {
       id: "notification",
@@ -183,19 +194,63 @@ const SettingsSidebar = ({
         </div>
         <nav className="sidebar-nav">
           {menuItems.map((item) => (
-            <button
-              key={item.id}
-              className={`sidebar-menu-item ${
-                activeMenu === item.id ? "active" : ""
-              }`}
-              onClick={() => {
-                onMenuChange(item.id);
-                onMobileClose();
-              }}
-            >
-              <span className="menu-icon">{item.icon}</span>
-              <span className="menu-label">{item.label}</span>
-            </button>
+            <div key={item.id} className="menu-item-wrapper">
+              <button
+                className={`sidebar-menu-item ${
+                  activeMenu === item.id ||
+                  (item.submenu &&
+                    item.submenu.some((sub) => sub.id === activeMenu))
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() => {
+                  if (item.hasSubmenu) {
+                    setExpandedMenu(expandedMenu === item.id ? null : item.id);
+                  } else {
+                    onMenuChange(item.id);
+                    onMobileClose();
+                  }
+                }}
+              >
+                <span className="menu-icon">{item.icon}</span>
+                <span className="menu-label">{item.label}</span>
+                {item.hasSubmenu && (
+                  <svg
+                    className={`submenu-arrow ${
+                      expandedMenu === item.id ? "expanded" : ""
+                    }`}
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                )}
+              </button>
+
+              {/* Submenu */}
+              {item.hasSubmenu && expandedMenu === item.id && (
+                <div className="submenu">
+                  {item.submenu.map((subItem) => (
+                    <button
+                      key={subItem.id}
+                      className={`submenu-item ${
+                        activeMenu === subItem.id ? "active" : ""
+                      }`}
+                      onClick={() => {
+                        onMenuChange(subItem.id);
+                        onMobileClose();
+                      }}
+                    >
+                      {subItem.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </nav>
       </aside>

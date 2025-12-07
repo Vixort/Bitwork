@@ -810,15 +810,15 @@ function ProductDetailModal({ product, onClose, onAddToCart }) {
   return (
     <div className="product-detail-overlay" onClick={onClose}>
       <div
-        className="product-detail-modal"
+        className="product-detail-modal-new"
         onClick={(e) => e.stopPropagation()}
         data-aos="zoom-in"
         data-aos-duration="300"
       >
-        <button className="detail-close" onClick={onClose}>
+        <button className="detail-close-new" onClick={onClose}>
           <svg
-            width="20"
-            height="20"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -829,161 +829,158 @@ function ProductDetailModal({ product, onClose, onAddToCart }) {
           </svg>
         </button>
 
-        <div className="detail-image-area">
-          <div className="detail-image-placeholder">
-            <svg
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            >
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-              <line x1="12" y1="22.08" x2="12" y2="12" />
-            </svg>
-          </div>
-          {product.category && (
-            <span className="detail-tag">{product.category}</span>
-          )}
-          {product.brand && (
-            <span className="detail-brand-tag">{product.brand}</span>
-          )}
-        </div>
-
-        <div className="detail-content">
-          <div className="detail-header">
-            <h2 className="detail-title">{product.title}</h2>
-            {product.rating && (
-              <div className="detail-rating">
-                <span className="rating-stars">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="#f59e0b"
-                    stroke="#f59e0b"
-                    strokeWidth="1"
-                  >
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                  {product.rating}
-                </span>
-                <span className="rating-count">({product.reviews} รีวิว)</span>
-              </div>
-            )}
-          </div>
-
-          <p className="detail-description">
-            {product.fullDescription || product.description}
-          </p>
-
-          {/* Specifications */}
-          {product.specs && (
-            <div className="detail-specs">
-              <h4 className="specs-title">
+        <div className="detail-modal-content-new">
+          {/* Left Side - Image */}
+          <div className="detail-left-section">
+            <div className="detail-image-container">
+              <div className="detail-image-placeholder-new">
                 <svg
-                  width="18"
-                  height="18"
+                  width="80"
+                  height="80"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="1.5"
                 >
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                  <polyline points="14 2 14 8 20 8" />
-                  <line x1="16" y1="13" x2="8" y2="13" />
-                  <line x1="16" y1="17" x2="8" y2="17" />
-                  <polyline points="10 9 9 9 8 9" />
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                  <line x1="12" y1="22.08" x2="12" y2="12" />
                 </svg>
-                สเปคสินค้า
-              </h4>
-              <div className="specs-grid">
-                {Object.entries(product.specs).map(([key, value]) => (
-                  <div key={key} className="spec-item">
-                    <span className="spec-label">{formatSpecLabel(key)}</span>
-                    <span className="spec-value">{value}</span>
-                  </div>
-                ))}
               </div>
             </div>
-          )}
+          </div>
 
-          <div className="detail-info">
-            <div className="detail-info-item">
-              <span className="detail-label">หมวดหมู่</span>
-              <span className="detail-value">{product.category}</span>
-            </div>
-            <div className="detail-info-item">
-              <span className="detail-label">แบรนด์</span>
-              <span className="detail-value">{product.brand || "ไม่ระบุ"}</span>
-            </div>
-            <div className="detail-info-item">
-              <span className="detail-label">ประกัน</span>
-              <span className="detail-value">{product.warranty || "1 ปี"}</span>
-            </div>
-            <div className="detail-info-item">
-              <span className="detail-label">ขายแล้ว</span>
-              <span className="detail-value detail-sold">
-                {product.sold ? product.sold.toLocaleString() : "0"} ชิ้น
+          {/* Right Side - Product Info */}
+          <div className="detail-right-section">
+            {/* Product Title */}
+            <h2 className="detail-title-new">{product.title}</h2>
+
+            {/* SKU and Category Badges */}
+            <div className="detail-meta-badges">
+              <span className="detail-sku-badge">
+                SKU: {product.sku || "N/A"}
               </span>
-            </div>
-          </div>
-
-          <div className="detail-status">
-            <span className="status-badge in-stock">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              มีสินค้า
-            </span>
-            <span className="status-shipping">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" />
-                <polygon points="12 15 17 21 7 21 12 15" />
-              </svg>
-              จัดส่งฟรีทั่วประเทศ
-            </span>
-          </div>
-
-          <div className="detail-footer">
-            <div className="detail-price-section">
-              <span className="detail-price">{product.price}</span>
-              <span className="detail-price-note">ราคารวม VAT แล้ว</span>
+              {product.category && (
+                <span className="detail-category-badge">
+                  {product.category}
+                </span>
+              )}
             </div>
 
-            <div className="detail-actions">
-              <div className="quantity-selector">
-                <button
-                  className="qty-control-btn"
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                >
-                  −
-                </button>
-                <span className="qty-value">{quantity}</span>
-                <button
-                  className="qty-control-btn"
-                  onClick={() => setQuantity(quantity + 1)}
-                >
-                  +
-                </button>
+            {/* Price Section */}
+            <div className="detail-price-box">
+              <div className="detail-main-price">{product.price}</div>
+              {product.stock && product.stock < 10 && product.stock > 0 && (
+                <div className="detail-stock-warning">
+                  เหลือเพียง {product.stock} ชิ้น!
+                </div>
+              )}
+            </div>
+
+            {/* Description */}
+            <div className="detail-description-section">
+              <h3 className="detail-section-title">รายละเอียดสินค้า</h3>
+              <p className="detail-description-text">
+                {product.fullDescription || product.description}
+              </p>
+            </div>
+
+            {/* Specifications Grid */}
+            <div className="detail-specs-section">
+              <h3 className="detail-section-title">ข้อมูลจำเพาะ</h3>
+              <div className="detail-specs-grid-new">
+                <div className="detail-spec-card">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                  </svg>
+                  <div>
+                    <span className="spec-card-label">น้ำหนัก</span>
+                    <span className="spec-card-value">
+                      {product.weight || "2.2 kg"}
+                    </span>
+                  </div>
+                </div>
+                <div className="detail-spec-card">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M9 11l3 3L22 4" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                  </svg>
+                  <div>
+                    <span className="spec-card-label">การรับประกัน</span>
+                    <span className="spec-card-value">
+                      {product.warranty || "3 ปี"}
+                    </span>
+                  </div>
+                </div>
+                <div className="detail-spec-card">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <div>
+                    <span className="spec-card-label">ยอดขายแล้ว</span>
+                    <span className="spec-card-value">
+                      {product.sold || "12"} ชิ้น
+                    </span>
+                  </div>
+                </div>
               </div>
-              <button className="detail-btn-buy" onClick={handleAddToCart}>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="detail-actions-new">
+              {product.stock && product.stock > 0 ? (
+                <>
+                  <button className="detail-cart-btn">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <circle cx="9" cy="21" r="1" />
+                      <circle cx="20" cy="21" r="1" />
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    เพิ่มถุงตะกร้า
+                  </button>
+                  <button className="detail-buy-btn" onClick={handleAddToCart}>
+                    ซื้อเลย
+                  </button>
+                </>
+              ) : (
+                <button className="detail-out-of-stock-btn" disabled>
+                  สินค้าหมด
+                </button>
+              )}
+            </div>
+
+            {/* Seller Info */}
+            <div className="detail-seller-section">
+              <div className="seller-info-badge">
                 <svg
                   width="18"
                   height="18"
@@ -992,12 +989,11 @@ function ProductDetailModal({ product, onClose, onAddToCart }) {
                   stroke="currentColor"
                   strokeWidth="2"
                 >
-                  <circle cx="9" cy="21" r="1" />
-                  <circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
-                เพิ่มลงตะกร้า
-              </button>
+                <span>ขายโดย: {product.seller || "Bitwork Store"}</span>
+              </div>
             </div>
           </div>
         </div>
