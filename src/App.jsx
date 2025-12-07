@@ -89,6 +89,13 @@ import CommunityMain from "./pages/Community/CommunityMain.jsx";
  */
 import SettingMain from "./pages/Setting/SettingMain.jsx";
 
+/**
+ * ScrollToTop - Component สำหรับเลื่อนขึ้นบนสุดเมื่อเปลี่ยนหน้า
+ * - แก้ปัญหาที่หน้าใหม่ไม่กลับขึ้นด้านบนหลังจากเลื่อนลงไว้
+ * - ทำงานอัตโนมัติทุกครั้งที่เปลี่ยน route
+ */
+import ScrollToTop from "./components/ScrollToTop.jsx";
+
 // =============================================================================
 // APP COMPONENT - Component หลักของแอปพลิเคชัน
 // =============================================================================
@@ -111,6 +118,9 @@ import SettingMain from "./pages/Setting/SettingMain.jsx";
 const App = () => {
   return (
     <div>
+      {/* ScrollToTop จะทำงานเบื้องหลัง เลื่อนขึ้นบนทุกครั้งที่เปลี่ยนหน้า */}
+      <ScrollToTop />
+
       {/* 
         Routes Container
         - ครอบ Route ทั้งหมด

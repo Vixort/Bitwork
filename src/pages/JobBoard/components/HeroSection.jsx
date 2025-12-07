@@ -61,32 +61,32 @@ const HeroSection = () => {
 
   return (
     // Section หลักของ Hero พร้อม class สำหรับ styling
-    <section className="hero-section">
+    <section className="job-hero-section">
       {/* Container จำกัดความกว้างและจัดกึ่งกลาง */}
-      <div className="hero-container">
+      <div className="job-hero-container">
         {/* ===== MAIN CONTENT - เนื้อหาหลัก ===== */}
-        <div className="hero-content">
+        <div className="job-hero-content">
           {/* Badge แสดงข้อความโปรโมท */}
-          <div className="hero-badge" data-aos="fade-down" data-aos-delay="100">
+          <div className="job-hero-badge" data-aos="fade-down" data-aos-delay="100">
             {/* จุดกลมเล็กๆ พร้อม animation pulse */}
-            <span className="badge-dot"></span>
+            <span className="job-badge-dot"></span>
             {/* ข้อความใน badge */}
             แพลตฟอร์มหางานอันดับ 1
           </div>
 
           {/* หัวข้อหลักของ Hero Section */}
-          <h1 className="hero-title" data-aos="fade-up" data-aos-delay="200">
+          <h1 className="job-hero-title" data-aos="fade-up" data-aos-delay="200">
             {/* ข้อความปกติ */}
             ค้นหา
             {/* ข้อความเน้นสีเขียว */}
-            <span className="highlight">งานในฝัน</span>
+            <span className="job-highlight">งานในฝัน</span>
             {/* ขึ้นบรรทัดใหม่ */}
             <br />
             ที่เหมาะกับคุณ
           </h1>
 
           {/* คำอธิบายย่อยใต้หัวข้อหลัก */}
-          <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="300">
+          <p className="job-hero-subtitle" data-aos="fade-up" data-aos-delay="300">
             เชื่อมต่อกับบริษัทชั้นนำนับพันแห่ง
             ค้นหาโอกาสทางอาชีพที่ตรงกับทักษะและความสนใจของคุณ
           </p>
@@ -94,18 +94,18 @@ const HeroSection = () => {
           {/* ===== SEARCH BOX - กล่องค้นหา ===== */}
           {/* Form สำหรับค้นหางาน เมื่อ submit จะเรียก handleSearch */}
           <form
-            className="hero-search-box"
+            className="job-hero-search-box"
             onSubmit={handleSearch}
             data-aos="fade-up"
             data-aos-delay="400"
           >
             {/* กลุ่ม input fields */}
-            <div className="search-input-group">
+            <div className="job-search-input-group">
               {/* ช่องค้นหาตำแหน่งงาน */}
               <div className="search-field">
                 {/* Icon แว่นขยาย (SVG) */}
                 <svg
-                  className="search-icon"
+                  className="job-search-icon"
                   width="20"
                   height="20"
                   viewBox="0 0 24 24"
@@ -134,7 +134,7 @@ const HeroSection = () => {
               <div className="search-field">
                 {/* Icon หมุด/ตำแหน่งที่ตั้ง (SVG) */}
                 <svg
-                  className="search-icon"
+                  className="job-search-icon"
                   width="20"
                   height="20"
                   viewBox="0 0 24 24"
@@ -188,7 +188,7 @@ const HeroSection = () => {
             <div className="categories-list">
               {/* วนลูปสร้างปุ่ม tag แต่ละหมวดหมู่ */}
               {popularCategories.map((category, index) => (
-                <button key={index} className="category-tag">
+                <button key={index} className="job-category-tag">
                   {category}
                 </button>
               ))}
@@ -197,7 +197,7 @@ const HeroSection = () => {
         </div>
 
         {/* ===== STATS - สถิติ ===== */}
-        <div className="hero-stats" data-aos="fade-up" data-aos-delay="600">
+        <div className="job-hero-stats" data-aos="fade-up" data-aos-delay="600">
           {/* วนลูปสร้างแต่ละ stat item */}
           {stats.map((stat, index) => (
             <div
@@ -207,9 +207,9 @@ const HeroSection = () => {
               data-aos-delay={700 + index * 100}
             >
               {/* ตัวเลขสถิติ (เช่น "10K+") */}
-              <span className="stat-number">{stat.number}</span>
+              <span className="job-stat-number">{stat.number}</span>
               {/* คำอธิบาย (เช่น "ตำแหน่งงาน") */}
-              <span className="stat-label">{stat.label}</span>
+              <span className="job-stat-label">{stat.label}</span>
             </div>
           ))}
         </div>

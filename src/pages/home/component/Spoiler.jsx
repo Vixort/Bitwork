@@ -66,21 +66,21 @@ const Spoiler = () => {
         <div className="products-grid">
           {products.map((product, index) => (
             <div
-              className="product-card"
+              className="home-spoiler-product-card"
               key={product.id}
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
-              <div className="product-image">
+              <div className="home-spoiler-product-image">
                 <img src={product.image} alt={product.name} />
-                <span className="product-tag">{product.tag}</span>
+                <span className="home-spoiler-product-tag">{product.tag}</span>
               </div>
-              <div className="product-info">
-                <h3 className="product-name">{product.name}</h3>
-                <p className="product-description">{product.description}</p>
-                <div className="product-footer">
-                  <span className="product-price">{product.price}</span>
-                  <button className="product-btn">
+              <div className="home-spoiler-product-info">
+                <h3 className="home-spoiler-product-name">{product.name}</h3>
+                <p className="home-spoiler-product-description">{product.description}</p>
+                <div className="home-spoiler-product-footer">
+                  <span className="home-spoiler-product-price">{product.price}</span>
+                  <button className="home-spoiler-product-btn">
                     <svg
                       width="18"
                       height="18"

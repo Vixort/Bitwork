@@ -188,10 +188,10 @@ const StoreProducts = () => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="product-card"
+              className="store-product-card"
               onClick={() => openProductDetail(product)}
             >
-              <div className="product-card-image">
+              <div className="store-product-card-image">
                 <img src={product.image} alt={product.name} />
                 <span className={`status-badge-card status-${product.status}`}>
                   {product.status === "active" && "กำลังขาย"}
@@ -200,13 +200,13 @@ const StoreProducts = () => {
                 </span>
               </div>
 
-              <div className="product-card-content">
-                <div className="product-card-header">
-                  <h4 className="product-card-name">{product.name}</h4>
-                  <span className="product-card-sku">{product.sku}</span>
+              <div className="store-product-card-content">
+                <div className="store-product-card-header">
+                  <h4 className="store-product-card-name">{product.name}</h4>
+                  <span className="store-product-card-sku">{product.sku}</span>
                 </div>
 
-                <div className="product-card-details">
+                <div className="store-product-card-details">
                   <div className="detail-row">
                     <span className="detail-label">หมวดหมู่:</span>
                     <span className="detail-value">{product.category}</span>
@@ -237,7 +237,7 @@ const StoreProducts = () => {
                   </div>
                 </div>
 
-                <div className="product-card-actions">
+                <div className="store-product-card-actions">
                   <button
                     className="card-action-btn view-btn"
                     onClick={(e) => {

@@ -10,7 +10,7 @@
   --hero-text-light: #6b7280;
 }
 
-.hero-section {
+.home-hero-section {
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -21,19 +21,19 @@
 }
 
 /* Background */
-.hero-background {
+.home-hero-background {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-.hero-overlay {
+.home-hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);
 }
 
-.hero-pattern {
+.home-hero-pattern {
   position: absolute;
   inset: 0;
   background-image: url("https://cdn.discordapp.com/attachments/884799982694174781/1446718252867911691/HeroSection.png?ex=693500de&is=6933af5e&hm=73899fbb06f7fa952d42a428e3532dbf992675c7560eae84c60b40fc52693b68&");
@@ -49,7 +49,7 @@
 }
 
 /* Container */
-.hero-container {
+.home-hero-container {
   position: relative;
   z-index: 1;
   max-width: 1400px;
@@ -61,13 +61,13 @@
 }
 
 /* Content */
-.hero-content {
+.home-hero-content {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.hero-badge {
+.home-hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -80,31 +80,31 @@
   width: fit-content;
 }
 
-.hero-badge svg {
+.home-hero-badge svg {
   width: 16px;
   height: 16px;
 }
 
-.hero-title {
+.home-hero-title {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.title-line {
+.home-title-line {
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--hero-text-light);
 }
 
-.title-highlight {
+.home-title-highlight {
   font-size: 4rem;
   font-weight: 800;
   color: var(--hero-primary);
   line-height: 1.1;
 }
 
-.hero-description {
+.home-hero-description {
   font-size: 1.1rem;
   line-height: 1.7;
   color: var(--hero-text-light);
@@ -112,45 +112,45 @@
 }
 
 /* Stats */
-.hero-stats {
+.home-hero-stats {
   display: flex;
   align-items: center;
   gap: 24px;
   padding: 20px 0;
 }
 
-.stat-item {
+.home-stat-item {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.stat-number {
+.home-stat-number {
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--hero-primary-dark);
 }
 
-.stat-label {
+.home-stat-label {
   font-size: 14px;
   color: var(--hero-text-light);
 }
 
-.stat-divider {
+.home-stat-divider {
   width: 1px;
   height: 40px;
   background: #d1d5db;
 }
 
 /* CTA Buttons */
-.hero-cta {
+.home-hero-cta {
   display: flex;
   gap: 16px;
   margin-top: 8px;
 }
 
-.cta-primary,
-.cta-secondary {
+.home-cta-primary,
+.home-cta-secondary {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -163,39 +163,39 @@
   border: none;
 }
 
-.cta-primary {
+.home-cta-primary {
   background: var(--hero-primary);
   color: white;
   box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
-.cta-primary:hover {
+.home-cta-primary:hover {
   background: var(--hero-primary-dark);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
 }
 
-.cta-secondary {
+.home-cta-secondary {
   background: white;
   color: var(--hero-text);
   border: 2px solid #e5e7eb;
 }
 
-.cta-secondary:hover {
+.home-cta-secondary:hover {
   border-color: var(--hero-primary);
   color: var(--hero-primary);
   transform: translateY(-2px);
 }
 
 /* Visual Cards */
-.hero-visual {
+.home-hero-visual {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   padding: 20px;
 }
 
-.visual-card {
+.home-visual-card {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -208,31 +208,31 @@
   transition: all 0.4s ease;
 }
 
-.visual-card:hover {
+.home-visual-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 50px rgba(16, 185, 129, 0.15);
 }
 
-.visual-card svg {
+.home-visual-card svg {
   color: var(--hero-primary);
 }
 
-.visual-card span {
+.home-visual-card span {
   font-size: 14px;
   font-weight: 600;
   color: var(--hero-text);
 }
 
-.visual-card.card-1 {
+.home-visual-card.home-card-1 {
   animation: float 6s ease-in-out infinite;
 }
-.visual-card.card-2 {
+.home-visual-card.home-card-2 {
   animation: float 6s ease-in-out infinite 0.5s;
 }
-.visual-card.card-3 {
+.home-visual-card.home-card-3 {
   animation: float 6s ease-in-out infinite 1s;
 }
-.visual-card.card-4 {
+.home-visual-card.home-card-4 {
   animation: float 6s ease-in-out infinite 1.5s;
 }
 
@@ -247,7 +247,7 @@
 }
 
 /* Scroll Indicator */
-.scroll-indicator {
+.home-scroll-indicator {
   position: absolute;
   bottom: 40px;
   left: 50%;
@@ -260,7 +260,7 @@
   font-size: 12px;
 }
 
-.mouse {
+.home-mouse {
   width: 24px;
   height: 38px;
   border: 2px solid var(--hero-text-light);
@@ -270,7 +270,7 @@
   padding-top: 8px;
 }
 
-.wheel {
+.home-wheel {
   width: 4px;
   height: 8px;
   background: var(--hero-primary);
@@ -292,74 +292,74 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .hero-container {
+  .home-hero-container {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 40px;
   }
 
-  .hero-content {
+  .home-hero-content {
     align-items: center;
   }
 
-  .hero-description {
+  .home-hero-description {
     max-width: 600px;
   }
 
-  .hero-stats {
+  .home-hero-stats {
     justify-content: center;
   }
 
-  .hero-cta {
+  .home-hero-cta {
     justify-content: center;
   }
 
-  .hero-visual {
+  .home-hero-visual {
     max-width: 400px;
     margin: 0 auto;
   }
 }
 
 @media (max-width: 768px) {
-  .hero-section {
+  .home-hero-section {
     padding: 100px 20px 60px;
     min-height: auto;
   }
 
-  .title-highlight {
+  .home-title-highlight {
     font-size: 2.5rem;
   }
 
-  .hero-stats {
+  .home-hero-stats {
     flex-wrap: wrap;
     gap: 16px;
   }
 
-  .stat-divider {
+  .home-stat-divider {
     display: none;
   }
 
-  .hero-cta {
+  .home-hero-cta {
     flex-direction: column;
     width: 100%;
   }
 
-  .cta-primary,
-  .cta-secondary {
+  .home-cta-primary,
+  .home-cta-secondary {
     justify-content: center;
     width: 100%;
   }
 
-  .hero-visual {
+  .home-hero-visual {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
-  .visual-card {
+  .home-visual-card {
     padding: 20px 16px;
   }
 
-  .scroll-indicator {
+  .home-scroll-indicator {
     display: none;
   }
 }

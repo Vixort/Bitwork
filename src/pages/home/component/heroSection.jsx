@@ -12,50 +12,61 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="hero-section">
-      <div className="hero-background">
-        <div className="hero-overlay"></div>
-        <div className="hero-pattern"></div>
+    <section className="home-hero-section">
+      <div className="home-hero-background">
+        <div className="home-hero-overlay"></div>
+        <div className="home-hero-pattern"></div>
       </div>
 
-      <div className="hero-container">
-        <div className="hero-content" data-aos="fade-up">
-          <span className="hero-badge">
+      <div className="home-hero-container">
+        <div className="home-hero-content" data-aos="fade-up">
+          <span className="home-hero-badge">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
             </svg>
             แพลตฟอร์มสำหรับคนรักคอมพิวเตอร์
           </span>
 
-          <h1 className="hero-title">
-            <span className="title-line">ยินดีต้อนรับสู่</span>
-            <span className="title-highlight">Bitwork</span>
+          <h1 className="home-hero-title">
+            <span className="home-title-line">ยินดีต้อนรับสู่</span>
+            <span className="home-title-highlight">Bitwork</span>
           </h1>
 
-          <p className="hero-description">
+          <p className="home-hero-description">
             แพลตฟอร์มครบวงจรสำหรับคนรักคอมพิวเตอร์ ซื้อขายอุปกรณ์มือสอง
             จ้างงานซ่อมแซม และแลกเปลี่ยนความรู้กับชุมชนที่ใหญ่ที่สุดในประเทศไทย
           </p>
 
-          <div className="hero-stats" data-aos="fade-up" data-aos-delay="100">
-            <div className="stat-item">
-              <span className="stat-number">10K+</span>
-              <span className="stat-label">ผู้ใช้งาน</span>
+          <div
+            className="home-hero-stats"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div className="home-stat-item">
+              <span className="home-stat-number">10K+</span>
+              <span className="home-stat-label">ผู้ใช้งาน</span>
             </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <span className="stat-number">5K+</span>
-              <span className="stat-label">สินค้า</span>
+            <div className="home-stat-divider"></div>
+            <div className="home-stat-item">
+              <span className="home-stat-number">5K+</span>
+              <span className="home-stat-label">สินค้า</span>
             </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <span className="stat-number">2K+</span>
-              <span className="stat-label">งานบริการ</span>
+            <div className="home-stat-divider"></div>
+            <div className="home-stat-item">
+              <span className="home-stat-number">2K+</span>
+              <span className="home-stat-label">งานบริการ</span>
             </div>
           </div>
 
-          <div className="hero-cta" data-aos="fade-up" data-aos-delay="200">
-            <button className="cta-primary" onClick={() => navigate("/market")}>
+          <div
+            className="home-hero-cta"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <button
+              className="home-cta-primary"
+              onClick={() => navigate("/market")}
+            >
               <svg
                 width="20"
                 height="20"
@@ -71,7 +82,7 @@ const HeroSection = () => {
               เริ่มช้อปปิ้ง
             </button>
             <button
-              className="cta-secondary"
+              className="home-cta-secondary"
               onClick={() => navigate("/jobboard")}
             >
               <svg
@@ -90,8 +101,12 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className="hero-visual" data-aos="fade-left" data-aos-delay="300">
-          <div className="visual-card card-1">
+        <div
+          className="home-hero-visual"
+          data-aos="fade-left"
+          data-aos-delay="300"
+        >
+          <div className="home-visual-card home-card-1">
             <svg
               width="32"
               height="32"
@@ -106,7 +121,7 @@ const HeroSection = () => {
             </svg>
             <span>คอมพิวเตอร์</span>
           </div>
-          <div className="visual-card card-2">
+          <div className="home-visual-card home-card-2">
             <svg
               width="32"
               height="32"
@@ -121,7 +136,7 @@ const HeroSection = () => {
             </svg>
             <span>การ์ดจอ</span>
           </div>
-          <div className="visual-card card-3">
+          <div className="home-visual-card home-card-3">
             <svg
               width="32"
               height="32"
@@ -134,7 +149,7 @@ const HeroSection = () => {
             </svg>
             <span>ซ่อมบำรุง</span>
           </div>
-          <div className="visual-card card-4">
+          <div className="home-visual-card home-card-4">
             <svg
               width="32"
               height="32"
@@ -153,9 +168,13 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="scroll-indicator" data-aos="fade-up" data-aos-delay="500">
-        <div className="mouse">
-          <div className="wheel"></div>
+      <div
+        className="home-scroll-indicator"
+        data-aos="fade-up"
+        data-aos-delay="500"
+      >
+        <div className="home-mouse">
+          <div className="home-wheel"></div>
         </div>
         <span>เลื่อนลง</span>
       </div>

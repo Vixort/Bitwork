@@ -53,7 +53,7 @@
   margin-bottom: 40px;
 }
 
-.product-card {
+.home-spoiler-product-card {
   background: white;
   border-radius: 20px;
   overflow: hidden;
@@ -62,19 +62,19 @@
   border: 1px solid #f3f4f6;
 }
 
-.product-card:hover {
+.home-spoiler-product-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
 }
 
-.product-image {
+.home-spoiler-product-image {
   position: relative;
   height: 200px;
   overflow: hidden;
   background: #f9fafb;
 }
 
-.product-image img {
+.home-spoiler-product-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -83,11 +83,11 @@
   display: block;
 }
 
-.product-card:hover .product-image img {
+.home-spoiler-product-card:hover .home-spoiler-product-image img {
   transform: scale(1.1);
 }
 
-.product-tag {
+.home-spoiler-product-tag {
   position: absolute;
   top: 12px;
   left: 12px;
@@ -99,37 +99,37 @@
   border-radius: 20px;
 }
 
-.product-info {
+.home-spoiler-product-info {
   padding: 20px;
 }
 
-.product-name {
+.home-spoiler-product-name {
   font-size: 1.1rem;
   font-weight: 600;
   color: #1f2937;
   margin-bottom: 8px;
 }
 
-.product-description {
+.home-spoiler-product-description {
   font-size: 13px;
   color: #6b7280;
   margin-bottom: 16px;
   line-height: 1.5;
 }
 
-.product-footer {
+.home-spoiler-product-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.product-price {
+.home-spoiler-product-price {
   font-size: 1.25rem;
   font-weight: 700;
   color: #10b981;
 }
 
-.product-btn {
+.home-spoiler-product-btn {
   width: 40px;
   height: 40px;
   display: flex;
@@ -143,7 +143,7 @@
   transition: all 0.3s ease;
 }
 
-.product-btn:hover {
+.home-spoiler-product-btn:hover {
   background: #10b981;
   color: white;
 }
@@ -260,11 +260,11 @@
     gap: 16px;
   }
 
-  .product-image {
+  .home-spoiler-product-image {
     height: 200px;
   }
 
-  .product-image img {
+  .home-spoiler-product-image img {
     object-fit: cover;
   }
 
@@ -285,7 +285,7 @@
 }
 
 @media (max-width: 480px) {
-  .product-image {
+  .home-spoiler-product-image {
     height: 180px;
   }
 

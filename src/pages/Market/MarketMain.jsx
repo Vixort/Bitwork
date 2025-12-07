@@ -750,14 +750,14 @@ const MarketMain = () => {
 function ProductCard({ product, onAddToCart, onViewDetail, aosDelay = 0 }) {
   return (
     <div
-      className="product-card"
+      className="market-product-card"
       onClick={onViewDetail}
       data-aos="fade-up"
       data-aos-delay={aosDelay}
     >
       {/* ส่วนรูป */}
-      <div className="product-image-area">
-        <div className="product-image-placeholder">
+      <div className="market-product-image-area">
+        <div className="market-product-image-placeholder">
           <svg
             width="48"
             height="48"
@@ -773,16 +773,16 @@ function ProductCard({ product, onAddToCart, onViewDetail, aosDelay = 0 }) {
         </div>
         {/* แสดง Tag หมวดหมู่มุมซ้ายบนของรูป */}
         {product.category && (
-          <span className="product-tag">{product.category}</span>
+          <span className="market-product-tag">{product.category}</span>
         )}
       </div>
-      <div className="product-body">
-        <h3 className="product-title">{product.title}</h3>
-        <p className="product-description">{product.description}</p>
-        <div className="product-footer">
-          <span className="product-price">{product.price}</span>
+      <div className="market-product-body">
+        <h3 className="market-product-title">{product.title}</h3>
+        <p className="market-product-description">{product.description}</p>
+        <div className="market-product-footer">
+          <span className="market-product-price">{product.price}</span>
           <button
-            className="product-btn-buy"
+            className="market-product-btn-buy"
             onClick={(e) => {
               e.stopPropagation();
               onAddToCart(product);
@@ -808,9 +808,9 @@ function ProductDetailModal({ product, onClose, onAddToCart }) {
   };
 
   return (
-    <div className="product-detail-overlay" onClick={onClose}>
+    <div className="market-detail-overlay" onClick={onClose}>
       <div
-        className="product-detail-modal-new"
+        className="market-detail-modal-new"
         onClick={(e) => e.stopPropagation()}
         data-aos="zoom-in"
         data-aos-duration="300"
