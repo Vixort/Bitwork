@@ -8,47 +8,14 @@ import React from "react";
 import { useNavigate } from "react-router";
 import "./Spoiler.css";
 
+// นำเข้าข้อมูล mock data จากไฟล์ JSON
+import spoilerData from "./spoilerData.json";
+
 const Spoiler = () => {
   const navigate = useNavigate();
 
-  const products = [
-    {
-      id: 1,
-      name: "RTX 4090",
-      description: "การ์ดจอสุดแรง สำหรับเกมเมอร์ตัวจริง",
-      price: "฿45,900",
-      image:
-        "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80",
-      tag: "ยอดนิยม",
-    },
-    {
-      id: 2,
-      name: "RTX 4080 Super",
-      description: "ประสิทธิภาพสูง คุ้มค่าที่สุด",
-      price: "฿35,500",
-      image:
-        "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&q=80",
-      tag: "แนะนำ",
-    },
-    {
-      id: 3,
-      name: "RTX 4070 Ti",
-      description: "สมดุลทั้งราคาและประสิทธิภาพ",
-      price: "฿25,900",
-      image:
-        "https://images.unsplash.com/photo-1555618254-5c1ce2cd81bc?w=400&q=80",
-      tag: "คุ้มค่า",
-    },
-    {
-      id: 4,
-      name: "RTX 4060 Ti",
-      description: "เริ่มต้นเล่นเกม 1080p สบายๆ",
-      price: "฿15,900",
-      image:
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80",
-      tag: "ราคาดี",
-    },
-  ];
+  // ข้อมูลสินค้าเด่นจาก JSON file
+  const products = spoilerData.featuredProducts;
 
   return (
     <section className="spoiler-section">
@@ -77,9 +44,13 @@ const Spoiler = () => {
               </div>
               <div className="home-spoiler-product-info">
                 <h3 className="home-spoiler-product-name">{product.name}</h3>
-                <p className="home-spoiler-product-description">{product.description}</p>
+                <p className="home-spoiler-product-description">
+                  {product.description}
+                </p>
                 <div className="home-spoiler-product-footer">
-                  <span className="home-spoiler-product-price">{product.price}</span>
+                  <span className="home-spoiler-product-price">
+                    {product.price}
+                  </span>
                   <button className="home-spoiler-product-btn">
                     <svg
                       width="18"

@@ -1,0 +1,201 @@
+{
+  "orders": [
+    {
+      "id": "#ORD-2024-001",
+      "date": "2024-12-10",
+      "time": "14:30",
+      "customer": {
+        "name": "สมชาย ใจดี",
+        "email": "somchai@email.com",
+        "phone": "081-234-5678",
+        "avatar": "https://i.pravatar.cc/100?img=1"
+      },
+      "items": [
+        {
+          "id": 1,
+          "name": "AMD Ryzen 9 7950X",
+          "quantity": 1,
+          "price": 18900,
+          "image": "https://via.placeholder.com/80"
+        },
+        {
+          "id": 2,
+          "name": "Corsair Vengeance 32GB",
+          "quantity": 2,
+          "price": 4500,
+          "image": "https://via.placeholder.com/80"
+        }
+      ],
+      "subtotal": 27900,
+      "shipping": 150,
+      "discount": 0,
+      "total": 28050,
+      "status": "pending",
+      "paymentMethod": "bank_transfer",
+      "paymentStatus": "paid",
+      "shippingAddress": {
+        "address": "123 ถนนสุขุมวิท",
+        "district": "วัฒนา",
+        "province": "กรุงเทพมหานคร",
+        "postcode": "10110"
+      },
+      "trackingNumber": null,
+      "notes": "กรุณาส่งช่วงเย็นหลัง 17:00"
+    },
+    {
+      "id": "#ORD-2024-002",
+      "date": "2024-12-09",
+      "time": "10:15",
+      "customer": {
+        "name": "สมหญิง รักษ์ดี",
+        "email": "somying@email.com",
+        "phone": "089-876-5432",
+        "avatar": "https://i.pravatar.cc/100?img=5"
+      },
+      "items": [
+        {
+          "id": 3,
+          "name": "NVIDIA RTX 4090",
+          "quantity": 1,
+          "price": 65000,
+          "image": "https://via.placeholder.com/80"
+        }
+      ],
+      "subtotal": 65000,
+      "shipping": 0,
+      "discount": 1000,
+      "total": 64000,
+      "status": "processing",
+      "paymentMethod": "credit_card",
+      "paymentStatus": "paid",
+      "shippingAddress": {
+        "address": "456 ซอยลาดพร้าว 71",
+        "district": "ลาดพร้าว",
+        "province": "กรุงเทพมหานคร",
+        "postcode": "10230"
+      },
+      "trackingNumber": null,
+      "notes": ""
+    },
+    {
+      "id": "#ORD-2024-003",
+      "date": "2024-12-08",
+      "time": "16:45",
+      "customer": {
+        "name": "สมศักดิ์ มั่นคง",
+        "email": "somsak@email.com",
+        "phone": "062-111-2222",
+        "avatar": "https://i.pravatar.cc/100?img=3"
+      },
+      "items": [
+        {
+          "id": 4,
+          "name": "Samsung 990 PRO 2TB",
+          "quantity": 2,
+          "price": 7800,
+          "image": "https://via.placeholder.com/80"
+        },
+        {
+          "id": 5,
+          "name": "MSI B650 Tomahawk",
+          "quantity": 1,
+          "price": 8900,
+          "image": "https://via.placeholder.com/80"
+        }
+      ],
+      "subtotal": 24500,
+      "shipping": 100,
+      "discount": 500,
+      "total": 24100,
+      "status": "shipped",
+      "paymentMethod": "promptpay",
+      "paymentStatus": "paid",
+      "shippingAddress": {
+        "address": "789 หมู่บ้านเมืองทอง",
+        "district": "ปากเกร็ด",
+        "province": "นนทบุรี",
+        "postcode": "11120"
+      },
+      "trackingNumber": "TH123456789012",
+      "notes": "ฝากไว้ที่รปภ.ได้"
+    },
+    {
+      "id": "#ORD-2024-004",
+      "date": "2024-12-07",
+      "time": "09:20",
+      "customer": {
+        "name": "สมใจ ซื่อสัตย์",
+        "email": "somjai@email.com",
+        "phone": "095-333-4444",
+        "avatar": "https://i.pravatar.cc/100?img=8"
+      },
+      "items": [
+        {
+          "id": 1,
+          "name": "AMD Ryzen 9 7950X",
+          "quantity": 1,
+          "price": 18900,
+          "image": "https://via.placeholder.com/80"
+        }
+      ],
+      "subtotal": 18900,
+      "shipping": 150,
+      "discount": 0,
+      "total": 19050,
+      "status": "delivered",
+      "paymentMethod": "bank_transfer",
+      "paymentStatus": "paid",
+      "shippingAddress": {
+        "address": "321 ถนนพหลโยธิน",
+        "district": "จตุจักร",
+        "province": "กรุงเทพมหานคร",
+        "postcode": "10900"
+      },
+      "trackingNumber": "TH987654321098",
+      "notes": ""
+    },
+    {
+      "id": "#ORD-2024-005",
+      "date": "2024-12-06",
+      "time": "11:30",
+      "customer": {
+        "name": "สมปอง ดีงาม",
+        "email": "sompong@email.com",
+        "phone": "086-555-6666",
+        "avatar": "https://i.pravatar.cc/100?img=12"
+      },
+      "items": [
+        {
+          "id": 2,
+          "name": "Corsair Vengeance 32GB",
+          "quantity": 4,
+          "price": 4500,
+          "image": "https://via.placeholder.com/80"
+        }
+      ],
+      "subtotal": 18000,
+      "shipping": 0,
+      "discount": 1800,
+      "total": 16200,
+      "status": "cancelled",
+      "paymentMethod": "credit_card",
+      "paymentStatus": "refunded",
+      "shippingAddress": {
+        "address": "555 ถนนรัชดาภิเษก",
+        "district": "ดินแดง",
+        "province": "กรุงเทพมหานคร",
+        "postcode": "10400"
+      },
+      "trackingNumber": null,
+      "notes": "ลูกค้าขอยกเลิก - เปลี่ยนใจ"
+    }
+  ],
+  "statusOptions": [
+    { "value": "all", "label": "ทั้งหมด" },
+    { "value": "pending", "label": "รอดำเนินการ" },
+    { "value": "processing", "label": "กำลังจัดเตรียม" },
+    { "value": "shipped", "label": "จัดส่งแล้ว" },
+    { "value": "delivered", "label": "ส่งสำเร็จ" },
+    { "value": "cancelled", "label": "ยกเลิก" }
+  ]
+}

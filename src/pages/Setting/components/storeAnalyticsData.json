@@ -1,0 +1,132 @@
+{
+  "overview": {
+    "totalRevenue": 458750,
+    "totalOrders": 156,
+    "totalProducts": 24,
+    "totalCustomers": 89,
+    "averageOrderValue": 2941,
+    "conversionRate": 3.2,
+    "revenueGrowth": 12.5,
+    "ordersGrowth": 8.3,
+    "customersGrowth": 15.2
+  },
+  "revenueByMonth": [
+    { "month": "ม.ค.", "revenue": 32500, "orders": 12 },
+    { "month": "ก.พ.", "revenue": 28900, "orders": 10 },
+    { "month": "มี.ค.", "revenue": 35200, "orders": 14 },
+    { "month": "เม.ย.", "revenue": 42100, "orders": 16 },
+    { "month": "พ.ค.", "revenue": 38600, "orders": 13 },
+    { "month": "มิ.ย.", "revenue": 45800, "orders": 18 },
+    { "month": "ก.ค.", "revenue": 52300, "orders": 21 },
+    { "month": "ส.ค.", "revenue": 48900, "orders": 17 },
+    { "month": "ก.ย.", "revenue": 41200, "orders": 15 },
+    { "month": "ต.ค.", "revenue": 36500, "orders": 12 },
+    { "month": "พ.ย.", "revenue": 29850, "orders": 11 },
+    { "month": "ธ.ค.", "revenue": 26900, "orders": 9 }
+  ],
+  "topProducts": [
+    {
+      "id": 1,
+      "name": "AMD Ryzen 9 7950X",
+      "category": "CPU",
+      "sold": 28,
+      "revenue": 125650,
+      "growth": 15.2
+    },
+    {
+      "id": 2,
+      "name": "NVIDIA RTX 4090",
+      "category": "GPU",
+      "sold": 12,
+      "revenue": 98500,
+      "growth": 22.8
+    },
+    {
+      "id": 3,
+      "name": "Corsair Vengeance 32GB",
+      "category": "RAM",
+      "sold": 45,
+      "revenue": 67500,
+      "growth": 8.5
+    },
+    {
+      "id": 4,
+      "name": "Samsung 990 Pro 2TB",
+      "category": "Storage",
+      "sold": 38,
+      "revenue": 52400,
+      "growth": 18.3
+    },
+    {
+      "id": 5,
+      "name": "ASUS ROG Crosshair X670E",
+      "category": "Mainboard",
+      "sold": 15,
+      "revenue": 45200,
+      "growth": -5.2
+    }
+  ],
+  "salesByCategory": [
+    { "category": "CPU", "sales": 125650, "percentage": 27.4 },
+    { "category": "GPU", "sales": 98500, "percentage": 21.5 },
+    { "category": "RAM", "sales": 67500, "percentage": 14.7 },
+    { "category": "Storage", "sales": 52400, "percentage": 11.4 },
+    { "category": "Mainboard", "sales": 45200, "percentage": 9.9 },
+    { "category": "อื่นๆ", "sales": 69500, "percentage": 15.1 }
+  ],
+  "recentActivity": [
+    {
+      "id": 1,
+      "type": "order",
+      "message": "คำสั่งซื้อใหม่ #ORD-2024-156",
+      "amount": 28050,
+      "time": "5 นาทีที่แล้ว"
+    },
+    {
+      "id": 2,
+      "type": "review",
+      "message": "รีวิวใหม่สำหรับ AMD Ryzen 9",
+      "rating": 5,
+      "time": "15 นาทีที่แล้ว"
+    },
+    {
+      "id": 3,
+      "type": "order",
+      "message": "คำสั่งซื้อใหม่ #ORD-2024-155",
+      "amount": 15800,
+      "time": "1 ชั่วโมงที่แล้ว"
+    },
+    {
+      "id": 4,
+      "type": "product",
+      "message": "สินค้า RTX 4090 ใกล้หมด",
+      "stock": 3,
+      "time": "2 ชั่วโมงที่แล้ว"
+    },
+    {
+      "id": 5,
+      "type": "shipped",
+      "message": "คำสั่งซื้อ #ORD-2024-150 จัดส่งแล้ว",
+      "time": "3 ชั่วโมงที่แล้ว"
+    }
+  ],
+  "customerStats": {
+    "newCustomers": 23,
+    "returningCustomers": 66,
+    "averageSpend": 5150,
+    "topLocations": [
+      { "province": "กรุงเทพมหานคร", "customers": 35, "percentage": 39.3 },
+      { "province": "เชียงใหม่", "customers": 12, "percentage": 13.5 },
+      { "province": "ชลบุรี", "customers": 10, "percentage": 11.2 },
+      { "province": "นนทบุรี", "customers": 8, "percentage": 9.0 },
+      { "province": "อื่นๆ", "customers": 24, "percentage": 27.0 }
+    ]
+  },
+  "periodOptions": [
+    { "value": "7days", "label": "7 วันล่าสุด" },
+    { "value": "30days", "label": "30 วันล่าสุด" },
+    { "value": "90days", "label": "90 วันล่าสุด" },
+    { "value": "year", "label": "ปีนี้" },
+    { "value": "all", "label": "ทั้งหมด" }
+  ]
+}

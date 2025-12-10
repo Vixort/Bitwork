@@ -15,7 +15,9 @@ import PaymentPanel from "./components/PaymentPanel";
 import StorePanel from "./components/StorePanel";
 import StoreDashboard from "./components/StoreDashboard";
 import StoreProducts from "./components/StoreProducts";
+import StoreOrders from "./components/StoreOrders";
 import StoreSalesHistory from "./components/StoreSalesHistory";
+import StoreAnalytics from "./components/StoreAnalytics";
 import NotificationPanel from "./components/NotificationPanel";
 import ThemePanel from "./components/ThemePanel";
 import SocialPanel from "./components/SocialPanel";
@@ -500,39 +502,11 @@ const SettingMain = () => {
       case "store-products":
         return <StoreProducts />;
       case "store-orders":
-        return (
-          <div className="settings-panel">
-            <div className="panel-header">
-              <h2 className="panel-title">คำสั่งซื้อ</h2>
-              <p className="panel-description">จัดการคำสั่งซื้อและการจัดส่ง</p>
-            </div>
-            <div className="panel-content">
-              <p
-                style={{ textAlign: "center", color: "#666", padding: "40px" }}
-              >
-                กำลังพัฒนา...
-              </p>
-            </div>
-          </div>
-        );
+        return <StoreOrders />;
       case "store-sales-history":
         return <StoreSalesHistory />;
       case "store-analytics":
-        return (
-          <div className="settings-panel">
-            <div className="panel-header">
-              <h2 className="panel-title">สถิติและรายงาน</h2>
-              <p className="panel-description">วิเคราะห์ข้อมูลและสถิติการขาย</p>
-            </div>
-            <div className="panel-content">
-              <p
-                style={{ textAlign: "center", color: "#666", padding: "40px" }}
-              >
-                กำลังพัฒนา...
-              </p>
-            </div>
-          </div>
-        );
+        return <StoreAnalytics />;
       case "notification":
         return (
           <NotificationPanel

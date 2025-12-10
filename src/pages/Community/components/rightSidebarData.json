@@ -1,0 +1,36 @@
+{
+  "trendingTopics": [
+    { "tag": "#React19", "posts": 234 },
+    { "tag": "#AI", "posts": 189 },
+    { "tag": "#SalaryTalk", "posts": 156 },
+    { "tag": "#RemoteWork", "posts": 134 },
+    { "tag": "#Interview", "posts": 98 }
+  ],
+  "topContributors": [
+    {
+      "name": "TechGuru2024",
+      "avatar": "https://i.pravatar.cc/100?img=1",
+      "points": 12500
+    },
+    {
+      "name": "CloudMaster",
+      "avatar": "https://i.pravatar.cc/100?img=3",
+      "points": 9870
+    },
+    {
+      "name": "SalaryHunter",
+      "avatar": "https://i.pravatar.cc/100?img=4",
+      "points": 8540
+    },
+    {
+      "name": "ReactFan",
+      "avatar": "https://i.pravatar.cc/100?img=6",
+      "points": 7230
+    },
+    {
+      "name": "DevNewbie",
+      "avatar": "https://i.pravatar.cc/100?img=2",
+      "points": 5120
+    }
+  ]
+}

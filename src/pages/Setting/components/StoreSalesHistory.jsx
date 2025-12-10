@@ -3,77 +3,15 @@
  */
 import React, { useState } from "react";
 
+// นำเข้าข้อมูล mock data จากไฟล์ JSON
+import salesHistoryData from "./storeSalesHistoryData.json";
+
 const StoreSalesHistory = () => {
   const [dateFilter, setDateFilter] = useState("30days");
 
-  const salesData = [
-    {
-      id: "#ORD-2024-156",
-      date: "2024-12-06",
-      time: "14:30",
-      customer: "สมชาย ใจดี",
-      products: ["AMD Ryzen 9 7950X", "Corsair RAM 32GB"],
-      amount: 23400,
-      profit: 3500,
-      status: "completed",
-      paymentMethod: "credit_card",
-    },
-    {
-      id: "#ORD-2024-155",
-      date: "2024-12-06",
-      time: "11:20",
-      customer: "สมหญิง รักษ์ดี",
-      products: ["NVIDIA RTX 4090"],
-      amount: 65000,
-      profit: 8500,
-      status: "completed",
-      paymentMethod: "bank_transfer",
-    },
-    {
-      id: "#ORD-2024-154",
-      date: "2024-12-05",
-      time: "16:45",
-      customer: "สมศักดิ์ มั่นคง",
-      products: ["Samsung 990 PRO 2TB", "MSI B650 Tomahawk"],
-      amount: 16700,
-      profit: 2400,
-      status: "completed",
-      paymentMethod: "promptpay",
-    },
-    {
-      id: "#ORD-2024-153",
-      date: "2024-12-05",
-      time: "09:15",
-      customer: "สมใจ ซื่อสัตย์",
-      products: ["Corsair Vengeance 32GB x2"],
-      amount: 9000,
-      profit: 1200,
-      status: "refunded",
-      paymentMethod: "credit_card",
-    },
-    {
-      id: "#ORD-2024-152",
-      date: "2024-12-04",
-      time: "13:50",
-      customer: "สมปอง ดีงาม",
-      products: [
-        "AMD Ryzen 9 7950X",
-        "MSI B650 Tomahawk",
-        "Samsung 990 PRO 2TB",
-      ],
-      amount: 35600,
-      profit: 5200,
-      status: "completed",
-      paymentMethod: "bank_transfer",
-    },
-  ];
-
-  const summary = {
-    totalSales: 149700,
-    totalProfit: 20800,
-    totalOrders: 5,
-    avgOrderValue: 29940,
-  };
+  // ข้อมูลจาก JSON file
+  const salesData = salesHistoryData.salesHistory;
+  const summary = salesHistoryData.summary;
 
   return (
     <div className="settings-panel">
@@ -203,67 +141,85 @@ const StoreSalesHistory = () => {
           </select>
         </div>
 
-        {/* Sales History Table */}
-        <div className="sales-table">
-          <table>
-            <thead>
-              <tr>
-                <th>รหัสคำสั่งซื้อ</th>
-                <th>วันที่-เวลา</th>
-                <th>ลูกค้า</th>
-                <th>สินค้า</th>
-                <th>ยอดรวม</th>
-                <th>กำไร</th>
-                <th>การชำระเงิน</th>
-                <th>สถานะ</th>
-              </tr>
-            </thead>
-            <tbody>
-              {salesData.map((sale) => (
-                <tr key={sale.id}>
-                  <td className="order-id">{sale.id}</td>
-                  <td>
-                    <div className="datetime-cell">
-                      <div>
-                        {new Date(sale.date).toLocaleDateString("th-TH")}
-                      </div>
-                      <div className="time-text">{sale.time}</div>
-                    </div>
-                  </td>
-                  <td>{sale.customer}</td>
-                  <td>
-                    <div className="products-cell">
-                      {sale.products.map((product, idx) => (
-                        <div key={idx} className="product-item">
-                          • {product}
-                        </div>
-                      ))}
-                    </div>
-                  </td>
-                  <td className="amount-cell">
+        {/* Sales History Cards */}
+        <div className="sales-cards">
+          {salesData.map((sale) => (
+            <div key={sale.id} className="sale-card">
+              <div className="sale-card-header">
+                <span className="order-id">{sale.id}</span>
+                <span className={`status-badge status-${sale.status}`}>
+                  {sale.status === "completed" && "สำเร็จ"}
+                  {sale.status === "refunded" && "คืนเงิน"}
+                  {sale.status === "cancelled" && "ยกเลิก"}
+                </span>
+              </div>
+
+              <div className="sale-card-customer">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                {sale.customer}
+              </div>
+
+              <div className="sale-card-date">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                {new Date(sale.date).toLocaleDateString("th-TH")} • {sale.time}
+              </div>
+
+              <div className="sale-card-products">
+                <span className="label">สินค้า:</span>
+                <div className="products-list">
+                  {sale.products.map((product, idx) => (
+                    <span key={idx} className="product-tag-item">
+                      {product}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="sale-card-footer">
+                <div className="sale-amount">
+                  <span className="label">ยอดรวม</span>
+                  <span className="value amount-cell">
                     ฿{sale.amount.toLocaleString()}
-                  </td>
-                  <td className="profit-cell">
+                  </span>
+                </div>
+                <div className="sale-profit">
+                  <span className="label">กำไร</span>
+                  <span className="value profit-cell">
                     ฿{sale.profit.toLocaleString()}
-                  </td>
-                  <td>
-                    <span className="payment-badge">
-                      {sale.paymentMethod === "credit_card" && "บัตรเครดิต"}
-                      {sale.paymentMethod === "bank_transfer" && "โอนเงิน"}
-                      {sale.paymentMethod === "promptpay" && "พร้อมเพย์"}
-                    </span>
-                  </td>
-                  <td>
-                    <span className={`status-badge status-${sale.status}`}>
-                      {sale.status === "completed" && "สำเร็จ"}
-                      {sale.status === "refunded" && "คืนเงิน"}
-                      {sale.status === "cancelled" && "ยกเลิก"}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </span>
+                </div>
+                <div className="sale-payment">
+                  <span className="payment-badge">
+                    {sale.paymentMethod === "credit_card" && "บัตรเครดิต"}
+                    {sale.paymentMethod === "bank_transfer" && "โอนเงิน"}
+                    {sale.paymentMethod === "promptpay" && "พร้อมเพย์"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

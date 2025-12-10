@@ -13,6 +13,9 @@ import JobCard from "./JobCard";
 // นำเข้าไฟล์ CSS สำหรับ styling
 import "./JobListing.css";
 
+// นำเข้าข้อมูล mock data จากไฟล์ JSON
+import jobListingData from "./jobListingData.json";
+
 /**
  * JobListing Component
  * แสดงรายการงานพร้อมตัวกรองและการเรียงลำดับ
@@ -30,191 +33,12 @@ const JobListing = () => {
   // state เก็บวิธีเรียงลำดับที่เลือก (ค่าเริ่มต้น = "latest")
   const [sortBy, setSortBy] = useState("latest");
 
-  // ===== DATA - ข้อมูลงานตัวอย่าง =====
+  // ===== DATA - ข้อมูลงานจาก JSON file =====
   // ในโปรเจคจริงควรดึงจาก API
-  const jobs = [
-    {
-      id: 1, // ID เฉพาะของงาน
-      title: "Senior Frontend Developer", // ชื่อตำแหน่งงาน
-      company: "TechCorp Thailand", // ชื่อบริษัท
-      companyLogo: null, // URL โลโก้บริษัท (null = ใช้ตัวอักษรแทน)
-      // URL รูปภาพปก
-      coverImage:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=300&fit=crop",
-      location: "กรุงเทพมหานคร", // สถานที่ทำงาน
-      type: "Full-time", // ประเภทงาน (Full-time, Part-time, Contract)
-      level: "Senior", // ระดับ (Junior, Mid-level, Senior)
-      salaryMin: 80000, // เงินเดือนต่ำสุด
-      salaryMax: 120000, // เงินเดือนสูงสุด
-      // คำอธิบายงาน
-      description:
-        "เรากำลังมองหา Senior Frontend Developer ที่มีประสบการณ์ในการพัฒนา Web Application ด้วย React, TypeScript และ Modern CSS เพื่อร่วมทีมพัฒนาผลิตภัณฑ์หลักของบริษัท",
-      skills: ["React", "TypeScript", "Tailwind CSS", "Next.js", "GraphQL"], // ทักษะที่ต้องการ
-      benefits: ["ประกันสุขภาพ", "WFH 3 วัน/สัปดาห์", "โบนัสประจำปี"], // สวัสดิการ
-      postedDate: "2025-11-24", // วันที่โพสต์
-      applicants: 45, // จำนวนผู้สมัคร
-      isVerified: true, // บริษัทยืนยันตัวตนหรือยัง
-      isUrgent: true, // งานด่วนหรือไม่
-      isRemote: true, // รองรับ Remote หรือไม่
-    },
-    {
-      id: 2,
-      title: "UX/UI Designer",
-      company: "Creative Studio",
-      companyLogo: null,
-      coverImage:
-        "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=600&h=300&fit=crop",
-      location: "เชียงใหม่",
-      type: "Full-time",
-      level: "Mid-level",
-      salaryMin: 45000,
-      salaryMax: 65000,
-      description:
-        "ออกแบบ User Interface และ User Experience สำหรับแอปพลิเคชันมือถือและเว็บไซต์ ทำงานร่วมกับทีม Product และ Developer เพื่อสร้างประสบการณ์ผู้ใช้ที่ยอดเยี่ยม",
-      skills: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-      benefits: ["ประกันสุขภาพ", "อุปกรณ์ทำงาน", "งบเรียนรู้"],
-      postedDate: "2025-11-23",
-      applicants: 32,
-      isVerified: true,
-      isUrgent: false,
-      isRemote: false,
-    },
-    {
-      id: 3,
-      title: "Backend Developer (Node.js)",
-      company: "StartupX",
-      companyLogo: null,
-      coverImage:
-        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=300&fit=crop",
-      location: "Remote",
-      type: "Full-time",
-      level: "Junior",
-      salaryMin: 35000,
-      salaryMax: 50000,
-      description:
-        "พัฒนา RESTful API และ Microservices ด้วย Node.js, Express และ MongoDB ร่วมทีม Backend เล็กๆ ที่เน้นคุณภาพและ Best Practices",
-      skills: ["Node.js", "Express", "MongoDB", "Docker", "AWS"],
-      benefits: ["Remote 100%", "Flexible Hours", "Stock Options"],
-      postedDate: "2025-11-22",
-      applicants: 78,
-      isVerified: false,
-      isUrgent: false,
-      isRemote: true,
-    },
-    {
-      id: 4,
-      title: "Data Analyst",
-      company: "FinanceHub",
-      companyLogo: null,
-      coverImage:
-        "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=300&fit=crop",
-      location: "กรุงเทพมหานคร",
-      type: "Full-time",
-      level: "Mid-level",
-      salaryMin: 55000,
-      salaryMax: 75000,
-      description:
-        "วิเคราะห์ข้อมูลทางการเงินและสร้าง Dashboard รายงานสำหรับผู้บริหาร ใช้ SQL, Python และ BI Tools ในการทำงาน",
-      skills: ["SQL", "Python", "Power BI", "Excel", "Statistics"],
-      benefits: ["ประกันสุขภาพ", "กองทุนสำรองเลี้ยงชีพ", "โบนัส 2-4 เดือน"],
-      postedDate: "2025-11-20",
-      applicants: 56,
-      isVerified: true,
-      isUrgent: false,
-      isRemote: false,
-    },
-    {
-      id: 5,
-      title: "Mobile Developer (Flutter)",
-      company: "AppMaster Co.",
-      companyLogo: null,
-      coverImage:
-        "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&h=300&fit=crop",
-      location: "กรุงเทพมหานคร",
-      type: "Full-time",
-      level: "Senior",
-      salaryMin: 70000,
-      salaryMax: 100000,
-      description:
-        "พัฒนาแอปพลิเคชันมือถือ Cross-platform ด้วย Flutter สำหรับ iOS และ Android ทำงานร่วมกับทีม Design และ Backend อย่างใกล้ชิด",
-      skills: ["Flutter", "Dart", "Firebase", "REST APIs", "Git"],
-      benefits: ["ประกันสุขภาพ", "MacBook Pro", "งบ Conference"],
-      postedDate: "2025-11-19",
-      applicants: 28,
-      isVerified: true,
-      isUrgent: true,
-      isRemote: true,
-    },
-    {
-      id: 6,
-      title: "Digital Marketing Specialist",
-      company: "GrowthLab",
-      companyLogo: null,
-      coverImage:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=300&fit=crop",
-      location: "กรุงเทพมหานคร",
-      type: "Full-time",
-      level: "Junior",
-      salaryMin: 30000,
-      salaryMax: 45000,
-      description:
-        "วางแผนและดำเนินการแคมเปญการตลาดดิจิทัล รวมถึง SEO, SEM, Social Media และ Content Marketing",
-      skills: ["Google Ads", "Facebook Ads", "SEO", "Analytics", "Content"],
-      benefits: ["ประกันสุขภาพ", "Commission", "Training"],
-      postedDate: "2025-11-18",
-      applicants: 89,
-      isVerified: false,
-      isUrgent: false,
-      isRemote: false,
-    },
-    {
-      id: 7,
-      title: "DevOps Engineer",
-      company: "CloudNative Inc.",
-      companyLogo: null,
-      coverImage:
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=300&fit=crop",
-      location: "Remote",
-      type: "Contract",
-      level: "Senior",
-      salaryMin: 90000,
-      salaryMax: 130000,
-      description:
-        "ดูแลระบบ Infrastructure บน Cloud, CI/CD Pipeline และ Monitoring สำหรับแอปพลิเคชันขนาดใหญ่ที่มีผู้ใช้หลายล้านคน",
-      skills: ["Kubernetes", "AWS", "Terraform", "Jenkins", "Prometheus"],
-      benefits: ["Remote 100%", "Flexible Hours", "Health Insurance"],
-      postedDate: "2025-11-17",
-      applicants: 19,
-      isVerified: true,
-      isUrgent: false,
-      isRemote: true,
-    },
-    {
-      id: 8,
-      title: "Product Manager",
-      company: "InnovateTech",
-      companyLogo: null,
-      coverImage:
-        "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=300&fit=crop",
-      location: "กรุงเทพมหานคร",
-      type: "Full-time",
-      level: "Mid-level",
-      salaryMin: 60000,
-      salaryMax: 90000,
-      description:
-        "บริหารจัดการ Product Roadmap, ทำงานร่วมกับ Stakeholders และทีมพัฒนา เพื่อส่งมอบ Features ที่ตอบโจทย์ผู้ใช้งาน",
-      skills: ["Agile", "Jira", "Data Analysis", "User Stories", "Roadmapping"],
-      benefits: ["ประกันสุขภาพ", "WFH", "โบนัสตาม KPI"],
-      postedDate: "2025-11-15",
-      applicants: 42,
-      isVerified: true,
-      isUrgent: false,
-      isRemote: false,
-    },
-  ];
+  const jobs = jobListingData.jobs;
 
-  // รายการตัวกรองที่แสดงเป็นปุ่ม
-  const filters = ["ทั้งหมด", "Full-time", "Part-time", "Contract", "Remote"];
+  // รายการตัวกรองที่แสดงเป็นปุ่ม (จาก JSON)
+  const filters = jobListingData.filters;
 
   // ===== EVENT HANDLERS =====
 

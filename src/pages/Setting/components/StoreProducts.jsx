@@ -4,6 +4,9 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
 
+// นำเข้าข้อมูล mock data จากไฟล์ JSON
+import storeProductsData from "./storeProductsData.json";
+
 const StoreProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
@@ -12,79 +15,8 @@ const StoreProducts = () => {
   const [isCustomerViewOpen, setIsCustomerViewOpen] = useState(false);
   const [editedProduct, setEditedProduct] = useState(null);
 
-  const products = [
-    {
-      id: 1,
-      name: "AMD Ryzen 9 7950X",
-      sku: "CPU-AMD-7950X",
-      category: "CPU",
-      price: 18900,
-      stock: 15,
-      status: "active",
-      image: "https://via.placeholder.com/200",
-      sales: 45,
-      description:
-        "โปรเซสเซอร์ AMD Ryzen 9 7950X ขุมพลัง 16 คอร์ 32 เธรด ความเร็ว 5.7 GHz เหมาะสำหรับงานสร้างสรรค์และเล่นเกม",
-      weight: "0.5 kg",
-      warranty: "3 ปี",
-    },
-    {
-      id: 2,
-      name: "NVIDIA RTX 4090",
-      sku: "GPU-NV-4090",
-      category: "GPU",
-      price: 65000,
-      stock: 3,
-      status: "active",
-      image: "https://via.placeholder.com/200",
-      sales: 12,
-      description: "การ์ดจอ NVIDIA RTX 4090 พลังสูงสุดสำหรับเกมและงาน AI/ML",
-      weight: "2.2 kg",
-      warranty: "3 ปี",
-    },
-    {
-      id: 3,
-      name: "Corsair Vengeance 32GB",
-      sku: "RAM-COR-32GB",
-      category: "RAM",
-      price: 4500,
-      stock: 0,
-      status: "out_of_stock",
-      image: "https://via.placeholder.com/200",
-      sales: 78,
-      description: "แรม DDR5 32GB (16GBx2) 6000MHz RGB ประสิทธิภาพสูง",
-      weight: "0.2 kg",
-      warranty: "Lifetime",
-    },
-    {
-      id: 4,
-      name: "Samsung 990 PRO 2TB",
-      sku: "SSD-SAM-2TB",
-      category: "Storage",
-      price: 7800,
-      stock: 25,
-      status: "active",
-      image: "https://via.placeholder.com/200",
-      sales: 34,
-      description: "SSD NVMe Gen 4 ความเร็วสูงสุด 7,450 MB/s อ่าน",
-      weight: "0.1 kg",
-      warranty: "5 ปี",
-    },
-    {
-      id: 5,
-      name: "MSI B650 Tomahawk",
-      sku: "MB-MSI-B650",
-      category: "Motherboard",
-      price: 8900,
-      stock: 8,
-      status: "active",
-      image: "https://via.placeholder.com/200",
-      sales: 23,
-      description: "เมนบอร์ด AMD B650 รองรับ Ryzen 7000 series",
-      weight: "1.5 kg",
-      warranty: "3 ปี",
-    },
-  ];
+  // ข้อมูลสินค้าจาก JSON file
+  const products = storeProductsData.products;
 
   const openProductDetail = (product) => {
     setSelectedProduct(product);

@@ -1,0 +1,51 @@
+{
+  "stats": [
+    {
+      "label": "ยอดขายวันนี้",
+      "value": "฿12,450",
+      "change": "+15.3%",
+      "trend": "up"
+    },
+    {
+      "label": "คำสั่งซื้อใหม่",
+      "value": "23",
+      "change": "+8",
+      "trend": "up"
+    },
+    {
+      "label": "สินค้าที่ขาย",
+      "value": "156",
+      "change": "+12",
+      "trend": "up"
+    },
+    {
+      "label": "อัตราการแปลง",
+      "value": "3.2%",
+      "change": "+0.4%",
+      "trend": "up"
+    }
+  ],
+  "recentOrders": [
+    {
+      "id": "#ORD-2024-001",
+      "customer": "สมชาย ใจดี",
+      "product": "Ryzen 9 7950X",
+      "amount": "฿18,900",
+      "status": "pending"
+    },
+    {
+      "id": "#ORD-2024-002",
+      "customer": "สมหญิง รักษ์ดี",
+      "product": "RTX 4090",
+      "amount": "฿65,000",
+      "status": "completed"
+    },
+    {
+      "id": "#ORD-2024-003",
+      "customer": "สมศักดิ์ มั่นคง",
+      "product": "Corsair RAM 32GB",
+      "amount": "฿4,500",
+      "status": "processing"
+    }
+  ]
+}

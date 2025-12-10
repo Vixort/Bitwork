@@ -3,117 +3,72 @@
  */
 import React from "react";
 
+// นำเข้าข้อมูล mock data จากไฟล์ JSON
+import dashboardData from "./storeDashboardData.json";
+
 const StoreDashboard = () => {
-  const stats = [
-    {
-      label: "ยอดขายวันนี้",
-      value: "฿12,450",
-      change: "+15.3%",
-      trend: "up",
-      icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <line x1="12" y1="1" x2="12" y2="23" />
-          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-        </svg>
-      ),
-    },
-    {
-      label: "คำสั่งซื้อใหม่",
-      value: "23",
-      change: "+8",
-      trend: "up",
-      icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <circle cx="9" cy="21" r="1" />
-          <circle cx="20" cy="21" r="1" />
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-        </svg>
-      ),
-    },
-    {
-      label: "สินค้าที่ขาย",
-      value: "156",
-      change: "+12",
-      trend: "up",
-      icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-          <line x1="12" y1="22.08" x2="12" y2="12" />
-        </svg>
-      ),
-    },
-    {
-      label: "อัตราการแปลง",
-      value: "3.2%",
-      change: "+0.4%",
-      trend: "up",
-      icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-        </svg>
-      ),
-    },
+  // ข้อมูลจาก JSON file (stats มี icon เป็น JSX จึงต้อง map เพิ่ม)
+  const statsData = dashboardData.stats;
+  const recentOrders = dashboardData.recentOrders;
+
+  // เพิ่ม icon ให้กับ stats
+  const icons = [
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      key="1"
+    >
+      <line x1="12" y1="1" x2="12" y2="23" />
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    </svg>,
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      key="2"
+    >
+      <circle cx="9" cy="21" r="1" />
+      <circle cx="20" cy="21" r="1" />
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+    </svg>,
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      key="3"
+    >
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+      <line x1="12" y1="22.08" x2="12" y2="12" />
+    </svg>,
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      key="4"
+    >
+      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+    </svg>,
   ];
 
-  const recentOrders = [
-    {
-      id: "#ORD-2024-001",
-      customer: "สมชาย ใจดี",
-      product: "Ryzen 9 7950X",
-      amount: "฿18,900",
-      status: "pending",
-    },
-    {
-      id: "#ORD-2024-002",
-      customer: "สมหญิง รักษ์ดี",
-      product: "RTX 4090",
-      amount: "฿65,000",
-      status: "completed",
-    },
-    {
-      id: "#ORD-2024-003",
-      customer: "สมศักดิ์ มั่นคง",
-      product: "RAM 32GB Kit",
-      amount: "฿4,500",
-      status: "processing",
-    },
-    {
-      id: "#ORD-2024-004",
-      customer: "สมใจ ซื่อสัตย์",
-      product: "MSI B650 Motherboard",
-      amount: "฿8,900",
-      status: "completed",
-    },
-  ];
+  // รวม stats data กับ icons
+  const stats = statsData.map((stat, index) => ({
+    ...stat,
+    icon: icons[index],
+  }));
 
   return (
     <div className="settings-panel">

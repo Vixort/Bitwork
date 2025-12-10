@@ -3,6 +3,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./MarketMain.css";
 
+// Import mock data from JSON file
+import marketData from "./marketProductsData.json";
+
 const MarketMain = () => {
   // Initialize AOS
   useEffect(() => {
@@ -14,19 +17,8 @@ const MarketMain = () => {
     });
   }, []);
 
-  // รายการหมวดหมู่สินค้าที่ใช้สร้างปุ่มตัวกรองด้านบน
-  const fillter = [
-    "คอมพิวเตอร์",
-    "Power Supply",
-    "สายไฟ",
-    "ซีพียู",
-    "Gadget",
-    "แรม(RAM)",
-    "การ์ดจอ",
-    "จอมอนิเตอร์",
-    "คีย์บอร์ด",
-    "เมาส์",
-  ];
+  // รายการหมวดหมู่สินค้าที่ใช้สร้างปุ่มตัวกรองด้านบน (จาก JSON)
+  const fillter = marketData.categories;
 
   // ref สำหรับควบคุมรายการปุ่มให้ลากได้เหมือน trackpad/เมาส์
   const menuRef = useRef(null);
@@ -158,133 +150,8 @@ const MarketMain = () => {
     return sum + price * item.quantity;
   }, 0);
 
-  // สินค้าตัวอย่างที่ใช้แสดงในการ์ด (สามารถเปลี่ยนมาจาก API ได้)
-  const products = [
-    {
-      id: 1,
-      title: "RTX 4090",
-      description: "การ์ดจอประสิทธิภาพสูงสำหรับการเล่นเกมและเรนเดอร์",
-      fullDescription:
-        "NVIDIA GeForce RTX 4090 เป็นการ์ดจอที่ทรงพลังที่สุดในตระกูล Ada Lovelace ให้ประสิทธิภาพการเล่นเกมที่เหนือชั้น รองรับ Ray Tracing และ DLSS 3.0 เหมาะสำหรับเกมเมอร์และครีเอเตอร์มืออาชีพ",
-      price: "฿55,900",
-      category: "การ์ดจอ",
-      brand: "NVIDIA",
-      warranty: "3 ปี",
-      specs: {
-        memory: "24GB GDDR6X",
-        coreClock: "2520 MHz",
-        tdp: "450W",
-        interface: "PCIe 4.0 x16",
-      },
-      rating: 4.9,
-      reviews: 1250,
-      sold: 3420,
-    },
-    {
-      id: 2,
-      title: "RTX 4080",
-      description: "GPU ทรงพลังสำหรับงานระดับมืออาชีพและการเล่นเกม",
-      fullDescription:
-        "GeForce RTX 4080 มาพร้อมสถาปัตยกรรม Ada Lovelace รุ่นใหม่ล่าสุด ให้ประสิทธิภาพที่ยอดเยี่ยมทั้งการเล่นเกมและงานสร้างสรรค์ รองรับ 4K gaming ได้อย่างลื่นไหล",
-      price: "฿41,900",
-      category: "การ์ดจอ",
-      brand: "NVIDIA",
-      warranty: "3 ปี",
-      specs: {
-        memory: "16GB GDDR6X",
-        coreClock: "2505 MHz",
-        tdp: "320W",
-        interface: "PCIe 4.0 x16",
-      },
-      rating: 4.8,
-      reviews: 890,
-      sold: 2150,
-    },
-    {
-      id: 3,
-      title: "RTX 4070",
-      description: "ประสิทธิภาพสมดุล เหมาะสำหรับครีเอเตอร์และเกมเมอร์",
-      fullDescription:
-        "RTX 4070 เป็นตัวเลือกที่คุ้มค่าสำหรับเกมเมอร์ที่ต้องการเล่นเกมที่ความละเอียด 1440p พร้อมประสิทธิภาพ Ray Tracing ที่ยอดเยี่ยม และการใช้พลังงานที่ประหยัด",
-      price: "฿27,900",
-      category: "การ์ดจอ",
-      brand: "NVIDIA",
-      warranty: "3 ปี",
-      specs: {
-        memory: "12GB GDDR6X",
-        coreClock: "2475 MHz",
-        tdp: "200W",
-        interface: "PCIe 4.0 x16",
-      },
-      rating: 4.7,
-      reviews: 1520,
-      sold: 4890,
-    },
-    {
-      id: 4,
-      title: "GTX 1660 Super",
-      description:
-        "GPU ระดับเริ่มต้น ประหยัดพลังงาน เหมาะสำหรับการเล่นเกมทั่วไป",
-      fullDescription:
-        "GeForce GTX 1660 Super เป็นการ์ดจอระดับเริ่มต้นที่ให้ประสิทธิภาพคุ้มค่า เหมาะสำหรับเล่นเกมที่ความละเอียด 1080p ได้อย่างลื่นไหล ใช้พลังงานต่ำและราคาเข้าถึงง่าย",
-      price: "฿7,990",
-      category: "การ์ดจอ",
-      brand: "NVIDIA",
-      warranty: "3 ปี",
-      specs: {
-        memory: "6GB GDDR6",
-        coreClock: "1785 MHz",
-        tdp: "125W",
-        interface: "PCIe 3.0 x16",
-      },
-      rating: 4.5,
-      reviews: 2340,
-      sold: 8920,
-    },
-    {
-      id: 5,
-      title: "Intel Core i9-14900K",
-      description: "โปรเซสเซอร์ระดับท็อปพร้อมประสิทธิภาพที่ยอดเยี่ยม",
-      fullDescription:
-        "Intel Core i9-14900K เป็น CPU รุ่นเรือธงจาก Intel ที่มาพร้อม 24 cores (8P + 16E) และความเร็วสูงสุดถึง 6.0 GHz เหมาะสำหรับงานหนักทุกประเภท ไม่ว่าจะเป็นเกมหรืองานตัดต่อ",
-      price: "฿23,900",
-      category: "ซีพียู",
-      brand: "Intel",
-      warranty: "3 ปี",
-      specs: {
-        cores: "24 Cores (8P + 16E)",
-        threads: "32 Threads",
-        baseClock: "3.2 GHz",
-        boostClock: "6.0 GHz",
-        tdp: "125W",
-      },
-      rating: 4.8,
-      reviews: 680,
-      sold: 1890,
-    },
-    {
-      id: 6,
-      title: "AMD Ryzen 9 7950X3D",
-      description: "CPU เกมมิ่งที่ดีที่สุดพร้อมเทคโนโลยี 3D V-Cache",
-      fullDescription:
-        "Ryzen 9 7950X3D คือ CPU ที่ดีที่สุดสำหรับการเล่นเกมด้วยเทคโนโลยี 3D V-Cache ที่เพิ่ม L3 Cache มหาศาล ให้ประสิทธิภาพเกมที่เหนือชั้น พร้อมความสามารถ multitasking ระดับเทพ",
-      price: "฿20,900",
-      category: "ซีพียู",
-      brand: "AMD",
-      warranty: "3 ปี",
-      specs: {
-        cores: "16 Cores",
-        threads: "32 Threads",
-        baseClock: "4.2 GHz",
-        boostClock: "5.7 GHz",
-        cache: "128MB L3 3D V-Cache",
-        tdp: "120W",
-      },
-      rating: 4.9,
-      reviews: 920,
-      sold: 2450,
-    },
-  ];
+  // สินค้าตัวอย่างที่ใช้แสดงในการ์ด (จาก JSON file)
+  const products = marketData.products;
 
   // กรองสินค้าตามหมวดหมู่และคำค้นหา
   const filteredProducts = products.filter((p) => {
