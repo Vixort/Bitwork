@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import "./NavBar.css";
 
-const NavBar = ({ isLoggedIn = false, user = null }) => {
+const NavBar = ({ isLoggedIn = true, user = null }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {

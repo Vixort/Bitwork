@@ -74,6 +74,14 @@ import AuthPage from "./pages/Login/AuthPage.jsx";
 import JobMain from "./pages/JobBoard/JobMain.jsx";
 
 /**
+ * JobDetail - หน้ารายละเอียดงานแบบเต็ม
+ * - แสดงข้อมูลงานครบถ้วน
+ * - รายละเอียดตำแหน่ง, คุณสมบัติ, สวัสดิการ
+ * - ข้อมูลบริษัท, ปุ่มสมัครงาน
+ */
+import JobDetail from "./pages/JobBoard/JobDetail.jsx";
+
+/**
  * CommunityMain - หน้าชุมชน/ฟอรัม
  * - แสดงกระทู้และการสนทนา
  * - มีหมวดหมู่ต่างๆ (ถาม-ตอบ, แชร์ประสบการณ์, รีวิวบริษัท)
@@ -88,6 +96,14 @@ import CommunityMain from "./pages/Community/CommunityMain.jsx";
  * - เชื่อมต่อ Social Login
  */
 import SettingMain from "./pages/Setting/SettingMain.jsx";
+
+/**
+ * ProfileMain - หน้าโปรไฟล์ผู้ใช้
+ * - แสดงข้อมูลสาธารณะของผู้ใช้
+ * - สินค้า, โพสต์, รีวิว, ทักษะ
+ * - ปุ่มติดตามและส่งข้อความ
+ */
+import ProfileMain from "./pages/Profile/ProfileMain.jsx";
 
 /**
  * ScrollToTop - Component สำหรับเลื่อนขึ้นบนสุดเมื่อเปลี่ยนหน้า
@@ -156,6 +172,13 @@ const App = () => {
         <Route path="/jobs" element={<JobMain />} />
 
         {/* 
+          Route: หน้ารายละเอียดงาน (/jobs/:jobId)
+          - แสดงรายละเอียดงานแบบเต็ม
+          - URL: http://localhost:5173/jobs/1
+        */}
+        <Route path="/jobs/:jobId" element={<JobDetail />} />
+
+        {/* 
           Route: หน้าชุมชน (/community)
           - แสดงฟอรัมและกระทู้
           - URL: http://localhost:5173/community
@@ -186,6 +209,14 @@ const App = () => {
           - URL: http://localhost:5173/settings
         */}
         <Route path="/settings" element={<SettingMain />} />
+
+        {/* 
+          Route: หน้าโปรไฟล์ผู้ใช้ (/profile/:username)
+          - แสดงข้อมูลสาธารณะของผู้ใช้
+          - สินค้า, โพสต์, รีวิว, ทักษะ
+          - URL: http://localhost:5173/profile/somchai_dev
+        */}
+        <Route path="/profile/:username" element={<ProfileMain />} />
       </Routes>
     </div>
   );

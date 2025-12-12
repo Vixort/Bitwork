@@ -7,6 +7,9 @@
 // นำเข้า React library
 import React from "react";
 
+// นำเข้า useNavigate สำหรับเปลี่ยนหน้า
+import { useNavigate } from "react-router";
+
 // นำเข้าไฟล์ CSS สำหรับ styling ของ JobCard
 import "./JobCard.css";
 
@@ -21,6 +24,7 @@ import "./JobCard.css";
  * @returns {JSX.Element} - Card แสดงข้อมูลงาน
  */
 const JobCard = ({ job, onApply, onSave, isSaved }) => {
+  const navigate = useNavigate();
   // ===== HELPER FUNCTIONS =====
 
   /**
@@ -66,9 +70,18 @@ const JobCard = ({ job, onApply, onSave, isSaved }) => {
 
   // ===== RENDER =====
 
+  // ฟังก์ชันเปิดหน้ารายละเอียดงาน
+  const handleCardClick = (e) => {
+    // ไม่เปิดถ้าคลิกที่ปุ่มบันทึกหรือสมัคร
+    if (e.target.closest(".save-btn") || e.target.closest(".apply-btn")) {
+      return;
+    }
+    navigate(`/jobs/${job.id}`);
+  };
+
   return (
-    // Container หลักของ Card
-    <div className="job-card">
+    // Container หลักของ Card - สามารถคลิกได้
+    <div className="job-card" onClick={handleCardClick}>
       {/* ===== COVER IMAGE - รูปภาพปก ===== */}
       {/* แสดงเฉพาะเมื่อมี coverImage */}
       {job.coverImage && (

@@ -228,6 +228,270 @@
   gap: 10px;
 }
 
+/* ============= View Profile Button ============= */
+.btn-view-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.1);
+  border: 1px solid #2ecc71;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-view-profile:hover {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.btn-view-profile svg {
+  flex-shrink: 0;
+}
+
+/* ============= Cover Image Section ============= */
+.cover-upload-section {
+  margin-bottom: 24px;
+}
+
+.cover-preview {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cover-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-remove-cover {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-remove-cover:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.cover-upload-placeholder {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #f8f9fa;
+  border: 2px dashed #e5e5e5;
+  border-radius: 12px;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cover-upload-placeholder:hover {
+  border-color: #2ecc71;
+  background: rgba(46, 204, 113, 0.05);
+}
+
+.cover-upload-placeholder span {
+  font-size: 14px;
+}
+
+.cover-upload-placeholder .helper-text {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ============= Skills Section ============= */
+.section-description {
+  margin: 0 0 16px 0;
+  font-size: 13px;
+  color: #888;
+}
+
+.skills-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skill-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.skill-input {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.skill-input:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+}
+
+.btn-add-skill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #2ecc71;
+  border: 1px solid #2ecc71;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-add-skill:hover:not(:disabled) {
+  background-color: #27ae60;
+}
+
+.btn-add-skill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 40px;
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.skill-tag-editable {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #333;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+}
+
+.btn-remove-skill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.btn-remove-skill:hover {
+  color: #e74c3c;
+}
+
+.no-skills-text {
+  font-size: 13px;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* ============= Social Inputs Section ============= */
+.social-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.social-icon.github {
+  background: #24292e;
+  color: #fff;
+}
+
+.social-icon.linkedin {
+  background: #0077b5;
+  color: #fff;
+}
+
+.social-icon.twitter {
+  background: #1da1f2;
+  color: #fff;
+}
+
+.social-icon.facebook {
+  background: #1877f2;
+  color: #fff;
+}
+
+.social-input {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.social-input:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+}
+
+.social-input::placeholder {
+  color: #999;
+}
+
 /* ============= Buttons ============= */
 .btn-primary {
   padding: 12px 24px;

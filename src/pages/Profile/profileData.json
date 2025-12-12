@@ -1,0 +1,151 @@
+{
+  "user": {
+    "id": "user_001",
+    "username": "somchai_dev",
+    "displayName": "สมชาย ใจดี",
+    "avatar": "https://i.pravatar.cc/200?img=11",
+    "coverImage": "https://images.unsplash.com/photo-1517134191118-9d595e4c8c2b?w=1200&q=80",
+    "bio": "Full-stack Developer ประสบการณ์ 5 ปี | เชี่ยวชาญ React, Node.js, Cloud Services | พร้อมรับงาน Freelance",
+    "location": "กรุงเทพมหานคร, ประเทศไทย",
+    "website": "https://somchai.dev",
+    "joinDate": "2023-06-15",
+    "isVerified": true,
+    "isOnline": true,
+    "lastSeen": "2024-12-11T10:30:00",
+    "role": "seller",
+    "stats": {
+      "followers": 1250,
+      "following": 324,
+      "posts": 45,
+      "products": 12,
+      "reviews": 89,
+      "rating": 4.8
+    },
+    "badges": [
+      { "id": 1, "name": "Top Seller", "icon": "star", "color": "#f59e0b" },
+      { "id": 2, "name": "Verified", "icon": "check", "color": "#2ecc71" },
+      { "id": 3, "name": "Fast Response", "icon": "zap", "color": "#3b82f6" }
+    ],
+    "skills": [
+      "React",
+      "Node.js",
+      "TypeScript",
+      "Python",
+      "AWS",
+      "Docker",
+      "MongoDB",
+      "PostgreSQL"
+    ],
+    "socialLinks": {
+      "github": "https://github.com/somchai",
+      "linkedin": "https://linkedin.com/in/somchai",
+      "twitter": "https://twitter.com/somchai",
+      "facebook": ""
+    }
+  },
+  "store": {
+    "name": "Somchai Dev Studio",
+    "description": "รับพัฒนาเว็บไซต์และแอปพลิเคชันครบวงจร",
+    "totalSales": 156,
+    "rating": 4.9,
+    "responseTime": "ภายใน 1 ชั่วโมง"
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "AMD Ryzen 9 7950X",
+      "price": 18900,
+      "image": "https://via.placeholder.com/200",
+      "rating": 4.9,
+      "sold": 45
+    },
+    {
+      "id": 2,
+      "name": "NVIDIA RTX 4090",
+      "price": 65000,
+      "image": "https://via.placeholder.com/200",
+      "rating": 4.8,
+      "sold": 12
+    },
+    {
+      "id": 3,
+      "name": "Corsair Vengeance 32GB",
+      "price": 4500,
+      "image": "https://via.placeholder.com/200",
+      "rating": 4.7,
+      "sold": 78
+    },
+    {
+      "id": 4,
+      "name": "Samsung 990 PRO 2TB",
+      "price": 7800,
+      "image": "https://via.placeholder.com/200",
+      "rating": 4.8,
+      "sold": 34
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "วิธีเลือกซื้อการ์ดจอในปี 2024",
+      "excerpt": "มาดูกันว่าการ์ดจอรุ่นไหนคุ้มค่าที่สุดในปีนี้...",
+      "category": "รีวิว",
+      "likes": 234,
+      "comments": 45,
+      "date": "2024-12-05"
+    },
+    {
+      "id": 2,
+      "title": "ประสบการณ์ใช้งาน Ryzen 9 7950X",
+      "excerpt": "หลังจากใช้งานมา 3 เดือน มาแชร์ประสบการณ์กัน...",
+      "category": "แชร์ประสบการณ์",
+      "likes": 189,
+      "comments": 32,
+      "date": "2024-11-28"
+    },
+    {
+      "id": 3,
+      "title": "Tips: วิธีประกอบคอมให้ประหยัดงบ",
+      "excerpt": "สำหรับมือใหม่ที่อยากประกอบคอมเอง...",
+      "category": "เทคนิค",
+      "likes": 312,
+      "comments": 67,
+      "date": "2024-11-15"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "reviewer": {
+        "name": "สมหญิง รักษ์ดี",
+        "avatar": "https://i.pravatar.cc/100?img=5"
+      },
+      "rating": 5,
+      "comment": "สินค้าดีมาก ส่งไว บรรจุภัณฑ์เรียบร้อย แนะนำเลยครับ!",
+      "product": "AMD Ryzen 9 7950X",
+      "date": "2024-12-08"
+    },
+    {
+      "id": 2,
+      "reviewer": {
+        "name": "สมศักดิ์ มั่นคง",
+        "avatar": "https://i.pravatar.cc/100?img=3"
+      },
+      "rating": 5,
+      "comment": "ตอบแชทไว ให้คำแนะนำดี สินค้าแท้ 100%",
+      "product": "NVIDIA RTX 4090",
+      "date": "2024-12-06"
+    },
+    {
+      "id": 3,
+      "reviewer": {
+        "name": "สมใจ ซื่อสัตย์",
+        "avatar": "https://i.pravatar.cc/100?img=8"
+      },
+      "rating": 4,
+      "comment": "สินค้าดี แต่ส่งช้าไปหน่อย โดยรวมพอใจครับ",
+      "product": "Samsung 990 PRO 2TB",
+      "date": "2024-12-01"
+    }
+  ]
+}

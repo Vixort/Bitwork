@@ -60,6 +60,14 @@ const SettingMain = () => {
     phone: "0812345678",
     bio: "Full-stack developer ประสบการณ์ 5 ปี เชี่ยวชาญ React, Node.js, และ Cloud Services",
     profileImage: "",
+    coverImage: "",
+    location: "กรุงเทพมหานคร, ประเทศไทย",
+    website: "https://somchai.dev",
+    skills: ["React", "Node.js", "TypeScript", "AWS", "Docker"],
+    githubUrl: "https://github.com/somchai_dev",
+    linkedinUrl: "https://linkedin.com/in/somchai_dev",
+    twitterUrl: "",
+    facebookUrl: "",
   });
   const [originalAccountData, setOriginalAccountData] = useState({
     ...accountData,
