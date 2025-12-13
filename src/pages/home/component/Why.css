@@ -20,13 +20,14 @@
 
 .why-badge {
   display: inline-block;
-  padding: 8px 20px;
-  background: #ecfdf5;
+  padding: 8px 16px;
+  background: #ffffff;
   color: #10b981;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  border-radius: 50px;
+  border-radius: 8px;
   margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
 }
 
 .why-title {
@@ -57,19 +58,18 @@
 }
 
 .feature-card {
-  background: #f9fafb;
+  background: #ffffff;
   padding: 32px 24px;
-  border-radius: 16px;
+  border-radius: 14px;
   text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  border: 1px solid #f3f4f6;
 }
 
 .feature-card:hover {
-  background: white;
-  border-color: #10b981;
-  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.1);
-  transform: translateY(-5px);
+  border-color: #e5e7eb;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
 }
 
 .feature-icon {
@@ -101,13 +101,13 @@
 .why-tagline {
   text-align: center;
   padding: 40px;
-  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-  border-radius: 20px;
+  background: #f9fafb;
+  border-radius: 16px;
 }
 
 .why-tagline p {
-  font-size: 1.25rem;
-  color: #1f2937;
+  font-size: 1.1rem;
+  color: #6b7280;
   font-weight: 500;
 }
 

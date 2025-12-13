@@ -1,17 +1,17 @@
 :root {
   --primary: #10b981;
   --primary-dark: #059669;
-  --primary-light: #d1fae5;
+  --primary-light: #ecfdf5;
 }
 
 .community-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f8fafb 0%, #f0f4f8 100%);
+  background: #ffffff;
 }
 
 .community-main {
   padding: 60px 40px 80px;
-  background: linear-gradient(180deg, #f8fafb 0%, #f0f4f8 100%);
+  background: #ffffff;
 }
 
 .community-container {

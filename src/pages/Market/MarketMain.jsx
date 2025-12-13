@@ -152,6 +152,7 @@ const MarketMain = () => {
 
   // สินค้าตัวอย่างที่ใช้แสดงในการ์ด (จาก JSON file)
   const products = marketData.products;
+  const storeInfo = marketData.storeInfo;
 
   // กรองสินค้าตามหมวดหมู่และคำค้นหา
   const filteredProducts = products.filter((p) => {
@@ -607,6 +608,7 @@ const MarketMain = () => {
             product={selectedProduct}
             onClose={() => setSelectedProduct(null)}
             onAddToCart={addToCart}
+            storeInfo={storeInfo}
           />
         )}
       </div>
@@ -663,9 +665,16 @@ function ProductCard({ product, onAddToCart, onViewDetail, aosDelay = 0 }) {
   );
 }
 
-// Modal สำหรับแสดงรายละเอียดสินค้า
-function ProductDetailModal({ product, onClose, onAddToCart }) {
+// Modal สำหรับแสดงรายละเอียดสินค้า (เหมือน Customer View ใน Settings)
+function ProductDetailModal({ product, onClose, onAddToCart, storeInfo }) {
   const [quantity, setQuantity] = useState(1);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState("details");
+  const [newComment, setNewComment] = useState({
+    rating: 5,
+    text: "",
+    images: [],
+  });
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
@@ -674,152 +683,278 @@ function ProductDetailModal({ product, onClose, onAddToCart }) {
     onClose();
   };
 
+  // Get product image
+  const getProductImage = (index = 0) => {
+    if (product.images && product.images.length > 0) {
+      return product.images[index] || product.images[0];
+    }
+    return "https://via.placeholder.com/400";
+  };
+
+  // Calculate average rating
+  const calculateAverageRating = () => {
+    if (!product.reviewsList || product.reviewsList.length === 0) {
+      return product.rating || 0;
+    }
+    const sum = product.reviewsList.reduce(
+      (acc, review) => acc + review.rating,
+      0
+    );
+    return (sum / product.reviewsList.length).toFixed(1);
+  };
+
+  // Render stars
+  const renderStars = (rating, interactive = false, onRate = null) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <svg
+          key={i}
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill={i <= rating ? "#f59e0b" : "none"}
+          stroke={i <= rating ? "#f59e0b" : "#d1d5db"}
+          strokeWidth="2"
+          style={{ cursor: interactive ? "pointer" : "default" }}
+          onClick={() => interactive && onRate && onRate(i)}
+        >
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      );
+    }
+    return stars;
+  };
+
+  // Handle image upload for comment
+  const handleCommentImageUpload = () => {
+    const mockImage = `https://picsum.photos/200?random=${Date.now()}`;
+    setNewComment((prev) => ({
+      ...prev,
+      images: [...prev.images, mockImage],
+    }));
+  };
+
+  // Remove image from comment
+  const removeCommentImage = (index) => {
+    setNewComment((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index),
+    }));
+  };
+
+  // Submit comment
+  const handleSubmitComment = () => {
+    if (!newComment.text.trim()) {
+      alert("กรุณาใส่ข้อความรีวิว");
+      return;
+    }
+    console.log("Submitting comment:", newComment);
+    setNewComment({ rating: 5, text: "", images: [] });
+  };
+
   return (
     <div className="market-detail-overlay" onClick={onClose}>
       <div
-        className="market-detail-modal-new"
+        className="market-customer-view-modal"
         onClick={(e) => e.stopPropagation()}
-        data-aos="zoom-in"
-        data-aos-duration="300"
       >
-        <button className="detail-close-new" onClick={onClose}>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-
-        <div className="detail-modal-content-new">
-          {/* Left Side - Image */}
-          <div className="detail-left-section">
-            <div className="detail-image-container">
-              <div className="detail-image-placeholder-new">
-                <svg
-                  width="80"
-                  height="80"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                >
-                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                  <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                  <line x1="12" y1="22.08" x2="12" y2="12" />
-                </svg>
-              </div>
-            </div>
+        {/* Header */}
+        <div className="market-cv-header">
+          <div className="market-cv-title">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span>รายละเอียดสินค้า</span>
           </div>
+          <button className="market-cv-close" onClick={onClose}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
 
-          {/* Right Side - Product Info */}
-          <div className="detail-right-section">
-            {/* Product Title */}
-            <h2 className="detail-title-new">{product.title}</h2>
-
-            {/* SKU and Category Badges */}
-            <div className="detail-meta-badges">
-              <span className="detail-sku-badge">
-                SKU: {product.sku || "N/A"}
-              </span>
-              {product.category && (
-                <span className="detail-category-badge">
-                  {product.category}
-                </span>
+        <div className="market-cv-content">
+          {/* Left: Image Gallery */}
+          <div className="market-cv-image-section">
+            <div className="market-cv-main-image">
+              {product.images && product.images.length > 0 ? (
+                <img
+                  src={getProductImage(activeImageIndex)}
+                  alt={product.title}
+                />
+              ) : (
+                <div className="market-cv-image-placeholder">
+                  <svg
+                    width="80"
+                    height="80"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  >
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                  </svg>
+                </div>
+              )}
+              {product.stock === 0 && (
+                <div className="market-cv-out-of-stock-overlay">
+                  <span>สินค้าหมด</span>
+                </div>
               )}
             </div>
+            {product.images && product.images.length > 1 && (
+              <div className="market-cv-thumbnails">
+                {product.images.map((img, idx) => (
+                  <div
+                    key={idx}
+                    className={`market-cv-thumbnail ${
+                      activeImageIndex === idx ? "active" : ""
+                    }`}
+                    onClick={() => setActiveImageIndex(idx)}
+                  >
+                    <img src={img} alt={`${product.title} ${idx + 1}`} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Right: Product Info */}
+          <div className="market-cv-info-section">
+            {/* Store Info */}
+            {storeInfo && (
+              <div className="market-cv-store-badge">
+                <div className="market-cv-store-logo">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                  </svg>
+                </div>
+                <div className="market-cv-store-details">
+                  <span className="market-cv-store-name">
+                    {storeInfo.name}
+                    {storeInfo.verified && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="#2ecc71"
+                        className="verified-icon"
+                      >
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline
+                          points="22 4 12 14.01 9 11.01"
+                          stroke="#fff"
+                          strokeWidth="2"
+                          fill="none"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                  <div className="market-cv-store-rating">
+                    {renderStars(Math.round(storeInfo.rating))}
+                    <span>
+                      {storeInfo.rating} ({storeInfo.totalReviews} รีวิว)
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Product Header */}
+            <div className="market-cv-product-header">
+              <h2 className="market-cv-product-title">{product.title}</h2>
+              <div className="market-cv-product-meta">
+                <span className="market-cv-sku-badge">
+                  SKU: {product.sku || "N/A"}
+                </span>
+                <span className="market-cv-category-badge">
+                  {product.category}
+                </span>
+                <span
+                  className={`market-cv-status-badge ${
+                    product.stock > 0 ? "in-stock" : "out-of-stock"
+                  }`}
+                >
+                  {product.stock > 0 ? "พร้อมจำหน่าย" : "สินค้าหมด"}
+                </span>
+              </div>
+            </div>
+
+            {/* Rating Summary */}
+            {(product.reviewsList?.length > 0 || product.rating) && (
+              <div className="market-cv-rating-summary">
+                <div className="market-cv-rating-big">
+                  {calculateAverageRating()}
+                </div>
+                <div className="market-cv-rating-details">
+                  <div className="market-cv-stars-row">
+                    {renderStars(Math.round(calculateAverageRating()))}
+                  </div>
+                  <span>
+                    {product.reviewsList?.length || 0} รีวิวจากผู้ซื้อ
+                  </span>
+                </div>
+              </div>
+            )}
 
             {/* Price Section */}
-            <div className="detail-price-box">
-              <div className="detail-main-price">{product.price}</div>
-              {product.stock && product.stock < 10 && product.stock > 0 && (
-                <div className="detail-stock-warning">
+            <div className="market-cv-price-section">
+              <div className="market-cv-main-price">{product.price}</div>
+              {product.stock > 0 && product.stock < 10 && (
+                <div className="market-cv-stock-warning">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
                   เหลือเพียง {product.stock} ชิ้น!
                 </div>
               )}
             </div>
 
-            {/* Description */}
-            <div className="detail-description-section">
-              <h3 className="detail-section-title">รายละเอียดสินค้า</h3>
-              <p className="detail-description-text">
-                {product.fullDescription || product.description}
-              </p>
-            </div>
-
-            {/* Specifications Grid */}
-            <div className="detail-specs-section">
-              <h3 className="detail-section-title">ข้อมูลจำเพาะ</h3>
-              <div className="detail-specs-grid-new">
-                <div className="detail-spec-card">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                  </svg>
-                  <div>
-                    <span className="spec-card-label">น้ำหนัก</span>
-                    <span className="spec-card-value">
-                      {product.weight || "2.2 kg"}
-                    </span>
-                  </div>
-                </div>
-                <div className="detail-spec-card">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M9 11l3 3L22 4" />
-                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                  </svg>
-                  <div>
-                    <span className="spec-card-label">การรับประกัน</span>
-                    <span className="spec-card-value">
-                      {product.warranty || "3 ปี"}
-                    </span>
-                  </div>
-                </div>
-                <div className="detail-spec-card">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                  <div>
-                    <span className="spec-card-label">ยอดขายแล้ว</span>
-                    <span className="spec-card-value">
-                      {product.sold || "12"} ชิ้น
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="detail-actions-new">
-              {product.stock && product.stock > 0 ? (
+            {/* Actions */}
+            <div className="market-cv-actions">
+              {product.stock > 0 ? (
                 <>
-                  <button className="detail-cart-btn">
+                  <button
+                    className="market-cv-cart-btn"
+                    onClick={() => onAddToCart(product)}
+                  >
                     <svg
                       width="20"
                       height="20"
@@ -832,35 +967,344 @@ function ProductDetailModal({ product, onClose, onAddToCart }) {
                       <circle cx="20" cy="21" r="1" />
                       <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
                     </svg>
-                    เพิ่มถุงตะกร้า
+                    เพิ่มลงตะกร้า
                   </button>
-                  <button className="detail-buy-btn" onClick={handleAddToCart}>
+                  <button
+                    className="market-cv-buy-btn"
+                    onClick={handleAddToCart}
+                  >
                     ซื้อเลย
                   </button>
                 </>
               ) : (
-                <button className="detail-out-of-stock-btn" disabled>
+                <button className="market-cv-out-of-stock-btn" disabled>
                   สินค้าหมด
                 </button>
               )}
             </div>
 
-            {/* Seller Info */}
-            <div className="detail-seller-section">
-              <div className="seller-info-badge">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
-                <span>ขายโดย: {product.seller || "Bitwork Store"}</span>
-              </div>
+            {/* Tabs */}
+            <div className="market-cv-tabs">
+              <button
+                className={`market-cv-tab-btn ${
+                  activeTab === "details" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("details")}
+              >
+                รายละเอียด
+              </button>
+              <button
+                className={`market-cv-tab-btn ${
+                  activeTab === "reviews" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("reviews")}
+              >
+                รีวิว ({product.reviewsList?.length || 0})
+              </button>
+              <button
+                className={`market-cv-tab-btn ${
+                  activeTab === "comments" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("comments")}
+              >
+                เขียนรีวิว
+              </button>
+            </div>
+
+            {/* Tab Content */}
+            <div className="market-cv-tab-content">
+              {/* Details Tab */}
+              {activeTab === "details" && (
+                <div className="market-cv-details-tab">
+                  <div className="market-cv-description">
+                    <h3>รายละเอียดสินค้า</h3>
+                    <p>{product.fullDescription || product.description}</p>
+                  </div>
+
+                  <div className="market-cv-specs">
+                    <h3>ข้อมูลจำเพาะ</h3>
+                    <div className="market-cv-specs-grid">
+                      <div className="market-cv-spec-item">
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                        </svg>
+                        <div>
+                          <span className="spec-label">น้ำหนัก</span>
+                          <span className="spec-value">
+                            {product.weight || "N/A"}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="market-cv-spec-item">
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M9 11l3 3L22 4" />
+                          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                        <div>
+                          <span className="spec-label">การรับประกัน</span>
+                          <span className="spec-value">
+                            {product.warranty || "N/A"}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="market-cv-spec-item">
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <rect
+                            x="2"
+                            y="7"
+                            width="20"
+                            height="14"
+                            rx="2"
+                            ry="2"
+                          />
+                          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                        </svg>
+                        <div>
+                          <span className="spec-label">สต็อก</span>
+                          <span className="spec-value">
+                            {product.stock || 0} ชิ้น
+                          </span>
+                        </div>
+                      </div>
+                      <div className="market-cv-spec-item">
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <line x1="12" y1="1" x2="12" y2="23" />
+                          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                        <div>
+                          <span className="spec-label">ยอดขายแล้ว</span>
+                          <span className="spec-value">
+                            {product.sold || 0} ชิ้น
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Reviews Tab */}
+              {activeTab === "reviews" && (
+                <div className="market-cv-reviews-tab">
+                  {product.reviewsList && product.reviewsList.length > 0 ? (
+                    <div className="market-cv-reviews-list">
+                      {product.reviewsList.map((review) => (
+                        <div key={review.id} className="market-cv-review-item">
+                          <div className="market-cv-review-header">
+                            <div className="market-cv-reviewer-info">
+                              <img
+                                src={review.avatar}
+                                alt={review.user}
+                                className="market-cv-reviewer-avatar"
+                              />
+                              <div>
+                                <span className="market-cv-reviewer-name">
+                                  {review.user}
+                                </span>
+                                <span className="market-cv-review-date">
+                                  {review.date}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="market-cv-review-rating">
+                              {renderStars(review.rating)}
+                            </div>
+                          </div>
+                          <p className="market-cv-review-comment">
+                            {review.comment}
+                          </p>
+                          {review.images && review.images.length > 0 && (
+                            <div className="market-cv-review-images">
+                              {review.images.map((img, idx) => (
+                                <img
+                                  key={idx}
+                                  src={img}
+                                  alt={`Review ${idx + 1}`}
+                                />
+                              ))}
+                            </div>
+                          )}
+                          <div className="market-cv-review-footer">
+                            <button className="market-cv-helpful-btn">
+                              <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                              >
+                                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+                              </svg>
+                              มีประโยชน์ ({review.helpful})
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="market-cv-no-reviews">
+                      <svg
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1"
+                      >
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                      </svg>
+                      <p>ยังไม่มีรีวิวสำหรับสินค้านี้</p>
+                      <span>เป็นคนแรกที่รีวิวสินค้านี้!</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Write Comment Tab */}
+              {activeTab === "comments" && (
+                <div className="market-cv-comments-tab">
+                  <h3>เขียนรีวิวสินค้า</h3>
+
+                  {/* Rating Selection */}
+                  <div className="market-cv-comment-rating">
+                    <label>ให้คะแนนสินค้า</label>
+                    <div className="market-cv-rating-selector">
+                      {renderStars(newComment.rating, true, (rating) =>
+                        setNewComment((prev) => ({ ...prev, rating }))
+                      )}
+                      <span className="market-cv-rating-text">
+                        {newComment.rating === 5 && "ยอดเยี่ยม"}
+                        {newComment.rating === 4 && "ดีมาก"}
+                        {newComment.rating === 3 && "ปานกลาง"}
+                        {newComment.rating === 2 && "พอใช้"}
+                        {newComment.rating === 1 && "ต้องปรับปรุง"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Comment Text */}
+                  <div className="market-cv-comment-text">
+                    <label>เขียนความคิดเห็น</label>
+                    <textarea
+                      rows="4"
+                      placeholder="แชร์ประสบการณ์การใช้งานสินค้านี้..."
+                      value={newComment.text}
+                      onChange={(e) =>
+                        setNewComment((prev) => ({
+                          ...prev,
+                          text: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  {/* Image Upload */}
+                  <div className="market-cv-comment-images">
+                    <label>เพิ่มรูปภาพ (ไม่บังคับ)</label>
+                    <div className="market-cv-image-upload-area">
+                      {newComment.images.map((img, idx) => (
+                        <div key={idx} className="market-cv-uploaded-image">
+                          <img src={img} alt={`Upload ${idx + 1}`} />
+                          <button
+                            className="market-cv-remove-image"
+                            onClick={() => removeCommentImage(idx)}
+                          >
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            >
+                              <line x1="18" y1="6" x2="6" y2="18" />
+                              <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                          </button>
+                        </div>
+                      ))}
+                      {newComment.images.length < 5 && (
+                        <button
+                          className="market-cv-add-image-btn"
+                          onClick={handleCommentImageUpload}
+                        >
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <rect
+                              x="3"
+                              y="3"
+                              width="18"
+                              height="18"
+                              rx="2"
+                              ry="2"
+                            />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                          </svg>
+                          <span>เพิ่มรูป</span>
+                        </button>
+                      )}
+                    </div>
+                    <span className="market-cv-image-hint">
+                      สามารถเพิ่มได้สูงสุด 5 รูป
+                    </span>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    className="market-cv-submit-btn"
+                    onClick={handleSubmitComment}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                    ส่งรีวิว
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

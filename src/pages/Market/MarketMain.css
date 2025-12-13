@@ -1,29 +1,29 @@
 /* ============================================
-   BITWORK TECH GADGET STORE - MINIMAL DESIGN
-   Theme: White & Green (Clean & Modern)
+   BITWORK MARKET - MINIMAL WHITE-GREEN THEME
+   Clean & Modern Design
    ============================================ */
 
 /* Base Variables */
 :root {
   --primary: #10b981;
-  --primary-light: #d1fae5;
+  --primary-light: #ecfdf5;
   --primary-dark: #059669;
   --accent: #047857;
   --white: #ffffff;
-  --bg-light: #f8fffe;
-  --bg-subtle: #f0fdf9;
+  --bg-light: #fafafa;
+  --bg-subtle: #f9fafb;
   --text-dark: #1f2937;
-  --text-medium: #4b5563;
+  --text-medium: #6b7280;
   --text-light: #9ca3af;
-  --border: #e5e7eb;
-  --border-light: #f3f4f6;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.08);
+  --border: #f3f4f6;
+  --border-light: #f9fafb;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.06);
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-xl: 20px;
 }
 
 /* MAIN CONTAINER */
@@ -2142,5 +2142,872 @@
 
   .discount-text {
     font-size: 12px;
+  }
+}
+
+/* ============================================
+   MARKET CUSTOMER VIEW MODAL - Full Detail
+   เหมือนกับ Customer View ใน Settings
+   ============================================ */
+
+.market-customer-view-modal {
+  background: white;
+  border-radius: 16px;
+  max-width: 1200px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 200ms ease;
+}
+
+.market-cv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  border-bottom: 2px solid var(--primary);
+  background: linear-gradient(135deg, var(--primary-light) 0%, #d1fae5 100%);
+}
+
+.market-cv-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.market-cv-close {
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--text-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms ease;
+}
+
+.market-cv-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--text-dark);
+}
+
+.market-cv-content {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  gap: 40px;
+  padding: 40px;
+}
+
+/* Image Section */
+.market-cv-image-section {
+  position: sticky;
+  top: 0;
+}
+
+.market-cv-main-image {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background: var(--bg-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.market-cv-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.market-cv-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  opacity: 0.5;
+}
+
+.market-cv-out-of-stock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.market-cv-out-of-stock-overlay span {
+  background: #e74c3c;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.market-cv-thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.market-cv-thumbnail {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.market-cv-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.market-cv-thumbnail:hover {
+  border-color: var(--border);
+}
+
+.market-cv-thumbnail.active {
+  border-color: var(--primary);
+}
+
+/* Info Section */
+.market-cv-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Store Badge */
+.market-cv-store-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: linear-gradient(
+    135deg,
+    var(--bg-subtle) 0%,
+    var(--bg-light) 100%
+  );
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.market-cv-store-logo {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.market-cv-store-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.market-cv-store-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.market-cv-store-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-medium);
+}
+
+.market-cv-store-rating svg {
+  display: inline;
+}
+
+/* Product Header */
+.market-cv-product-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.market-cv-product-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.market-cv-product-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.market-cv-sku-badge,
+.market-cv-category-badge,
+.market-cv-status-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.market-cv-sku-badge {
+  background: var(--bg-subtle);
+  color: var(--text-medium);
+  font-family: monospace;
+}
+
+.market-cv-category-badge {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.market-cv-status-badge.in-stock {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.market-cv-status-badge.out-of-stock {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Rating Summary */
+.market-cv-rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #fff8e1;
+  border-radius: 14px;
+  border: 1px solid #ffe082;
+}
+
+.market-cv-rating-big {
+  font-size: 48px;
+  font-weight: 800;
+  color: #f59e0b;
+  line-height: 1;
+}
+
+.market-cv-rating-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.market-cv-stars-row {
+  display: flex;
+  gap: 4px;
+}
+
+.market-cv-rating-details span {
+  font-size: 14px;
+  color: var(--text-medium);
+}
+
+/* Price Section */
+.market-cv-price-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.market-cv-main-price {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.market-cv-stock-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #fff3cd;
+  color: #856404;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+/* Actions */
+.market-cv-actions {
+  display: flex;
+  gap: 12px;
+  padding: 20px 0;
+}
+
+.market-cv-cart-btn,
+.market-cv-buy-btn,
+.market-cv-out-of-stock-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.market-cv-cart-btn {
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.market-cv-cart-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.market-cv-buy-btn {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.market-cv-buy-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.market-cv-out-of-stock-btn {
+  background: var(--border);
+  color: var(--text-light);
+  cursor: not-allowed;
+}
+
+/* Tabs */
+.market-cv-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 16px 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 0;
+}
+
+.market-cv-tab-btn {
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.market-cv-tab-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-dark);
+}
+
+.market-cv-tab-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* Tab Content */
+.market-cv-tab-content {
+  padding: 24px 0;
+  min-height: 200px;
+}
+
+/* Details Tab */
+.market-cv-details-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.market-cv-description h3,
+.market-cv-specs h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.market-cv-description p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-medium);
+}
+
+.market-cv-specs-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.market-cv-spec-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg-subtle);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.market-cv-spec-item svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.market-cv-spec-item > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.market-cv-spec-item .spec-label {
+  font-size: 12px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.market-cv-spec-item .spec-value {
+  font-size: 15px;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Reviews Tab */
+.market-cv-reviews-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.market-cv-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.market-cv-review-item {
+  padding: 20px;
+  background: var(--bg-subtle);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.market-cv-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.market-cv-reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.market-cv-reviewer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+}
+
+.market-cv-reviewer-info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.market-cv-reviewer-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.market-cv-review-date {
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.market-cv-review-rating {
+  display: flex;
+  gap: 3px;
+}
+
+.market-cv-review-comment {
+  margin: 0 0 14px 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-medium);
+}
+
+.market-cv-review-images {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.market-cv-review-images img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.market-cv-review-images img:hover {
+  transform: scale(1.05);
+}
+
+.market-cv-review-footer {
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.market-cv-helpful-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.market-cv-helpful-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* No Reviews State */
+.market-cv-no-reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.market-cv-no-reviews svg {
+  color: var(--border);
+  margin-bottom: 16px;
+}
+
+.market-cv-no-reviews p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-medium);
+}
+
+.market-cv-no-reviews span {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* Comments Tab (Write Review) */
+.market-cv-comments-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.market-cv-comments-tab h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.market-cv-comment-rating {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.market-cv-comment-rating label,
+.market-cv-comment-text label,
+.market-cv-comment-images > label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-medium);
+}
+
+.market-cv-rating-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.market-cv-rating-selector svg {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.market-cv-rating-selector svg:hover {
+  transform: scale(1.2);
+}
+
+.market-cv-rating-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f59e0b;
+  min-width: 80px;
+}
+
+.market-cv-comment-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.market-cv-comment-text textarea {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.market-cv-comment-text textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.market-cv-comment-text textarea::placeholder {
+  color: var(--text-light);
+}
+
+.market-cv-comment-images {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.market-cv-image-upload-area {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.market-cv-uploaded-image {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.market-cv-uploaded-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.market-cv-remove-image {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.market-cv-remove-image:hover {
+  transform: scale(1.1);
+}
+
+.market-cv-add-image-btn {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--bg-subtle);
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.market-cv-add-image-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.market-cv-add-image-btn svg {
+  color: var(--text-light);
+}
+
+.market-cv-add-image-btn span {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.market-cv-image-hint {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.market-cv-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.market-cv-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .market-cv-content {
+    grid-template-columns: 400px 1fr;
+    gap: 30px;
+    padding: 30px;
+  }
+
+  .market-cv-main-image {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .market-customer-view-modal {
+    margin: 0;
+    border-radius: 0;
+    max-height: 100vh;
+    height: 100vh;
+  }
+
+  .market-cv-content {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 24px;
+  }
+
+  .market-cv-main-image {
+    height: 300px;
+  }
+
+  .market-cv-image-section {
+    position: relative;
+  }
+
+  .market-cv-product-title {
+    font-size: 22px;
+  }
+
+  .market-cv-main-price {
+    font-size: 28px;
+  }
+
+  .market-cv-actions {
+    flex-direction: column;
+  }
+
+  .market-cv-cart-btn,
+  .market-cv-buy-btn,
+  .market-cv-out-of-stock-btn {
+    width: 100%;
+  }
+
+  .market-cv-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .market-cv-tab-btn {
+    white-space: nowrap;
+    padding: 10px 16px;
+    font-size: 14px;
   }
 }

@@ -51,7 +51,7 @@ const SocialPanel = ({ data, onConnect, onDisconnect, onOpenModal }) => {
         </svg>
       ),
       connected: data.facebookConnected,
-      name: data.facebookName,
+      username: data.facebookName,
     },
   ];
 

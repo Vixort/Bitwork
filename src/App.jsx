@@ -112,6 +112,20 @@ import ProfileMain from "./pages/Profile/ProfileMain.jsx";
  */
 import ScrollToTop from "./components/ScrollToTop.jsx";
 
+/**
+ * NotFound - หน้า 404
+ * - แสดงเมื่อเข้า URL ที่ไม่มีในระบบ
+ * - มีลิงก์นำทางกลับไปหน้าหลัก
+ */
+import NotFound from "./pages/NotFound/NotFound.jsx";
+
+/**
+ * ChatMain - หน้าข้อความ/แชท
+ * - สนทนากับลูกค้าและผู้สมัครงาน
+ * - แยกออกจากหน้า Settings เพื่อความสะดวก
+ */
+import ChatMain from "./pages/Chat/ChatMain.jsx";
+
 // =============================================================================
 // APP COMPONENT - Component หลักของแอปพลิเคชัน
 // =============================================================================
@@ -217,6 +231,20 @@ const App = () => {
           - URL: http://localhost:5173/profile/somchai_dev
         */}
         <Route path="/profile/:username" element={<ProfileMain />} />
+
+        {/* 
+          Route: หน้าข้อความ/แชท (/chat)
+          - สนทนากับลูกค้าและผู้สมัครงาน
+          - URL: http://localhost:5173/chat
+        */}
+        <Route path="/chat" element={<ChatMain />} />
+
+        {/* 
+          Route: หน้า 404 Not Found
+          - path="*" จะ match กับทุก URL ที่ไม่ตรงกับ Route ด้านบน
+          - แสดงหน้าแจ้งเตือนว่าไม่พบหน้าที่ค้นหา
+        */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

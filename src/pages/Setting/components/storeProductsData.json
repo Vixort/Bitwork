@@ -1,4 +1,11 @@
 {
+  "storeInfo": {
+    "name": "Somchai Tech Store",
+    "verified": true,
+    "rating": 4.8,
+    "totalReviews": 256,
+    "logo": ""
+  },
   "products": [
     {
       "id": 1,
@@ -8,67 +15,178 @@
       "price": 18900,
       "stock": 15,
       "status": "active",
-      "image": "https://via.placeholder.com/200",
+      "images": [
+        "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=400&fit=crop"
+      ],
       "sales": 45,
-      "description": "โปรเซสเซอร์ AMD Ryzen 9 7950X ขุมพลัง 16 คอร์ 32 เธรด ความเร็ว 5.7 GHz เหมาะสำหรับงานสร้างสรรค์และเล่นเกม",
+      "description": "โปรเซสเซอร์ AMD Ryzen 9 7950X ขุมพลัง 16 คอร์ 32 เธรด ความเร็ว 5.7 GHz เหมาะสำหรับงานสร้างสรรค์และเล่นเกม รองรับ DDR5 และ PCIe 5.0 ประสิทธิภาพสูงสุดสำหรับมืออาชีพ",
       "weight": "0.5 kg",
-      "warranty": "3 ปี"
+      "warranty": "3 ปี",
+      "reviews": [
+        {
+          "id": 1,
+          "user": "TechGamer99",
+          "avatar": "https://i.pravatar.cc/40?img=1",
+          "rating": 5,
+          "comment": "CPU ดีมากครับ ประสิทธิภาพสูง เล่นเกมลื่นมาก render งานก็เร็ว แนะนำเลยครับสำหรับคนทำงานหนักๆ",
+          "date": "10 ธ.ค. 2025",
+          "images": [
+            "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=200&h=200&fit=crop"
+          ],
+          "helpful": 12
+        },
+        {
+          "id": 2,
+          "user": "ProBuilder",
+          "avatar": "https://i.pravatar.cc/40?img=2",
+          "rating": 5,
+          "comment": "ใช้มาเดือนนึงแล้ว ไม่มีปัญหาเลย อุณหภูมิก็ไม่ร้อนมาก คุ้มค่ามากครับในราคานี้",
+          "date": "5 ธ.ค. 2025",
+          "images": [],
+          "helpful": 8
+        },
+        {
+          "id": 3,
+          "user": "ContentCreator",
+          "avatar": "https://i.pravatar.cc/40?img=3",
+          "rating": 4,
+          "comment": "ดีมากครับ แต่ราคาค่อนข้างสูง ต้องมีระบบระบายความร้อนดีๆ",
+          "date": "1 ธ.ค. 2025",
+          "images": [],
+          "helpful": 5
+        }
+      ]
     },
     {
       "id": 2,
-      "name": "NVIDIA RTX 4090",
+      "name": "NVIDIA RTX 4090 Founders Edition",
       "sku": "GPU-NV-4090",
       "category": "GPU",
       "price": 65000,
       "stock": 3,
       "status": "active",
-      "image": "https://via.placeholder.com/200",
+      "images": [
+        "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&h=400&fit=crop"
+      ],
       "sales": 12,
-      "description": "การ์ดจอ NVIDIA RTX 4090 พลังสูงสุดสำหรับเกมและงาน AI/ML",
+      "description": "การ์ดจอ NVIDIA RTX 4090 Founders Edition พลังสูงสุดสำหรับเกมและงาน AI/ML มาพร้อม 24GB GDDR6X รองรับ Ray Tracing และ DLSS 3.0",
       "weight": "2.2 kg",
-      "warranty": "3 ปี"
+      "warranty": "3 ปี",
+      "reviews": [
+        {
+          "id": 1,
+          "user": "GameMaster",
+          "avatar": "https://i.pravatar.cc/40?img=4",
+          "rating": 5,
+          "comment": "สุดยอดการ์ดจอครับ เล่น 4K Ultra ทุกเกมลื่นหมด",
+          "date": "8 ธ.ค. 2025",
+          "images": [
+            "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200&h=200&fit=crop"
+          ],
+          "helpful": 20
+        },
+        {
+          "id": 2,
+          "user": "AIResearcher",
+          "avatar": "https://i.pravatar.cc/40?img=5",
+          "rating": 5,
+          "comment": "ใช้ train model ได้เร็วมากครับ VRAM 24GB เพียงพอสำหรับงานใหญ่ๆ",
+          "date": "3 ธ.ค. 2025",
+          "images": [],
+          "helpful": 15
+        }
+      ]
     },
     {
       "id": 3,
-      "name": "Corsair Vengeance 32GB",
+      "name": "Corsair Vengeance DDR5 32GB (16GBx2)",
       "sku": "RAM-COR-32GB",
       "category": "RAM",
       "price": 4500,
       "stock": 0,
       "status": "out_of_stock",
-      "image": "https://via.placeholder.com/200",
+      "images": [
+        "https://images.unsplash.com/photo-1562976540-1502c2145186?w=400&h=400&fit=crop"
+      ],
       "sales": 78,
-      "description": "แรม DDR5 32GB (16GBx2) 6000MHz RGB ประสิทธิภาพสูง",
+      "description": "แรม DDR5 32GB (16GBx2) 6000MHz RGB ประสิทธิภาพสูง รองรับ Intel XMP 3.0 และ AMD EXPO เหมาะสำหรับเกมและงานหนัก",
       "weight": "0.2 kg",
-      "warranty": "Lifetime"
+      "warranty": "Lifetime",
+      "reviews": [
+        {
+          "id": 1,
+          "user": "PCBuilder",
+          "avatar": "https://i.pravatar.cc/40?img=6",
+          "rating": 5,
+          "comment": "แรมคุณภาพดี RGB สวยมาก XMP profile ใช้งานได้เลย",
+          "date": "15 พ.ย. 2025",
+          "images": [
+            "https://images.unsplash.com/photo-1562976540-1502c2145186?w=200&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=200&h=200&fit=crop"
+          ],
+          "helpful": 10
+        }
+      ]
     },
     {
       "id": 4,
-      "name": "Samsung 990 PRO 2TB",
+      "name": "Samsung 990 PRO 2TB NVMe SSD",
       "sku": "SSD-SAM-2TB",
       "category": "Storage",
       "price": 7800,
       "stock": 25,
       "status": "active",
-      "image": "https://via.placeholder.com/200",
+      "images": [
+        "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=400&h=400&fit=crop"
+      ],
       "sales": 34,
-      "description": "SSD NVMe Gen 4 ความเร็วสูงสุด 7,450 MB/s อ่าน",
+      "description": "SSD NVMe Gen 4 ความเร็วสูงสุด 7,450 MB/s อ่าน 6,900 MB/s เขียน เหมาะสำหรับ Gaming และ Creative Work รองรับ PS5",
       "weight": "0.1 kg",
-      "warranty": "5 ปี"
+      "warranty": "5 ปี",
+      "reviews": [
+        {
+          "id": 1,
+          "user": "SpeedFreak",
+          "avatar": "https://i.pravatar.cc/40?img=7",
+          "rating": 5,
+          "comment": "เร็วมากครับ boot Windows ไม่ถึง 10 วินาที โหลดเกมก็เร็วสุดๆ",
+          "date": "12 ธ.ค. 2025",
+          "images": [],
+          "helpful": 7
+        },
+        {
+          "id": 2,
+          "user": "VideoEditor",
+          "avatar": "https://i.pravatar.cc/40?img=8",
+          "rating": 4,
+          "comment": "ใช้ตัดต่อวิดีโอได้ลื่นมาก แต่ร้อนนิดหน่อยต้องมี heatsink",
+          "date": "10 ธ.ค. 2025",
+          "images": [],
+          "helpful": 5
+        }
+      ]
     },
     {
       "id": 5,
-      "name": "MSI B650 Tomahawk",
+      "name": "MSI MAG B650 TOMAHAWK WIFI",
       "sku": "MB-MSI-B650",
       "category": "Motherboard",
       "price": 8900,
       "stock": 8,
       "status": "active",
-      "image": "https://via.placeholder.com/200",
+      "images": [
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400&h=400&fit=crop"
+      ],
       "sales": 23,
-      "description": "เมนบอร์ด AMD B650 รองรับ Ryzen 7000 series",
+      "description": "เมนบอร์ด AMD B650 รองรับ Ryzen 7000 series มาพร้อม WiFi 6E, PCIe 5.0 M.2 slot และ DDR5 support คุณภาพระดับ Military Grade",
       "weight": "1.5 kg",
-      "warranty": "3 ปี"
+      "warranty": "3 ปี",
+      "reviews": []
     }
   ]
 }

@@ -30,7 +30,7 @@
 .home-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fdfb 50%, #f0fdf4 100%);
 }
 
 .home-hero-pattern {
@@ -72,12 +72,13 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: var(--hero-primary);
-  color: white;
+  background: #ecfdf5;
+  color: #10b981;
   font-size: 13px;
   font-weight: 600;
-  border-radius: 50px;
+  border-radius: 8px;
   width: fit-content;
+  border: 1px solid #d1fae5;
 }
 
 .home-hero-badge svg {
@@ -164,15 +165,14 @@
 }
 
 .home-cta-primary {
-  background: var(--hero-primary);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
 }
 
 .home-cta-primary:hover {
-  background: var(--hero-primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
 }
 
 .home-cta-secondary {

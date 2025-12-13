@@ -22,6 +22,10 @@ import NotificationPanel from "./components/NotificationPanel";
 import ThemePanel from "./components/ThemePanel";
 import SocialPanel from "./components/SocialPanel";
 import JobProfilePanel from "./components/JobProfilePanel";
+import JobPostPanel from "./components/JobPostPanel";
+import JobHistoryPanel from "./components/JobHistoryPanel";
+import JobApplicantsPanel from "./components/JobApplicantsPanel";
+import ChatSettingsPanel from "./components/ChatSettingsPanel";
 import Modal from "./components/Modal";
 import Notification from "./components/Notification";
 
@@ -472,6 +476,12 @@ const SettingMain = () => {
             onOpenModal={openModal}
           />
         );
+      case "job-post":
+        return <JobPostPanel />;
+      case "job-post-history":
+        return <JobHistoryPanel />;
+      case "job-applicants":
+        return <JobApplicantsPanel />;
       case "security":
         return (
           <SecurityPanel
@@ -543,6 +553,8 @@ const SettingMain = () => {
             onOpenModal={openModal}
           />
         );
+      case "chat-settings":
+        return <ChatSettingsPanel />;
       default:
         return null;
     }

@@ -3,8 +3,8 @@
    ============================================================================= */
 
 .showcase-section {
-  padding: 80px 5%;
-  background: #f9fafb;
+  padding: 100px 5%;
+  background: #ffffff;
 }
 
 .showcase-container {
@@ -15,14 +15,14 @@
 /* Header */
 .showcase-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .showcase-title {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #1f2937;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .showcase-title .highlight {
@@ -44,13 +44,13 @@
 
 .service-card {
   position: relative;
-  background: white;
-  padding: 40px 32px;
-  border-radius: 20px;
+  background: #f9fafb;
+  padding: 36px 28px;
+  border-radius: 16px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.4s ease;
-  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
   overflow: hidden;
 }
 
@@ -60,16 +60,17 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: var(--accent-color);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--accent-color);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
 }
 
 .service-card:hover::before {
@@ -188,15 +189,15 @@
 /* Footer */
 .showcase-footer {
   text-align: center;
-  padding: 30px;
-  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-  border-radius: 16px;
+  padding: 32px;
+  background: #f9fafb;
+  border-radius: 14px;
 }
 
 .showcase-footer p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
-  color: #1f2937;
+  color: #6b7280;
 }
 
 /* Responsive */

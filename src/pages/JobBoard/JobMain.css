@@ -1,53 +1,18 @@
-/* ===== JOB BOARD PAGE ===== */
+/* ===== JOB BOARD PAGE - MINIMAL THEME ===== */
 .job-board-page {
   min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #f8fdfb 30%,
-    #f0fdf4 60%,
-    #ecfdf5 100%
-  );
+  background: #ffffff;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Background Decorative Elements */
-.job-board-page::before {
-  content: "";
-  position: fixed;
-  top: -200px;
-  right: -200px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(
-    circle,
-    rgba(16, 185, 129, 0.08) 0%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
+/* Remove heavy background decorations for minimal look */
+.job-board-page::before,
 .job-board-page::after {
-  content: "";
-  position: fixed;
-  bottom: -150px;
-  left: -150px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(
-    circle,
-    rgba(16, 185, 129, 0.06) 0%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
+  display: none;
 }
 
-/* Floating Background Shapes */
+/* Floating Background Shapes - More subtle */
 .bg-shapes {
   position: fixed;
   top: 0;
@@ -62,93 +27,54 @@
 .bg-shape {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.4;
-  animation: float 20s ease-in-out infinite;
+  opacity: 0.15;
+  animation: float 30s ease-in-out infinite;
 }
 
 .bg-shape-1 {
-  width: 300px;
-  height: 300px;
-  top: 20%;
-  left: 5%;
-  background: linear-gradient(
-    135deg,
-    rgba(16, 185, 129, 0.1) 0%,
-    rgba(5, 150, 105, 0.05) 100%
+  width: 400px;
+  height: 400px;
+  top: 10%;
+  right: -100px;
+  background: radial-gradient(
+    circle,
+    rgba(16, 185, 129, 0.08) 0%,
+    transparent 70%
   );
   animation-delay: 0s;
 }
 
 .bg-shape-2 {
-  width: 200px;
-  height: 200px;
-  top: 60%;
-  right: 10%;
-  background: linear-gradient(
-    135deg,
-    rgba(16, 185, 129, 0.08) 0%,
-    rgba(5, 150, 105, 0.03) 100%
-  );
-  animation-delay: -5s;
-}
-
-.bg-shape-3 {
-  width: 150px;
-  height: 150px;
-  top: 40%;
-  left: 50%;
-  background: linear-gradient(
-    135deg,
+  width: 300px;
+  height: 300px;
+  bottom: 20%;
+  left: -50px;
+  background: radial-gradient(
+    circle,
     rgba(16, 185, 129, 0.06) 0%,
-    transparent 100%
+    transparent 70%
   );
   animation-delay: -10s;
 }
 
+.bg-shape-3,
 .bg-shape-4 {
-  width: 100px;
-  height: 100px;
-  top: 80%;
-  left: 20%;
-  background: linear-gradient(
-    135deg,
-    rgba(16, 185, 129, 0.1) 0%,
-    transparent 100%
-  );
-  animation-delay: -15s;
+  display: none;
 }
 
 @keyframes float {
   0%,
   100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(20px, -30px) rotate(5deg);
+    transform: translate(0, 0);
   }
   50% {
-    transform: translate(-10px, 20px) rotate(-5deg);
-  }
-  75% {
-    transform: translate(30px, 10px) rotate(3deg);
+    transform: translate(10px, -15px);
   }
 }
 
-/* Grid Pattern Overlay */
+/* Grid Pattern - More subtle */
 .grid-pattern {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(
-      rgba(16, 185, 129, 0.03) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
+  display: none;
 }
 
 /* Content wrapper to stay above background */

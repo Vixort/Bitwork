@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "name": "สมหญิง รักเรียน",
+    "avatar": null,
+    "type": "applicant",
+    "position": "Frontend Developer",
+    "lastMessage": "ขอบคุณครับ รอฟังข่าวดีนะครับ",
+    "lastMessageTime": "10:30",
+    "unread": 2,
+    "online": true
+  },
+  {
+    "id": 2,
+    "name": "วิชัย เก่งมาก",
+    "avatar": null,
+    "type": "applicant",
+    "position": "UX/UI Designer",
+    "lastMessage": "สะดวกสัมภาษณ์วันไหนครับ?",
+    "lastMessageTime": "เมื่อวาน",
+    "unread": 0,
+    "online": false
+  },
+  {
+    "id": 3,
+    "name": "ร้านกาแฟหอม",
+    "avatar": null,
+    "type": "customer",
+    "orderRef": "#ORD-2024-001",
+    "lastMessage": "สินค้าได้รับเรียบร้อยแล้วครับ ขอบคุณมากครับ",
+    "lastMessageTime": "3 วันก่อน",
+    "unread": 0,
+    "online": true
+  },
+  {
+    "id": 4,
+    "name": "ปรีชา ฉลาดดี",
+    "avatar": null,
+    "type": "applicant",
+    "position": "Backend Developer",
+    "lastMessage": "ได้เลยครับ เริ่มงานได้ทันที",
+    "lastMessageTime": "5 วันก่อน",
+    "unread": 0,
+    "online": false
+  },
+  {
+    "id": 5,
+    "name": "บริษัท ABC จำกัด",
+    "avatar": null,
+    "type": "customer",
+    "orderRef": "#ORD-2024-002",
+    "lastMessage": "รบกวนสอบถามเรื่องการชำระเงินหน่อยครับ",
+    "lastMessageTime": "1 สัปดาห์ก่อน",
+    "unread": 1,
+    "online": false
+  }
+]

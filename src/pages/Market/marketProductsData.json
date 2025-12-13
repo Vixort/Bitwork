@@ -1,4 +1,11 @@
 {
+  "storeInfo": {
+    "name": "Bitwork Store",
+    "verified": true,
+    "rating": 4.9,
+    "totalReviews": 5280,
+    "logo": ""
+  },
   "products": [
     {
       "id": 1,
@@ -9,6 +16,13 @@
       "category": "การ์ดจอ",
       "brand": "NVIDIA",
       "warranty": "3 ปี",
+      "weight": "2.5 kg",
+      "stock": 8,
+      "sku": "GPU-RTX-4090",
+      "images": [
+        "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&h=400&fit=crop"
+      ],
       "specs": {
         "memory": "24GB GDDR6X",
         "coreClock": "2520 MHz",
@@ -16,8 +30,42 @@
         "interface": "PCIe 4.0 x16"
       },
       "rating": 4.9,
-      "reviews": 1250,
-      "sold": 3420
+      "sold": 3420,
+      "seller": "Bitwork Store",
+      "reviewsList": [
+        {
+          "id": 1,
+          "user": "ProGamer99",
+          "avatar": "https://i.pravatar.cc/40?img=1",
+          "rating": 5,
+          "comment": "การ์ดจอตัวแรงมาก เล่น 4K Ultra ทุกเกมลื่นหมด แนะนำเลย!",
+          "date": "10 ธ.ค. 2025",
+          "images": [
+            "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200&h=200&fit=crop"
+          ],
+          "helpful": 45
+        },
+        {
+          "id": 2,
+          "user": "TechReviewer",
+          "avatar": "https://i.pravatar.cc/40?img=2",
+          "rating": 5,
+          "comment": "คุ้มค่าทุกบาท ประสิทธิภาพเทพมาก ร้านบริการดี ส่งไว",
+          "date": "8 ธ.ค. 2025",
+          "images": [],
+          "helpful": 32
+        },
+        {
+          "id": 3,
+          "user": "ContentCreator",
+          "avatar": "https://i.pravatar.cc/40?img=3",
+          "rating": 5,
+          "comment": "ใช้ render งานวิดีโอเร็วมาก CUDA cores เยอะมากจริงๆ",
+          "date": "5 ธ.ค. 2025",
+          "images": [],
+          "helpful": 28
+        }
+      ]
     },
     {
       "id": 2,
@@ -28,6 +76,12 @@
       "category": "การ์ดจอ",
       "brand": "NVIDIA",
       "warranty": "3 ปี",
+      "weight": "2.2 kg",
+      "stock": 15,
+      "sku": "GPU-RTX-4080",
+      "images": [
+        "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&h=400&fit=crop"
+      ],
       "specs": {
         "memory": "16GB GDDR6X",
         "coreClock": "2505 MHz",
@@ -35,8 +89,30 @@
         "interface": "PCIe 4.0 x16"
       },
       "rating": 4.8,
-      "reviews": 890,
-      "sold": 2150
+      "sold": 2150,
+      "seller": "Bitwork Store",
+      "reviewsList": [
+        {
+          "id": 1,
+          "user": "GameMaster",
+          "avatar": "https://i.pravatar.cc/40?img=4",
+          "rating": 5,
+          "comment": "เล่นเกม 1440p ลื่นมาก คุ้มค่ากว่า 4090 สำหรับคนงบไม่ถึง",
+          "date": "9 ธ.ค. 2025",
+          "images": [],
+          "helpful": 22
+        },
+        {
+          "id": 2,
+          "user": "PCBuilder",
+          "avatar": "https://i.pravatar.cc/40?img=5",
+          "rating": 4,
+          "comment": "ดีครับ แต่ร้อนนิดหน่อย ต้องมีพัดลมดีๆ",
+          "date": "7 ธ.ค. 2025",
+          "images": [],
+          "helpful": 15
+        }
+      ]
     },
     {
       "id": 3,
@@ -47,6 +123,12 @@
       "category": "การ์ดจอ",
       "brand": "NVIDIA",
       "warranty": "3 ปี",
+      "weight": "1.8 kg",
+      "stock": 25,
+      "sku": "GPU-RTX-4070",
+      "images": [
+        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400&h=400&fit=crop"
+      ],
       "specs": {
         "memory": "12GB GDDR6X",
         "coreClock": "2475 MHz",
@@ -54,8 +136,20 @@
         "interface": "PCIe 4.0 x16"
       },
       "rating": 4.7,
-      "reviews": 1520,
-      "sold": 4890
+      "sold": 4890,
+      "seller": "Bitwork Store",
+      "reviewsList": [
+        {
+          "id": 1,
+          "user": "BudgetGamer",
+          "avatar": "https://i.pravatar.cc/40?img=6",
+          "rating": 5,
+          "comment": "คุ้มค่ามาก ประสิทธิภาพดี ราคาจับต้องได้",
+          "date": "11 ธ.ค. 2025",
+          "images": [],
+          "helpful": 18
+        }
+      ]
     },
     {
       "id": 4,
@@ -66,6 +160,12 @@
       "category": "การ์ดจอ",
       "brand": "NVIDIA",
       "warranty": "3 ปี",
+      "weight": "1.2 kg",
+      "stock": 50,
+      "sku": "GPU-GTX-1660S",
+      "images": [
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=400&fit=crop"
+      ],
       "specs": {
         "memory": "6GB GDDR6",
         "coreClock": "1785 MHz",
@@ -73,8 +173,9 @@
         "interface": "PCIe 3.0 x16"
       },
       "rating": 4.5,
-      "reviews": 2340,
-      "sold": 8920
+      "sold": 8920,
+      "seller": "Bitwork Store",
+      "reviewsList": []
     },
     {
       "id": 5,
@@ -85,6 +186,12 @@
       "category": "ซีพียู",
       "brand": "Intel",
       "warranty": "3 ปี",
+      "weight": "0.5 kg",
+      "stock": 12,
+      "sku": "CPU-I9-14900K",
+      "images": [
+        "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=400&fit=crop"
+      ],
       "specs": {
         "cores": "24 Cores (8P + 16E)",
         "threads": "32 Threads",
@@ -93,8 +200,20 @@
         "tdp": "125W"
       },
       "rating": 4.8,
-      "reviews": 680,
-      "sold": 1890
+      "sold": 1890,
+      "seller": "Bitwork Store",
+      "reviewsList": [
+        {
+          "id": 1,
+          "user": "WorkstationPro",
+          "avatar": "https://i.pravatar.cc/40?img=7",
+          "rating": 5,
+          "comment": "CPU ตัวท็อป ทำงานหนักๆ ได้สบาย compile code เร็วมาก",
+          "date": "12 ธ.ค. 2025",
+          "images": [],
+          "helpful": 25
+        }
+      ]
     },
     {
       "id": 6,
@@ -105,6 +224,13 @@
       "category": "ซีพียู",
       "brand": "AMD",
       "warranty": "3 ปี",
+      "weight": "0.5 kg",
+      "stock": 5,
+      "sku": "CPU-R9-7950X3D",
+      "images": [
+        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=400&fit=crop"
+      ],
       "specs": {
         "cores": "16 Cores",
         "threads": "32 Threads",
@@ -114,8 +240,32 @@
         "tdp": "120W"
       },
       "rating": 4.9,
-      "reviews": 920,
-      "sold": 2450
+      "sold": 2450,
+      "seller": "Bitwork Store",
+      "reviewsList": [
+        {
+          "id": 1,
+          "user": "GamingKing",
+          "avatar": "https://i.pravatar.cc/40?img=8",
+          "rating": 5,
+          "comment": "CPU เกมมิ่งที่ดีที่สุดตอนนี้ 3D V-Cache ทำให้ FPS พุ่งมาก",
+          "date": "10 ธ.ค. 2025",
+          "images": [
+            "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=200&h=200&fit=crop"
+          ],
+          "helpful": 38
+        },
+        {
+          "id": 2,
+          "user": "AMDFan",
+          "avatar": "https://i.pravatar.cc/40?img=9",
+          "rating": 5,
+          "comment": "ประทับใจมาก ทั้งเล่นเกมและทำงาน multitask ได้ดีมาก",
+          "date": "8 ธ.ค. 2025",
+          "images": [],
+          "helpful": 20
+        }
+      ]
     }
   ],
   "categories": [
