@@ -1,0 +1,86 @@
+.order-detail-card {
+  max-width: 980px;
+  margin: 12px auto;
+  background: #ffffff;
+  border: 1px solid #e6f3ea;
+  border-radius: 12px;
+  padding: 18px;
+}
+.order-detail-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.order-detail-top .order-id {
+  font-weight: 800;
+  color: #064e3b;
+}
+.order-detail-top .order-date {
+  color: #6b7280;
+}
+.order-tracking {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.order-tracking strong {
+  color: #064e3b;
+}
+.tracking-number {
+  background: #f3fbf8;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+.copy-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.08);
+}
+.no-tracking {
+  color: #6b7280;
+}
+.order-items-list {
+  margin-top: 16px;
+}
+.items-table {
+  border-top: 1px solid #eef2f6;
+  margin-top: 8px;
+}
+.items-row {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  align-items: center;
+  border-bottom: 1px solid #f3f7f4;
+}
+.items-row:last-child {
+  border-bottom: none;
+}
+.item-name {
+  flex: 1;
+  font-weight: 600;
+}
+.item-qty {
+  width: 64px;
+  text-align: right;
+  color: #6b7280;
+}
+.item-price {
+  width: 100px;
+  text-align: right;
+  font-weight: 700;
+}
+.order-total-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+.order-total {
+  font-size: 16px;
+  font-weight: 800;
+}

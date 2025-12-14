@@ -179,7 +179,7 @@
   position: relative;
   padding: 50px;
   /* background: linear-gradient(135deg, #10b981 0%, #059669 100%); */
-  background-image: url(https://cdn.discordapp.com/attachments/884799982694174781/1446724409397346451/BannerHome.png?ex=6935069a&is=6933b51a&hm=0aff6067e5a8f749850f869858b8ad26d47be79f9b782843a9ba48ee65152309&);
+  background-image: url(https://cdn.discordapp.com/attachments/1435259791076360212/1449849000755728585/image.png?ex=6940649a&is=693f131a&hm=cb7b4c36ac41b8a70b059be35ed6d3136f177623ab2257ff31ebd95f066f8351&);
   background-position: center;
   background-size: cover;
   border-radius: 24px;
@@ -240,7 +240,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .promo-banner {
-    background: url(https://cdn.discordapp.com/attachments/884799982694174781/1446730226309795840/Banner865px.png?ex=69350c04&is=6933ba84&hm=0df705f6e2644cd75a5e5d17136567ebb985982c0fd5740aeee27c6417a2f953&);
+    background: url(https://media.discordapp.net/attachments/1435259791076360212/1449849029222731887/image.png?ex=694064a1&is=693f1321&hm=7640101edfd9123e59231685d33b8359e512e0fe583fc4227bd5e6642dc0cec4&=&format=webp&quality=lossless);
     background-position: center;
     background-size: cover;
   }

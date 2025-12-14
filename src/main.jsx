@@ -48,7 +48,7 @@ import { createRoot } from "react-dom/client";
  *
  * หมายเหตุ: Route และ Routes ถูก import ไว้ที่นี่แต่ใช้งานจริงใน App.jsx
  */
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router";
 
 /**
  * NavBar - Navigation Component (แถบเมนูนำทาง)
@@ -82,6 +82,33 @@ import "./pages/home/home.jsx";
 import Footer from "./components/Footer.jsx";
 
 // =============================================================================
+// LAYOUT WRAPPER - Component ที่จัดการแสดง NavBar/Footer
+// =============================================================================
+
+/**
+ * AppWrapper - ซ่อน NavBar และ Footer ในหน้า Admin
+ * - ตรวจสอบ path ว่าเริ่มต้นด้วย /admin หรือไม่
+ * - ถ้าเป็นหน้า Admin จะไม่แสดง NavBar และ Footer
+ */
+const AppWrapper = () => {
+  const location = useLocation();
+  const isAdminPage = location.pathname.startsWith("/admin");
+
+  return (
+    <>
+      {/* NavBar - แสดงเฉพาะหน้าที่ไม่ใช่ Admin */}
+      {!isAdminPage && <NavBar />}
+
+      {/* App - Routes Component ที่จัดการหน้าต่างๆ */}
+      <App />
+
+      {/* Footer - แสดงเฉพาะหน้าที่ไม่ใช่ Admin */}
+      {!isAdminPage && <Footer />}
+    </>
+  );
+};
+
+// =============================================================================
 // APPLICATION RENDER - การ Render แอปพลิเคชัน
 // =============================================================================
 
@@ -96,17 +123,12 @@ import Footer from "./components/Footer.jsx";
  * Component Structure:
  * - StrictMode: ครอบทั้งแอปเพื่อตรวจสอบปัญหา
  * - BrowserRouter: ครอบทั้งแอปเพื่อให้ทุก Component เข้าถึง Routing ได้
- * - NavBar: แถบเมนู (อยู่ข้างนอก App เพื่อแสดงทุกหน้า)
- * - App: Routes และหน้าต่างๆ ของแอป
+ * - AppWrapper: จัดการแสดง NavBar/Footer ตามหน้า
  */
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      {/* NavBar - แถบเมนูนำทางที่แสดงทุกหน้า */}
-      <NavBar />
-      {/* App - Routes Component ที่จัดการหน้าต่างๆ */}
-      <App />
-      <Footer />
+      <AppWrapper />
     </BrowserRouter>
   </StrictMode>
 );

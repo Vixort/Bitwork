@@ -3,8 +3,44 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./MarketMain.css";
 
-// Import mock data from JSON file
-import marketData from "./marketProductsData.json";
+// Import shared products data from central JSON file
+import productsData from "../../data/productsData.json";
+
+// Transform data to match Market format
+const transformProductsForMarket = (products) => {
+  return products
+    .filter((p) => p.status === "active") // Only show active products
+    .map((product) => ({
+      id: product.id,
+      title: product.name,
+      description: product.description,
+      fullDescription: product.fullDescription || product.description,
+      price: `฿${product.price.toLocaleString()}`,
+      priceNumber: product.price,
+      category: product.category,
+      brand: product.brand,
+      warranty: product.warranty,
+      weight: product.weight,
+      stock: product.stock,
+      sku: product.sku,
+      images: product.images,
+      specs: product.specs,
+      rating: product.rating,
+      sold: product.sales,
+      seller: product.seller || productsData.storeInfo.name,
+      reviewsList:
+        product.reviews?.map((r) => ({
+          ...r,
+          comment: r.comment,
+        })) || [],
+    }));
+};
+
+const marketData = {
+  storeInfo: productsData.storeInfo,
+  categories: productsData.categories,
+  products: transformProductsForMarket(productsData.products),
+};
 
 const MarketMain = () => {
   // Initialize AOS
@@ -36,6 +72,10 @@ const MarketMain = () => {
   const [searchTerm, setSearchTerm] = useState("");
   // state สำหรับเก็บสินค้าที่เลือกดูรายละเอียด
   const [selectedProduct, setSelectedProduct] = useState(null);
+  // state สำหรับ checkout
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [orderComplete, setOrderComplete] = useState(false);
+  const [orderNumber, setOrderNumber] = useState("");
 
   // เมื่อกดเมาส์/นิ้วลง ให้บันทึกจุดเริ่มลากและ lock pointer ไว้กับ list
   const onPointerDown = (e) => {
@@ -141,6 +181,26 @@ const MarketMain = () => {
   // ลบสินค้าทั้งชิ้นออกจากตะกร้า
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  };
+
+  // เปิดหน้า checkout
+  const handleCheckout = () => {
+    setShowCart(false);
+    setShowCheckout(true);
+  };
+
+  // เมื่อชำระเงินสำเร็จ
+  const handlePaymentComplete = (orderNum) => {
+    setOrderNumber(orderNum);
+    setOrderComplete(true);
+    setShowCheckout(false);
+    setCart([]); // ล้างตะกร้า
+  };
+
+  // ปิด order complete และกลับไปช้อปต่อ
+  const handleContinueShopping = () => {
+    setOrderComplete(false);
+    setOrderNumber("");
   };
 
   // คำนวณจำนวนรวมสำหรับ badge และยอดรวมราคาเพื่อสรุปท้ายตะกร้า
@@ -299,12 +359,35 @@ const MarketMain = () => {
                   ฿{totalPrice.toLocaleString()}
                 </span>
               </div>
-              <button className="checkout-btn" disabled={cart.length === 0}>
-                ชำระเงิน
+              <button
+                className="checkout-btn"
+                disabled={cart.length === 0}
+                onClick={handleCheckout}
+              >
+                ดำเนินการชำระเงิน
               </button>
             </div>
           </div>
         </div>
+      )}
+
+      {/* Checkout Modal */}
+      {showCheckout && (
+        <CheckoutModal
+          cart={cart}
+          totalPrice={totalPrice}
+          totalItems={totalItems}
+          onClose={() => setShowCheckout(false)}
+          onPaymentComplete={handlePaymentComplete}
+        />
+      )}
+
+      {/* Order Complete Modal */}
+      {orderComplete && (
+        <OrderCompleteModal
+          orderNumber={orderNumber}
+          onContinueShopping={handleContinueShopping}
+        />
       )}
 
       <div className="ContainerMarketUi">
@@ -626,38 +709,67 @@ function ProductCard({ product, onAddToCart, onViewDetail, aosDelay = 0 }) {
     >
       {/* ส่วนรูป */}
       <div className="market-product-image-area">
-        <div className="market-product-image-placeholder">
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          >
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-            <line x1="12" y1="22.08" x2="12" y2="12" />
-          </svg>
-        </div>
+        {product.images && product.images.length > 0 ? (
+          <img
+            src={product.images[0]}
+            alt={product.title}
+            className="market-product-image"
+          />
+        ) : (
+          <div className="market-product-image-placeholder">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+              <line x1="12" y1="22.08" x2="12" y2="12" />
+            </svg>
+          </div>
+        )}
         {/* แสดง Tag หมวดหมู่มุมซ้ายบนของรูป */}
         {product.category && (
           <span className="market-product-tag">{product.category}</span>
+        )}
+        {/* แสดง Rating */}
+        {product.rating > 0 && (
+          <span className="market-product-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            {product.rating}
+          </span>
+        )}
+        {/* แสดงสถานะสินค้าหมด */}
+        {product.stock === 0 && (
+          <div className="market-product-out-of-stock">สินค้าหมด</div>
         )}
       </div>
       <div className="market-product-body">
         <h3 className="market-product-title">{product.title}</h3>
         <p className="market-product-description">{product.description}</p>
+        <div className="market-product-meta">
+          <span className="market-product-sold">
+            ขายแล้ว {product.sold || 0}
+          </span>
+        </div>
         <div className="market-product-footer">
           <span className="market-product-price">{product.price}</span>
           <button
             className="market-product-btn-buy"
             onClick={(e) => {
               e.stopPropagation();
-              onAddToCart(product);
+              if (product.stock > 0) {
+                onAddToCart(product);
+              }
             }}
+            disabled={product.stock === 0}
           >
-            ซื้อเลย
+            {product.stock === 0 ? "หมด" : "ซื้อเลย"}
           </button>
         </div>
       </div>
@@ -1327,6 +1439,770 @@ function formatSpecLabel(key) {
     cache: "Cache",
   };
   return labels[key] || key;
+}
+
+// Checkout Modal Component
+function CheckoutModal({
+  cart,
+  totalPrice,
+  totalItems,
+  onClose,
+  onPaymentComplete,
+}) {
+  const [step, setStep] = useState(1); // 1: shipping, 2: payment, 3: confirm
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const [shippingInfo, setShippingInfo] = useState({
+    fullName: "",
+    phone: "",
+    address: "",
+    district: "",
+    province: "",
+    postalCode: "",
+    note: "",
+  });
+
+  const [paymentMethod, setPaymentMethod] = useState("credit");
+  const [cardInfo, setCardInfo] = useState({
+    number: "",
+    name: "",
+    expiry: "",
+    cvv: "",
+  });
+
+  const shippingCost = totalPrice >= 1500 ? 0 : 50;
+  const grandTotal = totalPrice + shippingCost;
+
+  const handleShippingChange = (field, value) => {
+    setShippingInfo((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleCardChange = (field, value) => {
+    setCardInfo((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const isShippingValid = () => {
+    return (
+      shippingInfo.fullName &&
+      shippingInfo.phone &&
+      shippingInfo.address &&
+      shippingInfo.district &&
+      shippingInfo.province &&
+      shippingInfo.postalCode
+    );
+  };
+
+  const isPaymentValid = () => {
+    if (paymentMethod === "credit" || paymentMethod === "debit") {
+      return (
+        cardInfo.number && cardInfo.name && cardInfo.expiry && cardInfo.cvv
+      );
+    }
+    return true; // For other methods like COD, QR
+  };
+
+  const handleConfirmOrder = () => {
+    setIsProcessing(true);
+    // Simulate payment processing
+    setTimeout(() => {
+      const orderNum = "BW" + Date.now().toString().slice(-8);
+      onPaymentComplete(orderNum);
+    }, 2000);
+  };
+
+  const formatCardNumber = (value) => {
+    const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+    const matches = v.match(/\d{4,16}/g);
+    const match = (matches && matches[0]) || "";
+    const parts = [];
+    for (let i = 0, len = match.length; i < len; i += 4) {
+      parts.push(match.substring(i, i + 4));
+    }
+    return parts.length ? parts.join(" ") : value;
+  };
+
+  return (
+    <div className="checkout-overlay" onClick={onClose}>
+      <div className="checkout-modal" onClick={(e) => e.stopPropagation()}>
+        {/* Header */}
+        <div className="checkout-header">
+          <h2>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            ชำระเงิน
+          </h2>
+          <button className="checkout-close-btn" onClick={onClose}>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Progress Steps */}
+        <div className="checkout-progress">
+          <div
+            className={`progress-step ${step >= 1 ? "active" : ""} ${
+              step > 1 ? "completed" : ""
+            }`}
+          >
+            <div className="step-number">
+              {step > 1 ? (
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                "1"
+              )}
+            </div>
+            <span>ที่อยู่จัดส่ง</span>
+          </div>
+          <div className="progress-line"></div>
+          <div
+            className={`progress-step ${step >= 2 ? "active" : ""} ${
+              step > 2 ? "completed" : ""
+            }`}
+          >
+            <div className="step-number">
+              {step > 2 ? (
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                "2"
+              )}
+            </div>
+            <span>ชำระเงิน</span>
+          </div>
+          <div className="progress-line"></div>
+          <div className={`progress-step ${step >= 3 ? "active" : ""}`}>
+            <div className="step-number">3</div>
+            <span>ยืนยันคำสั่งซื้อ</span>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="checkout-content">
+          {/* Step 1: Shipping Info */}
+          {step === 1 && (
+            <div className="checkout-step shipping-step">
+              <h3>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                ข้อมูลการจัดส่ง
+              </h3>
+
+              <div className="checkout-form">
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>ชื่อ-นามสกุล *</label>
+                    <input
+                      type="text"
+                      placeholder="ชื่อผู้รับสินค้า"
+                      value={shippingInfo.fullName}
+                      onChange={(e) =>
+                        handleShippingChange("fullName", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>เบอร์โทรศัพท์ *</label>
+                    <input
+                      type="tel"
+                      placeholder="0XX-XXX-XXXX"
+                      value={shippingInfo.phone}
+                      onChange={(e) =>
+                        handleShippingChange("phone", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label>ที่อยู่ *</label>
+                  <textarea
+                    placeholder="บ้านเลขที่ ซอย ถนน"
+                    value={shippingInfo.address}
+                    onChange={(e) =>
+                      handleShippingChange("address", e.target.value)
+                    }
+                    rows={2}
+                  />
+                </div>
+
+                <div className="form-row form-row-3">
+                  <div className="form-group">
+                    <label>แขวง/ตำบล *</label>
+                    <input
+                      type="text"
+                      placeholder="แขวง/ตำบล"
+                      value={shippingInfo.district}
+                      onChange={(e) =>
+                        handleShippingChange("district", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>จังหวัด *</label>
+                    <input
+                      type="text"
+                      placeholder="จังหวัด"
+                      value={shippingInfo.province}
+                      onChange={(e) =>
+                        handleShippingChange("province", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>รหัสไปรษณีย์ *</label>
+                    <input
+                      type="text"
+                      placeholder="XXXXX"
+                      value={shippingInfo.postalCode}
+                      onChange={(e) =>
+                        handleShippingChange("postalCode", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label>หมายเหตุถึงผู้ขาย (ไม่บังคับ)</label>
+                  <input
+                    type="text"
+                    placeholder="เช่น ฝากไว้ที่ป้อมรักษาการณ์"
+                    value={shippingInfo.note}
+                    onChange={(e) =>
+                      handleShippingChange("note", e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Step 2: Payment Method */}
+          {step === 2 && (
+            <div className="checkout-step payment-step">
+              <h3>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+                เลือกวิธีชำระเงิน
+              </h3>
+
+              <div className="payment-methods">
+                <label
+                  className={`payment-option ${
+                    paymentMethod === "credit" ? "selected" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="credit"
+                    checked={paymentMethod === "credit"}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                  />
+                  <div className="payment-option-content">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                      <line x1="1" y1="10" x2="23" y2="10" />
+                    </svg>
+                    <div>
+                      <span className="payment-title">บัตรเครดิต</span>
+                      <span className="payment-desc">
+                        Visa, Mastercard, JCB
+                      </span>
+                    </div>
+                  </div>
+                </label>
+
+                <label
+                  className={`payment-option ${
+                    paymentMethod === "debit" ? "selected" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="debit"
+                    checked={paymentMethod === "debit"}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                  />
+                  <div className="payment-option-content">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                      <line x1="1" y1="10" x2="23" y2="10" />
+                    </svg>
+                    <div>
+                      <span className="payment-title">บัตรเดบิต</span>
+                      <span className="payment-desc">ทุกธนาคารชั้นนำ</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label
+                  className={`payment-option ${
+                    paymentMethod === "qr" ? "selected" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="qr"
+                    checked={paymentMethod === "qr"}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                  />
+                  <div className="payment-option-content">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="3" y="3" width="7" height="7" />
+                      <rect x="14" y="3" width="7" height="7" />
+                      <rect x="3" y="14" width="7" height="7" />
+                      <rect x="14" y="14" width="7" height="7" />
+                    </svg>
+                    <div>
+                      <span className="payment-title">QR PromptPay</span>
+                      <span className="payment-desc">
+                        สแกน QR จ่ายผ่าน Mobile Banking
+                      </span>
+                    </div>
+                  </div>
+                </label>
+
+                <label
+                  className={`payment-option ${
+                    paymentMethod === "cod" ? "selected" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="cod"
+                    checked={paymentMethod === "cod"}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                  />
+                  <div className="payment-option-content">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                    <div>
+                      <span className="payment-title">เก็บเงินปลายทาง</span>
+                      <span className="payment-desc">
+                        ชำระเงินเมื่อรับสินค้า (+฿30)
+                      </span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+
+              {/* Card Info Form */}
+              {(paymentMethod === "credit" || paymentMethod === "debit") && (
+                <div className="card-form">
+                  <div className="form-group">
+                    <label>หมายเลขบัตร</label>
+                    <input
+                      type="text"
+                      placeholder="XXXX XXXX XXXX XXXX"
+                      value={cardInfo.number}
+                      onChange={(e) =>
+                        handleCardChange(
+                          "number",
+                          formatCardNumber(e.target.value)
+                        )
+                      }
+                      maxLength={19}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>ชื่อบนบัตร</label>
+                    <input
+                      type="text"
+                      placeholder="CARD HOLDER NAME"
+                      value={cardInfo.name}
+                      onChange={(e) =>
+                        handleCardChange("name", e.target.value.toUpperCase())
+                      }
+                    />
+                  </div>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>วันหมดอายุ</label>
+                      <input
+                        type="text"
+                        placeholder="MM/YY"
+                        value={cardInfo.expiry}
+                        onChange={(e) =>
+                          handleCardChange("expiry", e.target.value)
+                        }
+                        maxLength={5}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>CVV</label>
+                      <input
+                        type="password"
+                        placeholder="***"
+                        value={cardInfo.cvv}
+                        onChange={(e) =>
+                          handleCardChange("cvv", e.target.value)
+                        }
+                        maxLength={4}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* QR Code Display */}
+              {paymentMethod === "qr" && (
+                <div className="qr-payment">
+                  <div className="qr-code-placeholder">
+                    <svg
+                      width="120"
+                      height="120"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                    >
+                      <rect x="3" y="3" width="7" height="7" />
+                      <rect x="14" y="3" width="7" height="7" />
+                      <rect x="3" y="14" width="7" height="7" />
+                      <rect x="14" y="14" width="7" height="7" />
+                    </svg>
+                  </div>
+                  <p className="qr-instruction">
+                    สแกน QR Code ด้วยแอป Mobile Banking
+                  </p>
+                  <p className="qr-amount">
+                    ยอดชำระ: <strong>฿{grandTotal.toLocaleString()}</strong>
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Step 3: Order Confirmation */}
+          {step === 3 && (
+            <div className="checkout-step confirm-step">
+              <h3>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+                ตรวจสอบคำสั่งซื้อ
+              </h3>
+
+              {/* Order Summary */}
+              <div className="order-summary">
+                <div className="summary-section">
+                  <h4>สินค้าในคำสั่งซื้อ ({totalItems} ชิ้น)</h4>
+                  <div className="order-items">
+                    {cart.map((item) => (
+                      <div key={item.id} className="order-item">
+                        <span className="item-name">{item.title}</span>
+                        <span className="item-qty">x{item.quantity}</span>
+                        <span className="item-price">{item.price}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="summary-section">
+                  <h4>ที่อยู่จัดส่ง</h4>
+                  <div className="shipping-summary">
+                    <p>
+                      <strong>{shippingInfo.fullName}</strong>
+                    </p>
+                    <p>{shippingInfo.phone}</p>
+                    <p>{shippingInfo.address}</p>
+                    <p>
+                      {shippingInfo.district}, {shippingInfo.province}{" "}
+                      {shippingInfo.postalCode}
+                    </p>
+                    {shippingInfo.note && (
+                      <p className="note">หมายเหตุ: {shippingInfo.note}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="summary-section">
+                  <h4>วิธีชำระเงิน</h4>
+                  <p className="payment-summary">
+                    {paymentMethod === "credit" && "บัตรเครดิต"}
+                    {paymentMethod === "debit" && "บัตรเดบิต"}
+                    {paymentMethod === "qr" && "QR PromptPay"}
+                    {paymentMethod === "cod" && "เก็บเงินปลายทาง"}
+                    {(paymentMethod === "credit" ||
+                      paymentMethod === "debit") &&
+                      cardInfo.number &&
+                      ` (****${cardInfo.number.slice(-4)})`}
+                  </p>
+                </div>
+
+                <div className="price-breakdown">
+                  <div className="price-row">
+                    <span>ราคาสินค้า</span>
+                    <span>฿{totalPrice.toLocaleString()}</span>
+                  </div>
+                  <div className="price-row">
+                    <span>ค่าจัดส่ง</span>
+                    <span>
+                      {shippingCost === 0 ? "ฟรี" : `฿${shippingCost}`}
+                    </span>
+                  </div>
+                  {paymentMethod === "cod" && (
+                    <div className="price-row">
+                      <span>ค่าบริการเก็บเงินปลายทาง</span>
+                      <span>฿30</span>
+                    </div>
+                  )}
+                  <div className="price-row total">
+                    <span>ยอดรวมทั้งสิ้น</span>
+                    <span>
+                      ฿
+                      {(
+                        grandTotal + (paymentMethod === "cod" ? 30 : 0)
+                      ).toLocaleString()}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="checkout-footer">
+          <div className="footer-left">
+            {step > 1 && (
+              <button
+                className="checkout-back-btn"
+                onClick={() => setStep(step - 1)}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+                ย้อนกลับ
+              </button>
+            )}
+          </div>
+          <div className="footer-right">
+            {step < 3 ? (
+              <button
+                className="checkout-next-btn"
+                onClick={() => setStep(step + 1)}
+                disabled={step === 1 ? !isShippingValid() : !isPaymentValid()}
+              >
+                ถัดไป
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            ) : (
+              <button
+                className="checkout-confirm-btn"
+                onClick={handleConfirmOrder}
+                disabled={isProcessing}
+              >
+                {isProcessing ? (
+                  <>
+                    <span className="spinner"></span>
+                    กำลังดำเนินการ...
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    ยืนยันการสั่งซื้อ
+                  </>
+                )}
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Order Complete Modal Component
+function OrderCompleteModal({ orderNumber, onContinueShopping }) {
+  return (
+    <div className="order-complete-overlay">
+      <div className="order-complete-modal">
+        <div className="success-animation">
+          <div className="success-checkmark">
+            <svg
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          </div>
+        </div>
+
+        <h2>สั่งซื้อสำเร็จ!</h2>
+        <p className="order-number-label">หมายเลขคำสั่งซื้อ</p>
+        <p className="order-number">{orderNumber}</p>
+
+        <div className="order-info">
+          <p>ขอบคุณที่ใช้บริการ Bitwork Store</p>
+          <p>เราจะจัดส่งสินค้าให้คุณภายใน 1-3 วันทำการ</p>
+        </div>
+
+        <div className="order-actions">
+          <button className="view-order-btn">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            ดูคำสั่งซื้อ
+          </button>
+          <button
+            className="continue-shopping-btn"
+            onClick={onContinueShopping}
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+            </svg>
+            ช้อปต่อ
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default MarketMain;

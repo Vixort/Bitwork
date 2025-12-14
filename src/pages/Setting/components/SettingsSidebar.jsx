@@ -2,6 +2,7 @@
  * SettingsSidebar.jsx - Settings Navigation Sidebar
  */
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import "./SettingsSidebar.css";
 
 const SettingsSidebar = ({
@@ -11,6 +12,7 @@ const SettingsSidebar = ({
   onMobileClose,
 }) => {
   const [expandedMenu, setExpandedMenu] = useState(null);
+  const navigate = useNavigate();
 
   const menuItems = [
     {
@@ -104,15 +106,7 @@ const SettingsSidebar = ({
           <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
       ),
-      hasSubmenu: true,
-      submenu: [
-        { id: "store", label: "ตั้งค่าร้านค้า" },
-        { id: "store-dashboard", label: "Dashboard" },
-        { id: "store-products", label: "สินค้าที่ขายอยู่" },
-        { id: "store-orders", label: "คำสั่งซื้อ" },
-        { id: "store-sales-history", label: "ประวัติการขาย" },
-        { id: "store-analytics", label: "สถิติและรายงาน" },
-      ],
+      isExternal: true, // ไปที่ Admin Panel แทน
     },
     {
       id: "notification",
@@ -227,6 +221,10 @@ const SettingsSidebar = ({
                     : ""
                 }`}
                 onClick={() => {
+                  if (item.isExternal) {
+                    navigate("/admin/login");
+                    return;
+                  }
                   if (item.hasSubmenu) {
                     setExpandedMenu(expandedMenu === item.id ? null : item.id);
                   } else {
@@ -238,6 +236,21 @@ const SettingsSidebar = ({
                 <span className="menu-icon">{item.icon}</span>
                 <span className="menu-label">{item.label}</span>
                 {item.badge && <span className="menu-badge">{item.badge}</span>}
+                {item.isExternal && (
+                  <svg
+                    className="external-link-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                )}
                 {item.hasSubmenu && (
                   <svg
                     className={`submenu-arrow ${

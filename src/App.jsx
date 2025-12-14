@@ -104,6 +104,8 @@ import SettingMain from "./pages/Setting/SettingMain.jsx";
  * - ปุ่มติดตามและส่งข้อความ
  */
 import ProfileMain from "./pages/Profile/ProfileMain.jsx";
+import OrdersMain from "./pages/Orders/OrdersMain.jsx";
+import OrderDetail from "./pages/Orders/OrderDetail.jsx";
 
 /**
  * ScrollToTop - Component สำหรับเลื่อนขึ้นบนสุดเมื่อเปลี่ยนหน้า
@@ -125,6 +127,79 @@ import NotFound from "./pages/NotFound/NotFound.jsx";
  * - แยกออกจากหน้า Settings เพื่อความสะดวก
  */
 import ChatMain from "./pages/Chat/ChatMain.jsx";
+
+// =============================================================================
+// ADMIN PANEL IMPORTS - นำเข้าหน้า Admin Panel
+// =============================================================================
+
+/**
+ * AdminLogin - หน้าเข้าสู่ระบบ Admin
+ * - หน้าเข้าสู่ระบบแยกสำหรับผู้ดูแลร้านค้า
+ */
+import AdminLogin from "./pages/Admin/AdminLogin.jsx";
+
+/**
+ * AdminLayout - Layout สำหรับ Admin Panel
+ * - มี Sidebar และ Content Area
+ * - ใช้ Outlet สำหรับ nested routes
+ */
+import AdminLayout from "./pages/Admin/AdminLayout.jsx";
+
+/**
+ * AdminDashboard - แดชบอร์ดหลักของ Admin
+ * - แสดงสถิติร้านค้า, คำสั่งซื้อล่าสุด
+ */
+import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
+
+/**
+ * AdminProducts - จัดการสินค้า
+ * - เพิ่ม แก้ไข ลบสินค้าในร้าน
+ */
+import AdminProducts from "./pages/Admin/AdminProducts.jsx";
+
+/**
+ * AdminCategories - จัดการหมวดหมู่
+ * - เพิ่ม แก้ไข ลบหมวดหมู่สินค้า
+ */
+import AdminCategories from "./pages/Admin/AdminCategories.jsx";
+
+/**
+ * AdminOrders - จัดการคำสั่งซื้อ
+ * - ดูและอัพเดทสถานะคำสั่งซื้อ
+ */
+import AdminOrders from "./pages/Admin/AdminOrders.jsx";
+
+/**
+ * AdminUsers - จัดการผู้ใช้งาน
+ * - ดูข้อมูลลูกค้า ระงับบัญชี
+ */
+import AdminUsers from "./pages/Admin/AdminUsers.jsx";
+
+/**
+ * AdminRegister - หน้าสมัครร้านค้า
+ * - ลงทะเบียนเปิดร้านค้าใหม่
+ */
+import AdminRegister from "./pages/Admin/AdminRegister.jsx";
+
+/**
+ * AdminStoreSettings - หน้าตั้งค่าโปรไฟล์ร้านค้า
+ * - จัดการข้อมูลร้าน, โลโก้, แบนเนอร์
+ * - ตั้งค่าเวลาทำการ, นโยบายร้านค้า
+ */
+import AdminStoreSettings from "./pages/Admin/AdminStoreSettings.jsx";
+
+/**
+ * StoreProfile - หน้าโปรไฟล์ร้านค้าสาธารณะ
+ * - แสดงข้อมูลร้าน, สินค้า showcase
+ * - หน้าที่ลูกค้าจะเห็นเมื่อเข้าชมร้าน
+ */
+import StoreProfile from "./pages/Admin/StoreProfile.jsx";
+
+/**
+ * Navigate - สำหรับ Redirect
+ * - ใช้ redirect จาก /admin ไป /admin/dashboard
+ */
+import { Navigate } from "react-router";
 
 // =============================================================================
 // APP COMPONENT - Component หลักของแอปพลิเคชัน
@@ -224,6 +299,10 @@ const App = () => {
         */}
         <Route path="/settings" element={<SettingMain />} />
 
+        {/* User Orders - My Orders page */}
+        <Route path="/orders" element={<OrdersMain />} />
+        <Route path="/orders/:orderId" element={<OrderDetail />} />
+
         {/* 
           Route: หน้าโปรไฟล์ผู้ใช้ (/profile/:username)
           - แสดงข้อมูลสาธารณะของผู้ใช้
@@ -238,6 +317,83 @@ const App = () => {
           - URL: http://localhost:5173/chat
         */}
         <Route path="/chat" element={<ChatMain />} />
+
+        {/* =================================================================
+          ADMIN PANEL ROUTES - เส้นทางสำหรับ Admin Panel
+          ================================================================= */}
+
+        {/* 
+          Route: หน้าเข้าสู่ระบบ Admin (/admin/login)
+          - หน้า Login แยกสำหรับผู้ดูแลร้านค้า
+          - URL: http://localhost:5173/admin/login
+        */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        {/* 
+          Route: หน้าสมัครร้านค้า (/admin/register)
+          - ลงทะเบียนเปิดร้านค้าใหม่
+          - URL: http://localhost:5173/admin/register
+        */}
+        <Route path="/admin/register" element={<AdminRegister />} />
+
+        {/* 
+          Route: Admin Panel (/admin)
+          - ใช้ AdminLayout เป็น wrapper สำหรับ nested routes
+          - มี Sidebar navigation และ content area
+        */}
+        <Route path="/admin" element={<AdminLayout />}>
+          {/* Redirect /admin ไปที่ /admin/dashboard */}
+          <Route index element={<Navigate to="dashboard" replace />} />
+
+          {/* 
+            Route: แดชบอร์ด (/admin/dashboard)
+            - แสดงสถิติร้านค้า, คำสั่งซื้อล่าสุด
+            - URL: http://localhost:5173/admin/dashboard
+          */}
+          <Route path="dashboard" element={<AdminDashboard />} />
+
+          {/* 
+            Route: จัดการสินค้า (/admin/products)
+            - เพิ่ม แก้ไข ลบสินค้า
+            - URL: http://localhost:5173/admin/products
+          */}
+          <Route path="products" element={<AdminProducts />} />
+
+          {/* 
+            Route: จัดการหมวดหมู่ (/admin/categories)
+            - เพิ่ม แก้ไข ลบหมวดหมู่
+            - URL: http://localhost:5173/admin/categories
+          */}
+          <Route path="categories" element={<AdminCategories />} />
+
+          {/* 
+            Route: จัดการคำสั่งซื้อ (/admin/orders)
+            - ดูและอัพเดทสถานะคำสั่งซื้อ
+            - URL: http://localhost:5173/admin/orders
+          */}
+          <Route path="orders" element={<AdminOrders />} />
+
+          {/* 
+            Route: จัดการผู้ใช้งาน (/admin/users)
+            - ดูข้อมูลลูกค้า ระงับบัญชี
+            - URL: http://localhost:5173/admin/users
+          */}
+          <Route path="users" element={<AdminUsers />} />
+
+          {/* 
+            Route: ตั้งค่าร้านค้า (/admin/settings)
+            - จัดการข้อมูลร้าน, โลโก้, แบนเนอร์
+            - URL: http://localhost:5173/admin/settings
+          */}
+          <Route path="settings" element={<AdminStoreSettings />} />
+
+          {/* 
+            Route: โปรไฟล์ร้านค้าสาธารณะ (/admin/store-profile)
+            - หน้าแสดงโปรไฟล์ร้านค้าที่ลูกค้าเห็น
+            - URL: http://localhost:5173/admin/store-profile
+          */}
+          <Route path="store-profile" element={<StoreProfile />} />
+        </Route>
 
         {/* 
           Route: หน้า 404 Not Found

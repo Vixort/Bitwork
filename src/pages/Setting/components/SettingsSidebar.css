@@ -115,6 +115,18 @@
   transform: rotate(180deg);
 }
 
+/* External Link Icon */
+.external-link-icon {
+  margin-left: auto;
+  color: #10b981;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar-menu-item:hover .external-link-icon {
+  opacity: 1;
+}
+
 /* Submenu Styles */
 .submenu {
   display: flex;

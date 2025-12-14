@@ -48,7 +48,7 @@ const Showcase = () => {
       ),
       title: "จ้างงาน",
       description: "หาช่างซ่อมและบริการด้านไอที",
-      link: "/jobboard",
+      link: "/jobs",
       color: "#f59e0b",
     },
     {
