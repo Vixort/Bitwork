@@ -158,7 +158,7 @@ const AdminLogin = () => {
               <div className="form-group">
                 <label htmlFor="email">อีเมล</label>
                 <div className="input-wrapper">
-                  <svg
+                  {/* <svg
                     width="20"
                     height="20"
                     viewBox="0 0 24 24"
@@ -168,7 +168,7 @@ const AdminLogin = () => {
                   >
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                     <polyline points="22,6 12,13 2,6" />
-                  </svg>
+                  </svg> */}
                   <input
                     type="email"
                     id="email"
@@ -184,7 +184,7 @@ const AdminLogin = () => {
               <div className="form-group">
                 <label htmlFor="password">รหัสผ่าน</label>
                 <div className="input-wrapper">
-                  <svg
+                  {/* <svg
                     width="20"
                     height="20"
                     viewBox="0 0 24 24"
@@ -194,7 +194,7 @@ const AdminLogin = () => {
                   >
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  </svg>
+                  </svg> */}
                   <input
                     type="password"
                     id="password"
