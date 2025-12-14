@@ -2388,6 +2388,306 @@
   display: inline-block;
 }
 
+/* ============= NEW Edit Product Modal ============= */
+.edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.edit-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.edit-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.edit-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.edit-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.edit-modal-close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.edit-modal-body {
+  display: flex;
+  gap: 32px;
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Left: Images Section */
+.edit-modal-images {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-main-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.edit-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.edit-thumbnails {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.edit-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.edit-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.edit-thumb:hover {
+  border-color: #d1d5db;
+}
+
+.edit-thumb.active {
+  border-color: #10b981;
+}
+
+.edit-manage-images-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 4px;
+}
+
+.edit-manage-images-btn:hover {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #10b981;
+}
+
+/* Right: Form Section */
+.edit-modal-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.edit-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.edit-form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.edit-form-group input,
+.edit-form-group select,
+.edit-form-group textarea {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #111827;
+  background: #fff;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.edit-form-group input:focus,
+.edit-form-group select:focus,
+.edit-form-group textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.edit-form-group textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.edit-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Stats Box */
+.edit-stats-box {
+  display: flex;
+  gap: 24px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.edit-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.edit-stat-label {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.edit-stat-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #10b981;
+}
+
+/* Footer */
+.edit-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+  flex-shrink: 0;
+}
+
+.edit-btn-cancel {
+  padding: 10px 20px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-btn-cancel:hover {
+  background: #f3f4f6;
+}
+
+.edit-btn-save {
+  padding: 10px 24px;
+  background: #10b981;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-btn-save:hover {
+  background: #059669;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .edit-modal {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .edit-modal-body {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .edit-modal-images {
+    width: 100%;
+  }
+
+  .edit-main-image {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .edit-thumbnails {
+    justify-content: center;
+  }
+
+  .edit-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ============= Product Modal ============= */
 .product-modal-overlay {
   position: fixed;
@@ -2449,7 +2749,7 @@
 
 .product-modal-content {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 350px 1fr;
   gap: 32px;
   padding: 32px;
 }
@@ -2460,7 +2760,53 @@
   gap: 16px;
 }
 
-.modal-image-section img {
+.main-edit-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  background: #f8f9fa;
+}
+
+.main-edit-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-image-section .image-thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.modal-image-section .thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.modal-image-section .thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-image-section .thumbnail:hover {
+  border-color: #ddd;
+}
+
+.modal-image-section .thumbnail.active {
+  border-color: #2ecc71;
+}
+
+.modal-image-section > img {
   width: 100%;
   height: 300px;
   object-fit: cover;
@@ -3446,7 +3792,11 @@
     grid-template-columns: 1fr;
   }
 
-  .modal-image-section img {
+  .main-edit-image {
+    aspect-ratio: 4/3;
+  }
+
+  .modal-image-section > img {
     height: 250px;
   }
 

@@ -373,13 +373,14 @@ const StoreProducts = () => {
         </div>
       </div>
 
-      {/* Product Detail/Edit Modal */}
+      {/* Product Detail/Edit Modal - NEW CLEAN DESIGN */}
       {isEditModalOpen && editedProduct && (
-        <div className="product-modal-overlay" onClick={closeModal}>
-          <div className="product-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="product-modal-header">
+        <div className="edit-modal-overlay" onClick={closeModal}>
+          <div className="edit-modal" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="edit-modal-header">
               <h3>รายละเอียดและแก้ไขสินค้า</h3>
-              <button className="modal-close-btn" onClick={closeModal}>
+              <button className="edit-modal-close" onClick={closeModal}>
                 <svg
                   width="24"
                   height="24"
@@ -394,21 +395,23 @@ const StoreProducts = () => {
               </button>
             </div>
 
-            <div className="product-modal-content">
-              {/* Image Gallery Edit */}
-              <div className="modal-image-section">
-                <div className="main-edit-image">
+            {/* Modal Body */}
+            <div className="edit-modal-body">
+              {/* Left: Images */}
+              <div className="edit-modal-images">
+                <div className="edit-main-image">
                   <img
                     src={getProductImage(editedProduct, activeImageIndex)}
                     alt={editedProduct.name}
                   />
                 </div>
+
                 {editedProduct.images && editedProduct.images.length > 1 && (
-                  <div className="image-thumbnails">
+                  <div className="edit-thumbnails">
                     {editedProduct.images.map((img, idx) => (
                       <div
                         key={idx}
-                        className={`thumbnail ${
+                        className={`edit-thumb ${
                           activeImageIndex === idx ? "active" : ""
                         }`}
                         onClick={() => setActiveImageIndex(idx)}
@@ -421,10 +424,11 @@ const StoreProducts = () => {
                     ))}
                   </div>
                 )}
-                <button className="change-image-btn">
+
+                <button className="edit-manage-images-btn">
                   <svg
-                    width="20"
-                    height="20"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -438,8 +442,10 @@ const StoreProducts = () => {
                 </button>
               </div>
 
-              <div className="modal-form-section">
-                <div className="form-row">
+              {/* Right: Form */}
+              <div className="edit-modal-form">
+                {/* Product Name */}
+                <div className="edit-form-group">
                   <label>ชื่อสินค้า</label>
                   <input
                     type="text"
@@ -448,19 +454,21 @@ const StoreProducts = () => {
                   />
                 </div>
 
-                <div className="form-row">
+                {/* Description */}
+                <div className="edit-form-group">
                   <label>รายละเอียด</label>
                   <textarea
                     rows="3"
-                    value={editedProduct.description}
+                    value={editedProduct.description || ""}
                     onChange={(e) =>
                       handleEditChange("description", e.target.value)
                     }
                   />
                 </div>
 
-                <div className="form-row-group">
-                  <div className="form-row">
+                {/* SKU & Category */}
+                <div className="edit-form-row">
+                  <div className="edit-form-group">
                     <label>SKU</label>
                     <input
                       type="text"
@@ -468,62 +476,62 @@ const StoreProducts = () => {
                       onChange={(e) => handleEditChange("sku", e.target.value)}
                     />
                   </div>
-                  <div className="form-row">
+                  <div className="edit-form-group">
                     <label>หมวดหมู่</label>
-                    <select
+                    <input
+                      type="text"
                       value={editedProduct.category}
                       onChange={(e) =>
                         handleEditChange("category", e.target.value)
                       }
-                    >
-                      <option value="CPU">CPU</option>
-                      <option value="GPU">GPU</option>
-                      <option value="RAM">RAM</option>
-                      <option value="Storage">Storage</option>
-                      <option value="Motherboard">Motherboard</option>
-                    </select>
+                    />
                   </div>
                 </div>
 
-                <div className="form-row-group">
-                  <div className="form-row">
+                {/* Price & Stock */}
+                <div className="edit-form-row">
+                  <div className="edit-form-group">
                     <label>ราคา (บาท)</label>
                     <input
                       type="number"
                       value={editedProduct.price}
                       onChange={(e) =>
-                        handleEditChange("price", parseFloat(e.target.value))
+                        handleEditChange(
+                          "price",
+                          parseFloat(e.target.value) || 0
+                        )
                       }
                     />
                   </div>
-                  <div className="form-row">
+                  <div className="edit-form-group">
                     <label>จำนวนสต็อก</label>
                     <input
                       type="number"
                       value={editedProduct.stock}
                       onChange={(e) =>
-                        handleEditChange("stock", parseInt(e.target.value))
+                        handleEditChange("stock", parseInt(e.target.value) || 0)
                       }
                     />
                   </div>
                 </div>
 
-                <div className="form-row-group">
-                  <div className="form-row">
+                {/* Weight & Warranty */}
+                <div className="edit-form-row">
+                  <div className="edit-form-group">
                     <label>น้ำหนัก</label>
                     <input
                       type="text"
-                      value={editedProduct.weight}
+                      value={editedProduct.weight || ""}
                       onChange={(e) =>
                         handleEditChange("weight", e.target.value)
                       }
                     />
                   </div>
-                  <div className="form-row">
+                  <div className="edit-form-group">
                     <label>การรับประกัน</label>
                     <input
                       type="text"
-                      value={editedProduct.warranty}
+                      value={editedProduct.warranty || ""}
                       onChange={(e) =>
                         handleEditChange("warranty", e.target.value)
                       }
@@ -531,7 +539,8 @@ const StoreProducts = () => {
                   </div>
                 </div>
 
-                <div className="form-row">
+                {/* Status */}
+                <div className="edit-form-group">
                   <label>สถานะ</label>
                   <select
                     value={editedProduct.status}
@@ -543,30 +552,30 @@ const StoreProducts = () => {
                   </select>
                 </div>
 
-                <div className="modal-stats">
-                  <div className="stat-item">
-                    <span className="stat-label">ยอดขายทั้งหมด</span>
-                    <span className="stat-value">
-                      {editedProduct.sales} ชิ้น
+                {/* Stats */}
+                <div className="edit-stats-box">
+                  <div className="edit-stat">
+                    <span className="edit-stat-label">ยอดขายทั้งหมด</span>
+                    <span className="edit-stat-value">
+                      {editedProduct.sales || 0} ชิ้น
                     </span>
                   </div>
-                  {editedProduct.reviews && (
-                    <div className="stat-item">
-                      <span className="stat-label">รีวิว</span>
-                      <span className="stat-value">
-                        {editedProduct.reviews.length} รีวิว
-                      </span>
-                    </div>
-                  )}
+                  <div className="edit-stat">
+                    <span className="edit-stat-label">รีวิว</span>
+                    <span className="edit-stat-value">
+                      {editedProduct.reviews?.length || 0} รีวิว
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="product-modal-footer">
-              <button className="btn-secondary" onClick={closeModal}>
+            {/* Modal Footer */}
+            <div className="edit-modal-footer">
+              <button className="edit-btn-cancel" onClick={closeModal}>
                 ยกเลิก
               </button>
-              <button className="btn-primary" onClick={handleSaveProduct}>
+              <button className="edit-btn-save" onClick={handleSaveProduct}>
                 บันทึกการแก้ไข
               </button>
             </div>
