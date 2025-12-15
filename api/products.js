@@ -54,7 +54,8 @@ export default async function handler(req, res) {
                 images: Array.isArray(data.images) ? data.images : [],
                 status: data.status,
                 weight: data.weight,
-                warranty: data.warranty
+                warranty: data.warranty,
+                seller: data.seller // Required field
             };
 
             const product = await prisma.product.create({

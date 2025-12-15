@@ -27,19 +27,22 @@ export default async function handler(req, res) {
             const data = req.body;
 
             // Format data for Prisma
+            // Format data for Prisma
             const jobData = {
                 title: data.title,
                 company: data.company,
                 location: data.location,
                 type: data.type,
                 level: data.level,
-                salaryMin: parseInt(data.salaryMin),
-                salaryMax: parseInt(data.salaryMax),
+                // Ensure integers and handle empty strings
+                salaryMin: data.salaryMin ? parseInt(data.salaryMin) : 0,
+                salaryMax: data.salaryMax ? parseInt(data.salaryMax) : 0,
                 description: data.description,
-                skills: Array.isArray(data.skills) ? data.skills : (data.skills?.split(',').map(s => s.trim()) || []),
-                benefits: Array.isArray(data.benefits) ? data.benefits : (data.benefits?.split(',').map(s => s.trim()) || []),
-                isRemote: data.isRemote || false,
-                isUrgent: data.isUrgent || false,
+                // Handle skills/benefits string splitting
+                skills: Array.isArray(data.skills) ? data.skills : (typeof data.skills === 'string' ? data.skills.split(',').map(s => s.trim()).filter(s => s) : []),
+                benefits: Array.isArray(data.benefits) ? data.benefits : (typeof data.benefits === 'string' ? data.benefits.split(',').map(s => s.trim()).filter(s => s) : []),
+                isRemote: data.isRemote === "true" || data.isRemote === true,
+                isUrgent: data.isUrgent === "true" || data.isUrgent === true,
                 postedDate: new Date(),
             };
 
