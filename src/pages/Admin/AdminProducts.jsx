@@ -16,6 +16,12 @@ const AdminProducts = () => {
 
   useEffect(() => {
     loadProducts();
+
+    // Check for query params
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('action') === 'new') {
+      setShowAddModal(true);
+    }
   }, []);
 
   const loadProducts = async () => {

@@ -248,7 +248,7 @@ const AdminDashboard = () => {
       <div className="quick-actions">
         <h3>ดำเนินการด่วน</h3>
         <div className="actions-grid">
-          <a href="/admin/products/new" className="action-card">
+          <a href="/admin/products?action=new" className="action-card">
             <div className="action-icon add">
               <svg
                 width="24"
@@ -281,7 +281,7 @@ const AdminDashboard = () => {
             </div>
             <span>จัดการคำสั่งซื้อ</span>
           </a>
-          <a href="/admin/analytics" className="action-card">
+          <a href="/admin/dashboard" className="action-card">
             <div className="action-icon analytics">
               <svg
                 width="24"

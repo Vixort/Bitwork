@@ -24,7 +24,6 @@ export default async function handler(req, res) {
             if (status && status !== 'all') where.status = status;
             if (search) {
                 where.OR = [
-                    { name: { contains: search, mode: 'insensitive' } }, // Note: Schema calls it 'title' but frontend might send 'name' if mismatch. Checking schema... Schema uses 'title'.
                     { title: { contains: search, mode: 'insensitive' } },
                     { sku: { contains: search, mode: 'insensitive' } },
                 ];
@@ -42,13 +41,20 @@ export default async function handler(req, res) {
             const data = req.body;
             // Data cleaning/validation
             const productData = {
-                ...data,
+                title: data.name, // Map frontend 'name' to schema 'title'
+                description: data.description,
+                fullDescription: data.fullDescription,
+                category: data.category,
+                brand: data.brand,
+                sku: data.sku,
                 price: parseFloat(data.price),
                 stock: parseInt(data.stock),
                 rating: parseFloat(data.rating || 0),
                 sold: parseInt(data.sold || 0),
-                // Ensure images is array
                 images: Array.isArray(data.images) ? data.images : [],
+                status: data.status,
+                weight: data.weight,
+                warranty: data.warranty
             };
 
             const product = await prisma.product.create({
