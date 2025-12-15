@@ -2,15 +2,31 @@
  * StoreProfile.jsx - Public Store Profile Page
  * หน้าโปรไฟล์ร้านค้าสาธารณะแสดงสินค้าและข้อมูลร้าน
  */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 import "./StoreProfile.css";
 // Import shared data
-import { storeInfo } from "../../data/constants";
+import { storeInfo, categories } from "../../data/constants";
+import { fetchProducts } from "../../lib/api";
 
 const StoreProfile = () => {
   const navigate = useNavigate();
-  const { storeInfo, products, categories } = productsData;
+  // State for products
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        if (data) setProducts(data);
+      } catch (err) {
+        console.error("Failed to load products", err);
+      }
+    };
+    loadProducts();
+  }, []);
+
+  // const { storeInfo, products, categories } = productsData; // Removed
   const [selectedCategory, setSelectedCategory] = useState("ทั้งหมด");
 
   // Mock store data (would come from settings in real app)

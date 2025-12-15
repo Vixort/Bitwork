@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 import "./MarketMain.css";
 
 // Import shared products data from central JSON file (keeping for storeInfo/categories)
-import { categories as categoryList } from "../../data/constants";
+import { storeInfo, categories as categoryList } from "../../data/constants";
 import { fetchProducts } from "../../lib/api";
 
 // Transform data to match Market format
@@ -28,7 +28,7 @@ const transformProductsForMarket = (products) => {
       specs: product.specs,
       rating: product.rating,
       sold: product.sold || product.sales || 0, // Handle schema 'sold' vs json 'sales'
-      seller: product.seller || productsData.storeInfo.name,
+      seller: product.seller || storeInfo.name,
       reviewsList:
         product.reviews?.map((r) => ({
           ...r,
@@ -38,8 +38,8 @@ const transformProductsForMarket = (products) => {
 };
 
 const marketData = {
-  storeInfo: productsData.storeInfo,
-  categories: productsData.categories,
+  storeInfo: storeInfo,
+  categories: categoryList,
   // products: ... removed from static
 };
 

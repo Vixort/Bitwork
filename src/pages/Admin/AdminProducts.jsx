@@ -1401,7 +1401,7 @@ const AdminProducts = () => {
                   </div>
                   <div className="market-cv-store-details">
                     <span className="market-cv-store-name">
-                      {productsData.storeInfo.name}
+                      {storeInfo.name}
                       <svg
                         width="16"
                         height="16"
@@ -1426,12 +1426,12 @@ const AdminProducts = () => {
                           height="14"
                           viewBox="0 0 24 24"
                           fill={
-                            star <= Math.round(productsData.storeInfo.rating)
+                            star <= Math.round(storeInfo.rating)
                               ? "#f59e0b"
                               : "none"
                           }
                           stroke={
-                            star <= Math.round(productsData.storeInfo.rating)
+                            star <= Math.round(storeInfo.rating)
                               ? "#f59e0b"
                               : "#d1d5db"
                           }
@@ -1441,8 +1441,8 @@ const AdminProducts = () => {
                         </svg>
                       ))}
                       <span>
-                        {productsData.storeInfo.rating} (
-                        {productsData.storeInfo.totalReviews} รีวิว)
+                        {storeInfo.rating} (
+                        {storeInfo.totalReviews} รีวิว)
                       </span>
                     </div>
                   </div>
