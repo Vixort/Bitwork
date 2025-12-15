@@ -25,15 +25,38 @@ export default async function handler(req, res) {
 
         if (req.method === 'POST') {
             const data = req.body;
-            // Ensure specific fields are handled correctly if needed
-            if (data.salaryMin) data.salaryMin = parseInt(data.salaryMin);
-            if (data.salaryMax) data.salaryMax = parseInt(data.salaryMax);
-            if (data.applicants) data.applicants = parseInt(data.applicants);
+
+            // Format data for Prisma
+            const jobData = {
+                title: data.title,
+                company: data.company,
+                location: data.location,
+                type: data.type,
+                level: data.level,
+                salaryMin: parseInt(data.salaryMin),
+                salaryMax: parseInt(data.salaryMax),
+                description: data.description,
+                skills: Array.isArray(data.skills) ? data.skills : (data.skills?.split(',').map(s => s.trim()) || []),
+                benefits: Array.isArray(data.benefits) ? data.benefits : (data.benefits?.split(',').map(s => s.trim()) || []),
+                isRemote: data.isRemote || false,
+                isUrgent: data.isUrgent || false,
+                postedDate: new Date(),
+            };
 
             const job = await prisma.job.create({
-                data: data,
+                data: jobData,
             });
             return res.status(201).json(job);
+        }
+
+        if (req.method === 'DELETE') {
+            const { id } = req.query;
+            if (!id) return res.status(400).json({ error: 'Job ID required' });
+
+            await prisma.job.delete({
+                where: { id: parseInt(id) }
+            });
+            return res.status(200).json({ message: 'Job deleted' });
         }
 
         return res.status(405).json({ message: 'Method not allowed' });

@@ -14,7 +14,10 @@ begin
     new.email,
     new.raw_user_meta_data ->> 'full_name',
     new.raw_user_meta_data ->> 'avatar_url',
-    'user',
+    case
+      when new.email = 'bitwork.store@gmail.com' then 'admin'
+      else 'user'
+    end,
     now(),
     now()
   );

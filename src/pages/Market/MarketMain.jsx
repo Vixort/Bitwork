@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 import "./MarketMain.css";
 
 // Import shared products data from central JSON file (keeping for storeInfo/categories)
-import productsData from "../../data/productsData.json";
+import { categories as categoryList } from "../../data/constants";
 import { fetchProducts } from "../../lib/api";
 
 // Transform data to match Market format
@@ -69,11 +69,12 @@ const MarketMain = () => {
     loadProducts();
   }, []);
 
-  const displayProducts = dbProducts.length > 0 ? transformProductsForMarket(dbProducts) : transformProductsForMarket(productsData.products); // Fallback or empty?
+  // Fallback to empty array if no db products, do NOT show mock data
+  const displayProducts = dbProducts.length > 0 ? transformProductsForMarket(dbProducts) : [];
 
 
   // รายการหมวดหมู่สินค้าที่ใช้สร้างปุ่มตัวกรองด้านบน (จาก JSON)
-  const fillter = marketData.categories;
+  const fillter = categoryList;
 
   // ref สำหรับควบคุมรายการปุ่มให้ลากได้เหมือน trackpad/เมาส์
   const menuRef = useRef(null);

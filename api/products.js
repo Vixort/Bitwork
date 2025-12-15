@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     // Set CORS headers
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST,PUT,DELETE');
     res.setHeader(
         'Access-Control-Allow-Headers',
         'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
@@ -55,6 +55,36 @@ export default async function handler(req, res) {
                 data: productData,
             });
             return res.status(201).json(product);
+        }
+
+        if (req.method === 'PUT') {
+            const { id } = req.query;
+            const data = req.body;
+            if (!id) return res.status(400).json({ error: 'Product ID required' });
+
+            const productData = { ...data };
+            // Ensure numeric fields
+            if (productData.price) productData.price = parseFloat(productData.price);
+            if (productData.stock) productData.stock = parseInt(productData.stock);
+
+            // Remove ID from data if present to avoid prisma error
+            delete productData.id;
+
+            const product = await prisma.product.update({
+                where: { id: parseInt(id) },
+                data: productData,
+            });
+            return res.status(200).json(product);
+        }
+
+        if (req.method === 'DELETE') {
+            const { id } = req.query;
+            if (!id) return res.status(400).json({ error: 'Product ID required' });
+
+            await prisma.product.delete({
+                where: { id: parseInt(id) }
+            });
+            return res.status(200).json({ message: 'Product deleted' });
         }
 
         return res.status(405).json({ message: 'Method not allowed' });

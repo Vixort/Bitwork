@@ -7,8 +7,8 @@ import "./AdminProducts.css";
 // Import MarketMain CSS for customer view modal styling
 import "../Market/MarketMain.css";
 
-// Import shared products data
-import productsData from "../../data/productsData.json";
+// Import shared data
+import { storeInfo, categories } from "../../data/constants";
 import { fetchProducts, createProduct, updateProduct, deleteProduct } from "../../lib/api";
 
 const AdminProducts = () => {
@@ -65,7 +65,8 @@ const AdminProducts = () => {
     type: "",
   });
 
-  const categories = productsData.categories;
+  // const categories = productsData.categories; // Removed
+
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
@@ -159,7 +160,7 @@ const AdminProducts = () => {
       const productData = {
         ...formData,
         rating: 0,
-        seller: productsData.storeInfo.name,
+        seller: storeInfo.name,
         // API expects sold, ensure we handle conversion if needed
         sold: 0
       };

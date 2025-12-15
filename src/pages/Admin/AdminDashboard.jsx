@@ -2,18 +2,60 @@
  * AdminDashboard.jsx - Admin Dashboard Page
  * หน้า Dashboard หลักของ Admin
  */
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
-  // Mock data
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+  const [dbStats, setDbStats] = useState({
+    jobs: 0,
+    products: 0,
+    users: 0
+  });
+
+  useEffect(() => {
+    if (!loading && (!user || user.email !== 'bitwork.store@gmail.com')) {
+      navigate('/login');
+    }
+
+    // Fetch real stats
+    async function fetchStats() {
+      try {
+        // Using existing APIs to count
+        const [jobsRes, productsRes] = await Promise.all([
+          fetch('/api/jobs').then(r => r.json()),
+          fetch('/api/products').then(r => r.json())
+        ]);
+
+        setDbStats({
+          jobs: jobsRes.length || 0,
+          products: productsRes.length || 0,
+          users: 0 // User API not available publicly yet
+        });
+      } catch (e) {
+        console.error("Failed to fetch dashboard stats", e);
+      }
+    }
+
+    if (user?.email === 'bitwork.store@gmail.com') {
+      fetchStats();
+    }
+
+  }, [user, loading, navigate]);
+
+  if (loading) return <div>Loading...</div>;
+
+  // Mock data combined with real data
   const stats = [
     {
       id: "revenue",
       label: "รายได้วันนี้",
-      value: "฿12,450",
-      change: "+12.5%",
-      changeType: "positive",
+      value: "฿0", // Placeholder until Order API implemented
+      change: "0%",
+      changeType: "neutral",
       icon: (
         <svg
           width="24"
@@ -31,9 +73,9 @@ const AdminDashboard = () => {
     {
       id: "orders",
       label: "คำสั่งซื้อใหม่",
-      value: "24",
-      change: "+8.2%",
-      changeType: "positive",
+      value: "0",
+      change: "0%",
+      changeType: "neutral",
       icon: (
         <svg
           width="24"
@@ -52,8 +94,8 @@ const AdminDashboard = () => {
     {
       id: "products",
       label: "สินค้าทั้งหมด",
-      value: "156",
-      change: "+3",
+      value: dbStats.products.toString(),
+      change: "+0",
       changeType: "neutral",
       icon: (
         <svg
@@ -70,10 +112,10 @@ const AdminDashboard = () => {
       ),
     },
     {
-      id: "users",
-      label: "ลูกค้าใหม่",
-      value: "45",
-      change: "+22%",
+      id: "jobs", // Changed from users to jobs for relevance
+      label: "งานทั้งหมด",
+      value: dbStats.jobs.toString(),
+      change: "+0",
       changeType: "positive",
       icon: (
         <svg
@@ -84,64 +126,16 @@ const AdminDashboard = () => {
           stroke="currentColor"
           strokeWidth="2"
         >
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
         </svg>
       ),
     },
   ];
 
-  const recentOrders = [
-    {
-      id: "#ORD-2024-001",
-      customer: "สมชาย ใจดี",
-      items: 3,
-      total: 4500,
-      status: "pending",
-      date: "14 ธ.ค. 2025",
-    },
-    {
-      id: "#ORD-2024-002",
-      customer: "สมหญิง รักเรียน",
-      items: 1,
-      total: 18900,
-      status: "processing",
-      date: "14 ธ.ค. 2025",
-    },
-    {
-      id: "#ORD-2024-003",
-      customer: "วิชัย เก่งมาก",
-      items: 2,
-      total: 7800,
-      status: "shipped",
-      date: "13 ธ.ค. 2025",
-    },
-    {
-      id: "#ORD-2024-004",
-      customer: "ปรีชา ฉลาด",
-      items: 5,
-      total: 12500,
-      status: "delivered",
-      date: "13 ธ.ค. 2025",
-    },
-    {
-      id: "#ORD-2024-005",
-      customer: "มานี มานะ",
-      items: 1,
-      total: 3200,
-      status: "delivered",
-      date: "12 ธ.ค. 2025",
-    },
-  ];
+  const recentOrders = []; // Empty for now
 
-  const topProducts = [
-    { name: "AMD Ryzen 9 7950X", sales: 45, revenue: 850500 },
-    { name: "NVIDIA RTX 4090", sales: 12, revenue: 780000 },
-    { name: "Samsung 990 PRO 2TB", sales: 34, revenue: 265200 },
-    { name: "Corsair DDR5 32GB", sales: 78, revenue: 351000 },
-  ];
+  const topProducts = []; // Empty for now
 
   const getStatusBadge = (status) => {
     const statusMap = {
@@ -210,9 +204,8 @@ const AdminDashboard = () => {
                     ฿{order.total.toLocaleString()}
                   </span>
                   <span
-                    className={`status-badge ${
-                      getStatusBadge(order.status).class
-                    }`}
+                    className={`status-badge ${getStatusBadge(order.status).class
+                      }`}
                   >
                     {getStatusBadge(order.status).label}
                   </span>

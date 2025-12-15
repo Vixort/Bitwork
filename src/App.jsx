@@ -158,6 +158,12 @@ import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
 import AdminProducts from "./pages/Admin/AdminProducts.jsx";
 
 /**
+ * AdminJobs - จัดการตำแหน่งงาน
+ * - เพิ่ม แก้ไข ลบงานประกาศรับสมัคร
+ */
+import AdminJobs from "./pages/Admin/AdminJobs.jsx";
+
+/**
  * AdminCategories - จัดการหมวดหมู่
  * - เพิ่ม แก้ไข ลบหมวดหมู่สินค้า
  */
@@ -358,6 +364,13 @@ const App = () => {
             - URL: http://localhost:5173/admin/products
           */}
           <Route path="products" element={<AdminProducts />} />
+
+          {/* 
+            Route: จัดการงาน (/admin/jobs)
+            - เพิ่ม แก้ไข ลบงาน
+            - URL: http://localhost:5173/admin/jobs
+          */}
+          <Route path="jobs" element={<AdminJobs />} />
 
           {/* 
             Route: จัดการหมวดหมู่ (/admin/categories)

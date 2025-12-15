@@ -30,6 +30,19 @@ export const createJob = async (jobData) => {
     }
 };
 
+export const deleteJob = async (id) => {
+    try {
+        const response = await fetch(`${API_BASE}/jobs?id=${id}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) throw new Error('Failed to delete job');
+        return await response.json();
+    } catch (error) {
+        console.error('Error deleting job:', error);
+        throw error;
+    }
+};
+
 export const fetchProducts = async (filters = {}) => {
     try {
         const params = new URLSearchParams();
