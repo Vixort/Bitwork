@@ -200,6 +200,12 @@ const AuthPage = () => {
         } else {
           alert("Registration successful! You can now log in.");
           setIsLogin(true);
+          setFormData({
+            fullname: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          });
         }
       }
     } catch (err) {
