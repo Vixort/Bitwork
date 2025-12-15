@@ -90,7 +90,7 @@ const MarketMain = () => {
     scrollLeft.current = el.scrollLeft;
     try {
       el.setPointerCapture(e.pointerId);
-    } catch (err) {}
+    } catch (err) { }
   };
 
   // ตอนลากอยู่ให้คำนวณระยะและเลื่อน scrollLeft ตามระยะที่ขยับ
@@ -116,7 +116,7 @@ const MarketMain = () => {
     el.classList.remove("dragging");
     try {
       el.releasePointerCapture(e.pointerId);
-    } catch (err) {}
+    } catch (err) { }
   };
 
   // ฟังก์ชันจัดการคลิกปุ่ม Filter
@@ -525,9 +525,8 @@ const MarketMain = () => {
                   {fillter.map((item, index) => (
                     <button
                       key={index}
-                      className={`filter-btn ${
-                        selectedCategory === item ? "active" : ""
-                      }`}
+                      className={`filter-btn ${selectedCategory === item ? "active" : ""
+                        }`}
                       onClick={(e) => handleFilterClick(e, item)}
                       onPointerDown={(e) => e.stopPropagation()} // ป้องกัน event ชนกับ container
                     >
@@ -939,9 +938,8 @@ function ProductDetailModal({ product, onClose, onAddToCart, storeInfo }) {
                 {product.images.map((img, idx) => (
                   <div
                     key={idx}
-                    className={`market-cv-thumbnail ${
-                      activeImageIndex === idx ? "active" : ""
-                    }`}
+                    className={`market-cv-thumbnail ${activeImageIndex === idx ? "active" : ""
+                      }`}
                     onClick={() => setActiveImageIndex(idx)}
                   >
                     <img src={img} alt={`${product.title} ${idx + 1}`} />
@@ -1011,9 +1009,8 @@ function ProductDetailModal({ product, onClose, onAddToCart, storeInfo }) {
                   {product.category}
                 </span>
                 <span
-                  className={`market-cv-status-badge ${
-                    product.stock > 0 ? "in-stock" : "out-of-stock"
-                  }`}
+                  className={`market-cv-status-badge ${product.stock > 0 ? "in-stock" : "out-of-stock"
+                    }`}
                 >
                   {product.stock > 0 ? "พร้อมจำหน่าย" : "สินค้าหมด"}
                 </span>
@@ -1098,25 +1095,22 @@ function ProductDetailModal({ product, onClose, onAddToCart, storeInfo }) {
             {/* Tabs */}
             <div className="market-cv-tabs">
               <button
-                className={`market-cv-tab-btn ${
-                  activeTab === "details" ? "active" : ""
-                }`}
+                className={`market-cv-tab-btn ${activeTab === "details" ? "active" : ""
+                  }`}
                 onClick={() => setActiveTab("details")}
               >
                 รายละเอียด
               </button>
               <button
-                className={`market-cv-tab-btn ${
-                  activeTab === "reviews" ? "active" : ""
-                }`}
+                className={`market-cv-tab-btn ${activeTab === "reviews" ? "active" : ""
+                  }`}
                 onClick={() => setActiveTab("reviews")}
               >
                 รีวิว ({product.reviewsList?.length || 0})
               </button>
               <button
-                className={`market-cv-tab-btn ${
-                  activeTab === "comments" ? "active" : ""
-                }`}
+                className={`market-cv-tab-btn ${activeTab === "comments" ? "active" : ""
+                  }`}
                 onClick={() => setActiveTab("comments")}
               >
                 เขียนรีวิว
@@ -1559,9 +1553,8 @@ function CheckoutModal({
         {/* Progress Steps */}
         <div className="checkout-progress">
           <div
-            className={`progress-step ${step >= 1 ? "active" : ""} ${
-              step > 1 ? "completed" : ""
-            }`}
+            className={`progress-step ${step >= 1 ? "active" : ""} ${step > 1 ? "completed" : ""
+              }`}
           >
             <div className="step-number">
               {step > 1 ? (
@@ -1583,9 +1576,8 @@ function CheckoutModal({
           </div>
           <div className="progress-line"></div>
           <div
-            className={`progress-step ${step >= 2 ? "active" : ""} ${
-              step > 2 ? "completed" : ""
-            }`}
+            className={`progress-step ${step >= 2 ? "active" : ""} ${step > 2 ? "completed" : ""
+              }`}
           >
             <div className="step-number">
               {step > 2 ? (
@@ -1741,9 +1733,8 @@ function CheckoutModal({
 
               <div className="payment-methods">
                 <label
-                  className={`payment-option ${
-                    paymentMethod === "credit" ? "selected" : ""
-                  }`}
+                  className={`payment-option ${paymentMethod === "credit" ? "selected" : ""
+                    }`}
                 >
                   <input
                     type="radio"
@@ -1774,9 +1765,8 @@ function CheckoutModal({
                 </label>
 
                 <label
-                  className={`payment-option ${
-                    paymentMethod === "debit" ? "selected" : ""
-                  }`}
+                  className={`payment-option ${paymentMethod === "debit" ? "selected" : ""
+                    }`}
                 >
                   <input
                     type="radio"
@@ -1805,9 +1795,8 @@ function CheckoutModal({
                 </label>
 
                 <label
-                  className={`payment-option ${
-                    paymentMethod === "qr" ? "selected" : ""
-                  }`}
+                  className={`payment-option ${paymentMethod === "qr" ? "selected" : ""
+                    }`}
                 >
                   <input
                     type="radio"
@@ -1840,9 +1829,8 @@ function CheckoutModal({
                 </label>
 
                 <label
-                  className={`payment-option ${
-                    paymentMethod === "cod" ? "selected" : ""
-                  }`}
+                  className={`payment-option ${paymentMethod === "cod" ? "selected" : ""
+                    }`}
                 >
                   <input
                     type="radio"

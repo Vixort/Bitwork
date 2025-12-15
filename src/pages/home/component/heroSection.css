@@ -1,14 +1,9 @@
 /* =============================================================================
    HERO SECTION - Modern Landing Hero
+   Uses variables from index.css
    ============================================================================= */
 
-:root {
-  --hero-primary: #10b981;
-  --hero-primary-dark: #059669;
-  --hero-bg: #f0fdf4;
-  --hero-text: #1f2937;
-  --hero-text-light: #6b7280;
-}
+
 
 .home-hero-section {
   position: relative;
@@ -43,7 +38,7 @@
   /* opacity: 0.1; */
   /* filter: blur(5px); */
   /* Fallback gradient if image fails to load */
-  background-color: var(--hero-bg);
+  background-color: var(--primary-lighter, #f0fdf4);
   /* Ensure proper scaling on all devices */
   background-attachment: scroll;
 }
@@ -95,20 +90,20 @@
 .home-title-line {
   font-size: 1.5rem;
   font-weight: 500;
-  color: var(--hero-text-light);
+  color: var(--gray-500);
 }
 
 .home-title-highlight {
   font-size: 4rem;
   font-weight: 800;
-  color: var(--hero-primary);
+  color: var(--primary);
   line-height: 1.1;
 }
 
 .home-hero-description {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: var(--hero-text-light);
+  color: var(--gray-500);
   max-width: 500px;
 }
 
@@ -129,12 +124,12 @@
 .home-stat-number {
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(--hero-primary-dark);
+  color: var(--primary-hover);
 }
 
 .home-stat-label {
   font-size: 14px;
-  color: var(--hero-text-light);
+  color: var(--gray-500);
 }
 
 .home-stat-divider {
@@ -226,21 +221,26 @@
 .home-visual-card.home-card-1 {
   animation: float 6s ease-in-out infinite;
 }
+
 .home-visual-card.home-card-2 {
   animation: float 6s ease-in-out infinite 0.5s;
 }
+
 .home-visual-card.home-card-3 {
   animation: float 6s ease-in-out infinite 1s;
 }
+
 .home-visual-card.home-card-4 {
   animation: float 6s ease-in-out infinite 1.5s;
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -279,11 +279,13 @@
 }
 
 @keyframes scroll {
+
   0%,
   100% {
     transform: translateY(0);
     opacity: 1;
   }
+
   50% {
     transform: translateY(8px);
     opacity: 0.3;

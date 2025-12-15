@@ -1,8 +1,4 @@
-:root {
-  --primary: #10b981;
-  --primary-dark: #059669;
-  --primary-light: #ecfdf5;
-}
+/* Variables are defined in index.css */
 
 .community-page {
   min-height: 100vh;

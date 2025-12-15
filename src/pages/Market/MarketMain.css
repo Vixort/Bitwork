@@ -1,30 +1,10 @@
 /* ============================================
    BITWORK MARKET - MINIMAL WHITE-GREEN THEME
    Clean & Modern Design
+   Uses variables from index.css
    ============================================ */
 
-/* Base Variables */
-:root {
-  --primary: #10b981;
-  --primary-light: #ecfdf5;
-  --primary-dark: #059669;
-  --accent: #047857;
-  --white: #ffffff;
-  --bg-light: #fafafa;
-  --bg-subtle: #f9fafb;
-  --text-dark: #1f2937;
-  --text-medium: #6b7280;
-  --text-light: #9ca3af;
-  --border: #f3f4f6;
-  --border-light: #f9fafb;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.06);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-}
+
 
 /* MAIN CONTAINER */
 .ContainerMarketUi {
@@ -464,6 +444,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -483,6 +464,7 @@
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -717,6 +699,7 @@
     opacity: 0;
     transform: scale(0.96);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -1531,7 +1514,7 @@
   flex-shrink: 0;
 }
 
-.detail-spec-card > div {
+.detail-spec-card>div {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -1585,11 +1568,9 @@
 }
 
 .detail-buy-btn {
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--primary) 0%,
+      var(--primary-dark) 100%);
   color: white;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
@@ -1990,11 +1971,13 @@
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     opacity: 0.3;
     transform: translate(-50%, -50%) scale(1);
   }
+
   50% {
     opacity: 0.1;
     transform: translate(-50%, -50%) scale(1.05);
@@ -2123,10 +2106,12 @@
     width: 160px;
     height: 160px;
   }
+
   .circle-2 {
     width: 210px;
     height: 210px;
   }
+
   .circle-3 {
     width: 260px;
     height: 260px;
@@ -2219,85 +2204,93 @@
 }
 
 /* ============================================
-   MARKET CUSTOMER VIEW MODAL - Full Detail
-   เหมือนกับ Customer View ใน Settings
+   MARKET CUSTOMER VIEW MODAL - Minimal Design
    ============================================ */
 
 .market-customer-view-modal {
-  background: white;
+  background: #fff;
   border-radius: 16px;
-  max-width: 1200px;
-  width: 100%;
+  max-width: 1000px;
+  width: 95%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
   animation: scaleIn 200ms ease;
 }
 
+/* Header - Clean & Simple */
 .market-cv-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 32px;
-  border-bottom: 2px solid var(--primary);
-  background: linear-gradient(135deg, var(--primary-light) 0%, #d1fae5 100%);
+  padding: 16px 24px;
+  border-bottom: 1px solid #f3f4f6;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .market-cv-title {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--primary-dark);
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.market-cv-title svg {
+  color: #10b981;
 }
 
 .market-cv-close {
   background: none;
   border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   cursor: pointer;
-  color: var(--text-medium);
+  color: #9ca3af;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 150ms ease;
+  transition: all 0.15s ease;
 }
 
 .market-cv-close:hover {
-  background: rgba(0, 0, 0, 0.1);
-  color: var(--text-dark);
+  background: #f3f4f6;
+  color: #1f2937;
 }
 
 .market-cv-content {
   display: grid;
-  grid-template-columns: 500px 1fr;
-  gap: 40px;
-  padding: 40px;
+  grid-template-columns: 400px 1fr;
+  gap: 32px;
+  padding: 24px;
 }
 
 /* Image Section */
 .market-cv-image-section {
-  position: sticky;
-  top: 0;
+  position: relative;
 }
 
 .market-cv-main-image {
   position: relative;
   width: 100%;
-  height: 500px;
-  background: var(--bg-subtle);
-  border-radius: 16px;
+  height: 400px;
+  background: #f9fafb;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .market-cv-main-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .market-cv-image-placeholder {
@@ -2306,42 +2299,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-light);
-  opacity: 0.5;
+  color: #d1d5db;
 }
 
 .market-cv-out-of-stock-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .market-cv-out-of-stock-overlay span {
-  background: #e74c3c;
-  color: white;
-  padding: 16px 32px;
-  border-radius: 50px;
-  font-size: 24px;
-  font-weight: 700;
+  background: #ef4444;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .market-cv-thumbnails {
   display: flex;
-  gap: 10px;
-  margin-top: 16px;
-  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 .market-cv-thumbnail {
-  width: 70px;
-  height: 70px;
-  border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
   border: 3px solid transparent;
@@ -2375,11 +2360,9 @@
   align-items: center;
   gap: 14px;
   padding: 16px 20px;
-  background: linear-gradient(
-    135deg,
-    var(--bg-subtle) 0%,
-    var(--bg-light) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--bg-subtle) 0%,
+      var(--bg-light) 100%);
   border-radius: 14px;
   border: 1px solid var(--border);
 }
@@ -2387,11 +2370,9 @@
 .market-cv-store-logo {
   width: 48px;
   height: 48px;
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--primary) 0%,
+      var(--primary-dark) 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -2577,11 +2558,9 @@
 }
 
 .market-cv-buy-btn {
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--primary) 0%,
+      var(--primary-dark) 100%);
   color: white;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
@@ -2676,7 +2655,7 @@
   flex-shrink: 0;
 }
 
-.market-cv-spec-item > div {
+.market-cv-spec-item>div {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -2735,7 +2714,7 @@
   border: 2px solid var(--border);
 }
 
-.market-cv-reviewer-info > div {
+.market-cv-reviewer-info>div {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -2859,7 +2838,7 @@
 
 .market-cv-comment-rating label,
 .market-cv-comment-text label,
-.market-cv-comment-images > label {
+.market-cv-comment-images>label {
   font-size: 14px;
   font-weight: 600;
   color: var(--text-medium);
@@ -3000,11 +2979,9 @@
   justify-content: center;
   gap: 10px;
   padding: 16px 32px;
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--primary) 0%,
+      var(--primary-dark) 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -3656,9 +3633,11 @@
     transform: scale(0);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.2);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;

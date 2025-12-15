@@ -1,0 +1,446 @@
+/* =============================================================================
+   BITWORK - Shared Component Styles
+   Centralized styles to avoid duplication across components
+   ============================================================================= */
+
+/* No :root here - use index.css for CSS variables */
+
+/* =============================================================================
+   BUTTONS - Shared Button Styles
+   ============================================================================= */
+
+.bw-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.bw-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Primary Button */
+.bw-btn-primary {
+    color: #fff;
+    background-color: var(--primary, #10b981);
+    border-color: var(--primary, #10b981);
+}
+
+.bw-btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover, #059669);
+    border-color: var(--primary-hover, #059669);
+}
+
+.bw-btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+/* Secondary Button */
+.bw-btn-secondary {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #e5e5e5;
+}
+
+.bw-btn-secondary:hover:not(:disabled) {
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+/* Outline Button */
+.bw-btn-outline {
+    color: #555;
+    background-color: transparent;
+    border-color: #e5e5e5;
+}
+
+.bw-btn-outline:hover:not(:disabled) {
+    border-color: #ccc;
+    background-color: #fafafa;
+}
+
+/* Danger Button */
+.bw-btn-danger {
+    color: #fff;
+    background-color: #ef4444;
+    border-color: #ef4444;
+}
+
+.bw-btn-danger:hover:not(:disabled) {
+    background-color: #dc2626;
+    border-color: #dc2626;
+}
+
+/* Button Sizes */
+.bw-btn-sm {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.bw-btn-lg {
+    padding: 14px 28px;
+    font-size: 16px;
+}
+
+.bw-btn-full {
+    width: 100%;
+}
+
+/* Icon Button */
+.bw-btn-icon {
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.bw-btn-icon:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* =============================================================================
+   MODAL - Shared Modal Styles
+   ============================================================================= */
+
+.bw-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: bw-fadeIn 0.2s ease;
+}
+
+@keyframes bw-fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.bw-modal-container {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    animation: bw-scaleIn 0.2s ease;
+}
+
+@keyframes bw-scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.bw-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.bw-modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.bw-modal-close {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #6b7280;
+    transition: all 0.2s ease;
+}
+
+.bw-modal-close:hover {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.bw-modal-body {
+    padding: 24px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.bw-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid #f3f4f6;
+    background: #f9fafb;
+}
+
+/* =============================================================================
+   CARDS - Shared Card Styles
+   ============================================================================= */
+
+.bw-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #f3f4f6;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.bw-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.bw-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.bw-card-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.bw-card-body {
+    padding: 20px;
+}
+
+.bw-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 20px;
+    border-top: 1px solid #f3f4f6;
+    background: #f9fafb;
+}
+
+/* =============================================================================
+   FORM INPUTS - Shared Input Styles
+   ============================================================================= */
+
+.bw-input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.bw-input:focus {
+    border-color: var(--primary, #10b981);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.bw-input::placeholder {
+    color: #999;
+}
+
+.bw-input:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.bw-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.bw-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+/* =============================================================================
+   BADGES - Shared Badge Styles
+   ============================================================================= */
+
+.bw-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 20px;
+}
+
+.bw-badge-primary {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+.bw-badge-success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+}
+
+.bw-badge-warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+}
+
+.bw-badge-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+.bw-badge-info {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563eb;
+}
+
+.bw-badge-gray {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+/* =============================================================================
+   UTILITIES
+   ============================================================================= */
+
+/* Flexbox */
+.bw-flex {
+    display: flex;
+}
+
+.bw-flex-col {
+    flex-direction: column;
+}
+
+.bw-items-center {
+    align-items: center;
+}
+
+.bw-justify-center {
+    justify-content: center;
+}
+
+.bw-justify-between {
+    justify-content: space-between;
+}
+
+.bw-gap-1 {
+    gap: 4px;
+}
+
+.bw-gap-2 {
+    gap: 8px;
+}
+
+.bw-gap-3 {
+    gap: 12px;
+}
+
+.bw-gap-4 {
+    gap: 16px;
+}
+
+/* Spacing */
+.bw-m-0 {
+    margin: 0;
+}
+
+.bw-p-0 {
+    padding: 0;
+}
+
+/* Text */
+.bw-text-center {
+    text-align: center;
+}
+
+.bw-text-primary {
+    color: var(--primary, #10b981);
+}
+
+.bw-text-muted {
+    color: #6b7280;
+}
+
+.bw-text-danger {
+    color: #ef4444;
+}
+
+.bw-font-medium {
+    font-weight: 500;
+}
+
+.bw-font-semibold {
+    font-weight: 600;
+}
+
+.bw-font-bold {
+    font-weight: 700;
+}
+
+/* Visibility */
+.bw-hidden {
+    display: none;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+    .bw-hide-mobile {
+        display: none !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .bw-hide-desktop {
+        display: none !important;
+    }
+}

@@ -142,6 +142,7 @@
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -197,29 +198,41 @@
 }
 
 /* Mobile Styles */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+
   .settings-sidebar {
+    display: none;
+    /* Completely remove from document flow */
     position: fixed;
     top: 0;
-    left: -300px;
+    left: 0;
     width: 280px;
     height: 100vh;
     z-index: 1100;
-    transition: left 0.3s ease;
     box-shadow: none;
   }
 
   .settings-sidebar.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    /* Ensure it stays fixed/floating */
+    top: 0;
     left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 1100;
     box-shadow: 5px 0 30px rgba(0, 0, 0, 0.15);
+    background: #fff;
   }
 
   .sidebar-close {
     display: block;
   }
 
+
+  /* Overlay is hidden by default, shown via JS/React when sidebar opens */
   .sidebar-overlay {
-    display: block;
     position: fixed;
     top: 0;
     left: 0;

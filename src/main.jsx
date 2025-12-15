@@ -67,6 +67,13 @@ import NavBar from "./components/NavBar.jsx";
 import "./index.css";
 
 /**
+ * Shared Component Styles - Styles ที่ใช้ร่วมกัน
+ * - ป้องกัน className ซ้ำกันระหว่างไฟล์
+ * - ใช้ prefix bw-* สำหรับ buttons, modals, cards
+ */
+import "./shared.css";
+
+/**
  * App - Main Application Component
  * - เป็น Component หลักที่รวม Routes ทั้งหมด
  * - จัดการการแสดงผลหน้าต่างๆ ตาม URL

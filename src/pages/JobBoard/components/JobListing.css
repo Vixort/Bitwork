@@ -1,18 +1,7 @@
 /* ===== CSS VARIABLES ===== */
-:root {
-  --primary: #10b981;
-  --primary-dark: #059669;
-  --primary-light: #d1fae5;
-  --white: #ffffff;
-  --bg-light: #f8fafb;
-  --bg-subtle: #f1f5f9;
-  --text-dark: #1e293b;
-  --text-medium: #475569;
-  --text-light: #64748b;
-  --text-muted: #94a3b8;
-  --border: #e2e8f0;
-  --border-light: #f1f5f9;
-}
+/* Using variables from index.css */
+
+
 
 /* ===== JOB LISTING SECTION ===== */
 .job-listing-section {
