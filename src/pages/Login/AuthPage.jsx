@@ -282,64 +282,86 @@ const AuthPage = () => {
           >
             {error && <div className="auth-error">{error}</div>}
 
-            {/* ----- FULLNAME INPUT (Register Only) ----- */}
-            {/* แสดงเฉพาะตอนสมัครสมาชิก */}
-            {!isLogin && (
+            {/* ----- OTP INPUT (Verify Only) ----- */}
+            {isVerifying ? (
               <div className="input-group">
-                <label htmlFor="fullname">ชื่อ-นามสกุล หรือ ชื่อร้านค้า</label>
+                <label htmlFor="otp">รหัส OTP (6 หลัก)</label>
                 <input
                   type="text"
-                  id="fullname"
-                  placeholder="เช่น Bitwork Shop"
-                  value={formData.fullname}
-                  onChange={handleChange}
+                  id="otp"
+                  placeholder="123456"
+                  maxLength={6}
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  style={{ letterSpacing: "0.5em", textAlign: "center", fontSize: "1.2rem" }}
                   required
                 />
+                <p style={{ fontSize: "0.8rem", color: "#666", marginTop: "0.5rem" }}>
+                  ระบบได้ส่งรหัสยืนยันไปยังอีเมล {formData.email}
+                </p>
               </div>
-            )}
+            ) : (
+              <>
+                {/* ----- FULLNAME INPUT (Register Only) ----- */}
+                {/* แสดงเฉพาะตอนสมัครสมาชิก */}
+                {!isLogin && (
+                  <div className="input-group">
+                    <label htmlFor="fullname">ชื่อ-นามสกุล หรือ ชื่อร้านค้า</label>
+                    <input
+                      type="text"
+                      id="fullname"
+                      placeholder="เช่น Bitwork Shop"
+                      value={formData.fullname}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                )}
 
-            {/* ----- EMAIL INPUT ----- */}
-            {/* แสดงทั้ง Login และ Register */}
-            <div className="input-group">
-              <label htmlFor="email">อีเมล</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="name@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
+                {/* ----- EMAIL INPUT ----- */}
+                {/* แสดงทั้ง Login และ Register */}
+                <div className="input-group">
+                  <label htmlFor="email">อีเมล</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="name@example.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
 
-            {/* ----- PASSWORD INPUT ----- */}
-            {/* แสดงทั้ง Login และ Register */}
-            <div className="input-group">
-              <label htmlFor="password">รหัสผ่าน</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-            </div>
+                {/* ----- PASSWORD INPUT ----- */}
+                {/* แสดงทั้ง Login และ Register */}
+                <div className="input-group">
+                  <label htmlFor="password">รหัสผ่าน</label>
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="••••••••"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
 
-            {/* ----- CONFIRM PASSWORD INPUT (Register Only) ----- */}
-            {/* แสดงเฉพาะตอนสมัครสมาชิก เพื่อยืนยันรหัสผ่าน */}
-            {!isLogin && (
-              <div className="input-group">
-                <label htmlFor="confirmPassword">ยืนยันรหัสผ่าน</label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  placeholder="••••••••"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                {/* ----- CONFIRM PASSWORD INPUT (Register Only) ----- */}
+                {/* แสดงเฉพาะตอนสมัครสมาชิก เพื่อยืนยันรหัสผ่าน */}
+                {!isLogin && (
+                  <div className="input-group">
+                    <label htmlFor="confirmPassword">ยืนยันรหัสผ่าน</label>
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      placeholder="••••••••"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                )}
+              </>
             )}
 
             {/* =================================================================
@@ -386,9 +408,29 @@ const AuthPage = () => {
 
             {/* ----- SUBMIT BUTTON ----- */}
             {/* ข้อความเปลี่ยนตามโหมด */}
-            <button type="submit" className="btn-primary">
-              {isLogin ? "เข้าสู่ระบบ" : "ลงทะเบียน"}
-            </button>
+            {!isVerifying ? (
+              <button type="submit" className="btn-primary" disabled={loading}>
+                {loading ? "กำลังโหลด..." : isLogin ? "เข้าสู่ระบบ" : "ลงทะเบียน"}
+              </button>
+            ) : (
+              <button type="button" className="btn-primary" onClick={handleVerify} disabled={loading}>
+                {loading ? "กำลังตรวจสอบ..." : "ยืนยันรหัส OTP"}
+              </button>
+            )}
+
+            {/* Show "Back to Register" when verifying */}
+            {isVerifying && (
+              <div style={{ textAlign: "center", marginTop: "1rem" }}>
+                <button
+                  type="button"
+                  onClick={() => setIsVerifying(false)}
+                  className="forgot-link"
+                  style={{ background: "none", border: "none", cursor: "pointer" }}
+                >
+                  กลับไปแก้ไขอีเมล
+                </button>
+              </div>
+            )}
           </form>
 
           {/* =================================================================
