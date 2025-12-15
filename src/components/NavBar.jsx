@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import "./NavBar.css";
+import { useAuth } from "../contexts/AuthContext";
 
-const NavBar = ({ isLoggedIn = true, user = null }) => {
+const NavBar = () => {
+  const { user, signOut } = useAuth();
+  const isLoggedIn = !!user;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef(null);
@@ -197,9 +200,8 @@ const NavBar = ({ isLoggedIn = true, user = null }) => {
                     </svg>
                   </div>
                   <svg
-                    className={`dropdown-arrow ${
-                      isProfileDropdownOpen ? "open" : ""
-                    }`}
+                    className={`dropdown-arrow ${isProfileDropdownOpen ? "open" : ""
+                      }`}
                     width="14"
                     height="14"
                     viewBox="0 0 24 24"
@@ -213,9 +215,8 @@ const NavBar = ({ isLoggedIn = true, user = null }) => {
 
                 {/* Dropdown Menu */}
                 <div
-                  className={`profile-dropdown ${
-                    isProfileDropdownOpen ? "open" : ""
-                  }`}
+                  className={`profile-dropdown ${isProfileDropdownOpen ? "open" : ""
+                    }`}
                 >
                   <div className="dropdown-header">
                     <div className="dropdown-avatar">
@@ -305,7 +306,13 @@ const NavBar = ({ isLoggedIn = true, user = null }) => {
 
                   <div className="dropdown-divider"></div>
 
-                  <button className="dropdown-item logout">
+                  <button
+                    className="dropdown-item logout"
+                    onClick={async () => {
+                      await signOut();
+                      setIsProfileDropdownOpen(false);
+                    }}
+                  >
                     <svg
                       width="18"
                       height="18"

@@ -13,8 +13,9 @@ import JobCard from "./JobCard";
 // นำเข้าไฟล์ CSS สำหรับ styling
 import "./JobListing.css";
 
-// นำเข้าข้อมูล mock data จากไฟล์ JSON
-import jobListingData from "./jobListingData.json";
+// นำเข้า API
+import { fetchJobs } from "../../../lib/api";
+import { useEffect } from "react";
 
 /**
  * JobListing Component
@@ -33,12 +34,28 @@ const JobListing = () => {
   // state เก็บวิธีเรียงลำดับที่เลือก (ค่าเริ่มต้น = "latest")
   const [sortBy, setSortBy] = useState("latest");
 
-  // ===== DATA - ข้อมูลงานจาก JSON file =====
-  // ในโปรเจคจริงควรดึงจาก API
-  const jobs = jobListingData.jobs;
+  // ===== DATA - ข้อมูลงานจาก API =====
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // รายการตัวกรองที่แสดงเป็นปุ่ม (จาก JSON)
-  const filters = jobListingData.filters;
+  // รายการตัวกรองที่แสดงเป็นปุ่ม
+  const filters = ["ทั้งหมด", "Full-time", "Part-time", "Contract", "Remote"];
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await fetchJobs();
+        // Convert API dates to match structure if needed, or rely on Prisma/JSON match
+        // Prisma 'postedDate' is DateTime string.
+        setJobs(data);
+      } catch (error) {
+        console.error("Failed to load jobs", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
 
   // ===== EVENT HANDLERS =====
 
@@ -52,7 +69,7 @@ const JobListing = () => {
       prev.includes(jobId)
         ? prev.filter((id) => id !== jobId)
         : // ถ้ายังไม่มี ให้เพิ่มเข้าไป (บันทึก)
-          [...prev, jobId]
+        [...prev, jobId]
     );
   };
 
@@ -160,9 +177,8 @@ const JobListing = () => {
             <button
               key={filter}
               // เพิ่ม class "active" ถ้าเป็น filter ที่เลือกอยู่
-              className={`filter-chip ${
-                activeFilter === filter ? "active" : ""
-              }`}
+              className={`filter-chip ${activeFilter === filter ? "active" : ""
+                }`}
               // อัพเดท activeFilter เมื่อคลิก
               onClick={() => setActiveFilter(filter)}
             >

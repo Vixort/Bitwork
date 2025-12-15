@@ -3,8 +3,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./MarketMain.css";
 
-// Import shared products data from central JSON file
+// Import shared products data from central JSON file (keeping for storeInfo/categories)
 import productsData from "../../data/productsData.json";
+import { fetchProducts } from "../../lib/api";
 
 // Transform data to match Market format
 const transformProductsForMarket = (products) => {
@@ -12,7 +13,7 @@ const transformProductsForMarket = (products) => {
     .filter((p) => p.status === "active") // Only show active products
     .map((product) => ({
       id: product.id,
-      title: product.name,
+      title: product.title || product.name, // Schema uses title, JSON uses name? Check data.
       description: product.description,
       fullDescription: product.fullDescription || product.description,
       price: `฿${product.price.toLocaleString()}`,
@@ -26,7 +27,7 @@ const transformProductsForMarket = (products) => {
       images: product.images,
       specs: product.specs,
       rating: product.rating,
-      sold: product.sales,
+      sold: product.sold || product.sales || 0, // Handle schema 'sold' vs json 'sales'
       seller: product.seller || productsData.storeInfo.name,
       reviewsList:
         product.reviews?.map((r) => ({
@@ -39,7 +40,7 @@ const transformProductsForMarket = (products) => {
 const marketData = {
   storeInfo: productsData.storeInfo,
   categories: productsData.categories,
-  products: transformProductsForMarket(productsData.products),
+  // products: ... removed from static
 };
 
 const MarketMain = () => {
@@ -52,6 +53,24 @@ const MarketMain = () => {
       offset: 50,
     });
   }, []);
+
+  // Fetch products from API
+  const [dbProducts, setDbProducts] = useState([]);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        if (data) setDbProducts(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    loadProducts();
+  }, []);
+
+  const displayProducts = dbProducts.length > 0 ? transformProductsForMarket(dbProducts) : transformProductsForMarket(productsData.products); // Fallback or empty?
+
 
   // รายการหมวดหมู่สินค้าที่ใช้สร้างปุ่มตัวกรองด้านบน (จาก JSON)
   const fillter = marketData.categories;
@@ -210,8 +229,8 @@ const MarketMain = () => {
     return sum + price * item.quantity;
   }, 0);
 
-  // สินค้าตัวอย่างที่ใช้แสดงในการ์ด (จาก JSON file)
-  const products = marketData.products;
+  // สินค้าตัวอย่างที่ใช้แสดงในการ์ด
+  const products = displayProducts;
   const storeInfo = marketData.storeInfo;
 
   // กรองสินค้าตามหมวดหมู่และคำค้นหา

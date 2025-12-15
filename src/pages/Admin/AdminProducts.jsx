@@ -9,9 +9,23 @@ import "../Market/MarketMain.css";
 
 // Import shared products data
 import productsData from "../../data/productsData.json";
+import { fetchProducts, createProduct, updateProduct, deleteProduct } from "../../lib/api";
 
 const AdminProducts = () => {
-  const [products, setProducts] = useState(productsData.products);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  const loadProducts = async () => {
+    try {
+      const data = await fetchProducts();
+      if (data) setProducts(data);
+    } catch (error) {
+      console.error("Failed to load products", error);
+    }
+  };
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [filterCategory, setFilterCategory] = useState("all");
@@ -140,39 +154,57 @@ const AdminProducts = () => {
   };
 
   // Handle Add Product
-  const handleAddProduct = () => {
-    const newProduct = {
-      id: Date.now(),
-      ...formData,
-      sales: 0,
-      rating: 0,
-      reviews: [],
-      seller: productsData.storeInfo.name,
-    };
-    setProducts([...products, newProduct]);
-    setShowAddModal(false);
-    resetForm();
-    showNotification("เพิ่มสินค้าสำเร็จ!");
+  const handleAddProduct = async () => {
+    try {
+      const productData = {
+        ...formData,
+        rating: 0,
+        seller: productsData.storeInfo.name,
+        // API expects sold, ensure we handle conversion if needed
+        sold: 0
+      };
+
+      const newProduct = await createProduct(productData);
+      setProducts([newProduct, ...products]);
+      setShowAddModal(false);
+      resetForm();
+      showNotification("เพิ่มสินค้าสำเร็จ!");
+    } catch (error) {
+      console.error(error);
+      showNotification("เพิ่มสินค้าไม่สำเร็จ", "error");
+    }
   };
 
   // Handle Edit Product
-  const handleEditProduct = () => {
-    const updatedProducts = products.map((p) =>
-      p.id === selectedProduct.id ? { ...p, ...formData } : p
-    );
-    setProducts(updatedProducts);
-    setShowEditModal(false);
-    setSelectedProduct(null);
-    showNotification("แก้ไขสินค้าสำเร็จ!");
+  const handleEditProduct = async () => {
+    try {
+      const updatedProduct = await updateProduct(selectedProduct.id, formData);
+      const updatedProducts = products.map((p) =>
+        p.id === selectedProduct.id ? updatedProduct : p
+      );
+      setProducts(updatedProducts);
+      setShowEditModal(false);
+      setSelectedProduct(null);
+      showNotification("แก้ไขสินค้าสำเร็จ!");
+    } catch (error) {
+      console.error(error);
+      showNotification("แก้ไขสินค้าไม่สำเร็จ", "error");
+    }
   };
 
   // Handle Delete Product
-  const handleDeleteProduct = () => {
-    const updatedProducts = products.filter((p) => p.id !== selectedProduct.id);
-    setProducts(updatedProducts);
-    setShowDeleteModal(false);
-    setSelectedProduct(null);
-    showNotification("ลบสินค้าสำเร็จ!", "warning");
+  const handleDeleteProduct = async () => {
+    try {
+      await deleteProduct(selectedProduct.id);
+      const updatedProducts = products.filter((p) => p.id !== selectedProduct.id);
+      setProducts(updatedProducts);
+      setShowDeleteModal(false);
+      setSelectedProduct(null);
+      showNotification("ลบสินค้าสำเร็จ!", "warning");
+    } catch (error) {
+      console.error(error);
+      showNotification("ลบสินค้าไม่สำเร็จ", "error");
+    }
   };
 
   // Handle form input change
@@ -442,9 +474,8 @@ const AdminProducts = () => {
                 alt={product.name}
               />
               <span
-                className={`status-badge ${
-                  getStatusBadge(product.status).class
-                }`}
+                className={`status-badge ${getStatusBadge(product.status).class
+                  }`}
               >
                 {getStatusBadge(product.status).label}
               </span>
@@ -479,13 +510,12 @@ const AdminProducts = () => {
                 <div className="stat">
                   <span className="label">คงเหลือ</span>
                   <span
-                    className={`value stock ${
-                      product.stock === 0
-                        ? "out"
-                        : product.stock < 10
+                    className={`value stock ${product.stock === 0
+                      ? "out"
+                      : product.stock < 10
                         ? "low"
                         : ""
-                    }`}
+                      }`}
                   >
                     {product.stock}
                   </span>
@@ -1301,7 +1331,7 @@ const AdminProducts = () => {
               <div className="market-cv-image-section">
                 <div className="market-cv-main-image">
                   {selectedProduct.images &&
-                  selectedProduct.images.length > 0 ? (
+                    selectedProduct.images.length > 0 ? (
                     <img
                       src={
                         selectedProduct.images[previewImageIndex] ||
@@ -1337,9 +1367,8 @@ const AdminProducts = () => {
                       {selectedProduct.images.map((img, idx) => (
                         <div
                           key={idx}
-                          className={`market-cv-thumbnail ${
-                            previewImageIndex === idx ? "active" : ""
-                          }`}
+                          className={`market-cv-thumbnail ${previewImageIndex === idx ? "active" : ""
+                            }`}
                           onClick={() => setPreviewImageIndex(idx)}
                         >
                           <img
@@ -1431,9 +1460,8 @@ const AdminProducts = () => {
                       {selectedProduct.category}
                     </span>
                     <span
-                      className={`market-cv-status-badge ${
-                        selectedProduct.stock > 0 ? "in-stock" : "out-of-stock"
-                      }`}
+                      className={`market-cv-status-badge ${selectedProduct.stock > 0 ? "in-stock" : "out-of-stock"
+                        }`}
                     >
                       {selectedProduct.stock > 0 ? "พร้อมจำหน่าย" : "สินค้าหมด"}
                     </span>
@@ -1532,25 +1560,22 @@ const AdminProducts = () => {
                 {/* Tabs */}
                 <div className="market-cv-tabs">
                   <button
-                    className={`market-cv-tab-btn ${
-                      previewTab === "details" ? "active" : ""
-                    }`}
+                    className={`market-cv-tab-btn ${previewTab === "details" ? "active" : ""
+                      }`}
                     onClick={() => setPreviewTab("details")}
                   >
                     รายละเอียด
                   </button>
                   <button
-                    className={`market-cv-tab-btn ${
-                      previewTab === "reviews" ? "active" : ""
-                    }`}
+                    className={`market-cv-tab-btn ${previewTab === "reviews" ? "active" : ""
+                      }`}
                     onClick={() => setPreviewTab("reviews")}
                   >
                     รีวิว ({selectedProduct.reviews?.length || 0})
                   </button>
                   <button
-                    className={`market-cv-tab-btn ${
-                      previewTab === "comments" ? "active" : ""
-                    }`}
+                    className={`market-cv-tab-btn ${previewTab === "comments" ? "active" : ""
+                      }`}
                     onClick={() => setPreviewTab("comments")}
                   >
                     เขียนรีวิว
@@ -1683,7 +1708,7 @@ const AdminProducts = () => {
                   {previewTab === "reviews" && (
                     <div className="market-cv-reviews-tab">
                       {selectedProduct.reviews &&
-                      selectedProduct.reviews.length > 0 ? (
+                        selectedProduct.reviews.length > 0 ? (
                         <div className="market-cv-reviews-list">
                           {selectedProduct.reviews.map((review) => (
                             <div

@@ -36,6 +36,8 @@
 // =============================================================================
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 
 /**
  * AOS (Animate On Scroll) Library
@@ -167,12 +169,37 @@ const AuthPage = () => {
    * - เพิ่ม Loading State
    * - Redirect หลัง Login/Register สำเร็จ
    */
-  const handleSubmit = (e) => {
+  const { signIn, signUp } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isLogin) {
-      console.log("Login Logic:", formData.email);
-    } else {
-      console.log("Register Logic:", formData);
+    setError("");
+    setLoading(true);
+
+    try {
+      if (isLogin) {
+        const { error } = await signIn(formData.email, formData.password);
+        if (error) throw error;
+        navigate("/");
+      } else {
+        if (formData.password !== formData.confirmPassword) {
+          throw new Error("Passwords do not match");
+        }
+        const { error } = await signUp(formData.email, formData.password, {
+          full_name: formData.fullname
+        });
+        if (error) throw error;
+        // Optional: Show success message or redirect to verification page
+        alert("Registration successful! Please check your email for verification.");
+        setIsLogin(true);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -253,6 +280,8 @@ const AuthPage = () => {
             key={isLogin ? "login" : "register"}
             className="fade-in-form"
           >
+            {error && <div className="auth-error">{error}</div>}
+
             {/* ----- FULLNAME INPUT (Register Only) ----- */}
             {/* แสดงเฉพาะตอนสมัครสมาชิก */}
             {!isLogin && (

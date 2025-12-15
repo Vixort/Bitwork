@@ -87,6 +87,7 @@ import App from "./App.jsx";
 import "./pages/home/home.jsx";
 
 import Footer from "./components/Footer.jsx";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
 
 // =============================================================================
 // LAYOUT WRAPPER - Component ที่จัดการแสดง NavBar/Footer
@@ -134,8 +135,10 @@ const AppWrapper = () => {
  */
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <AppWrapper />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <AppWrapper />
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>
 );

@@ -39,3 +39,5 @@ remoteconfig.template.json
 # Firebase emulator data
 firebase-export-*
 emulator-data/
+
+/src/generated/prisma
