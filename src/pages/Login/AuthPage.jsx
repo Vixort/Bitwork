@@ -105,6 +105,10 @@ const AuthPage = () => {
     confirmPassword: "",
   });
 
+  // OTP Verification State
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [otp, setOtp] = useState("");
+
   // =============================================================================
   // SIDE EFFECTS - ผลข้างเคียง (useEffect)
   // =============================================================================
@@ -169,10 +173,27 @@ const AuthPage = () => {
    * - เพิ่ม Loading State
    * - Redirect หลัง Login/Register สำเร็จ
    */
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, verifyOtp } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleVerify = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      const { error } = await verifyOtp(formData.email, otp);
+      if (error) throw error;
+      alert("Email verified successfully! You can now login.");
+      setIsVerifying(false);
+      setIsLogin(true);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -192,9 +213,9 @@ const AuthPage = () => {
           full_name: formData.fullname
         });
         if (error) throw error;
-        // Optional: Show success message or redirect to verification page
-        alert("Registration successful! Please check your email for verification.");
-        setIsLogin(true);
+        if (error) throw error;
+        // Proceed to OTP verification
+        setIsVerifying(true);
       }
     } catch (err) {
       setError(err.message);
