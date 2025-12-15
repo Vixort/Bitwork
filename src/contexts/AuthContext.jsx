@@ -49,19 +49,10 @@ export const AuthProvider = ({ children }) => {
         return supabase.auth.signOut();
     };
 
-    const verifyOtp = async (email, token) => {
-        return supabase.auth.verifyOtp({
-            email,
-            token,
-            type: 'signup'
-        });
-    };
-
     const value = {
         signUp,
         signIn,
         signOut,
-        verifyOtp,
         user,
         loading
     };

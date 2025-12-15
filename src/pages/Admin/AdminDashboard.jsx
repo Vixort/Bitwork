@@ -17,30 +17,33 @@ const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    if (!loading && (!user || user.email !== 'bitwork.store@gmail.com')) {
-      navigate('/login');
+    // Redirect if not admin
+    if (!loading) {
+      if (!user || user.email?.toLowerCase() !== 'bitwork.store@gmail.com') {
+        navigate('/login');
+        return;
+      }
     }
 
     // Fetch real stats
     async function fetchStats() {
       try {
-        // Using existing APIs to count
         const [jobsRes, productsRes] = await Promise.all([
-          fetch('/api/jobs').then(r => r.json()),
-          fetch('/api/products').then(r => r.json())
+          fetch('/api/jobs').then(async r => r.ok ? r.json() : []),
+          fetch('/api/products').then(async r => r.ok ? r.json() : [])
         ]);
 
         setDbStats({
-          jobs: jobsRes.length || 0,
-          products: productsRes.length || 0,
-          users: 0 // User API not available publicly yet
+          jobs: Array.isArray(jobsRes) ? jobsRes.length : 0,
+          products: Array.isArray(productsRes) ? productsRes.length : 0,
+          users: 0
         });
       } catch (e) {
         console.error("Failed to fetch dashboard stats", e);
       }
     }
 
-    if (user?.email === 'bitwork.store@gmail.com') {
+    if (!loading && user?.email?.toLowerCase() === 'bitwork.store@gmail.com') {
       fetchStats();
     }
 
