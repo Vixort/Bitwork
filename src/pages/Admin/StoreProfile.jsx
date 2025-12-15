@@ -5,7 +5,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import "./StoreProfile.css";
-import productsData from "../../data/productsData.json";
+// Import shared data
+import { storeInfo } from "../../data/constants";
 
 const StoreProfile = () => {
   const navigate = useNavigate();
@@ -342,9 +343,8 @@ const StoreProfile = () => {
         {/* Category Filter */}
         <div className="category-filter">
           <button
-            className={`category-btn ${
-              selectedCategory === "ทั้งหมด" ? "active" : ""
-            }`}
+            className={`category-btn ${selectedCategory === "ทั้งหมด" ? "active" : ""
+              }`}
             onClick={() => setSelectedCategory("ทั้งหมด")}
           >
             ทั้งหมด
@@ -352,9 +352,8 @@ const StoreProfile = () => {
           {categories.slice(0, 8).map((category) => (
             <button
               key={category}
-              className={`category-btn ${
-                selectedCategory === category ? "active" : ""
-              }`}
+              className={`category-btn ${selectedCategory === category ? "active" : ""
+                }`}
               onClick={() => setSelectedCategory(category)}
             >
               {category}

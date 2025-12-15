@@ -7,14 +7,15 @@ import React, { useState } from "react";
 import "./AdminStoreSettings.css";
 
 // Import store data
-import productsData from "../../data/productsData.json";
+// Import store data
+import { storeInfo } from "../../data/constants";
 
 const AdminStoreSettings = () => {
   // Store profile state
   const [storeData, setStoreData] = useState({
-    name: productsData.storeInfo?.name || "Bitwork Store",
+    name: storeInfo?.name || "Bitwork Store",
     description:
-      productsData.storeInfo?.description || "ร้านขายอุปกรณ์ IT คุณภาพสูง",
+      storeInfo?.description || "ร้านขายอุปกรณ์ IT คุณภาพสูง",
     email: "contact@bitworkstore.com",
     phone: "02-123-4567",
     address: "123 ถนนสุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพฯ 10110",
