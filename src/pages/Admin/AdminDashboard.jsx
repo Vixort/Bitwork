@@ -19,8 +19,9 @@ const AdminDashboard = () => {
   useEffect(() => {
     // Redirect if not admin
     if (!loading) {
-      if (!user || user.email?.toLowerCase() !== 'bitwork.store@gmail.com') {
-        navigate('/login');
+      const role = user?.user_metadata?.role;
+      if (!user || role !== 'admin') {
+        navigate('/admin/login'); // Redirect to Admin Login
         return;
       }
     }
@@ -43,7 +44,7 @@ const AdminDashboard = () => {
       }
     }
 
-    if (!loading && user?.email?.toLowerCase() === 'bitwork.store@gmail.com') {
+    if (!loading && user?.user_metadata?.role === 'admin') {
       fetchStats();
     }
 

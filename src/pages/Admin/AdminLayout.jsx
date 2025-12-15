@@ -6,16 +6,19 @@ import React, { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router";
 import "./AdminLayout.css";
 
+import { useAuth } from "../../contexts/AuthContext";
+
 const AdminLayout = () => {
   const navigate = useNavigate();
+  const { user, signOut } = useAuth(); // Get user from context
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
-  // Mock admin data
+  // Use real data or fallback
   const adminData = {
-    name: "สมชาย Tech Store",
-    email: "admin@techstore.com",
-    avatar: null,
+    name: user?.user_metadata?.shop_name || user?.user_metadata?.full_name || "Shop Admin",
+    email: user?.email || "admin@example.com",
+    avatar: user?.user_metadata?.avatar_url || null,
   };
 
   const menuItems = [
@@ -157,9 +160,13 @@ const AdminLayout = () => {
     },
   ];
 
-  const handleLogout = () => {
-    // Mock logout
-    navigate("/admin/login");
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate("/admin/login");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
   };
 
   const getInitials = (name) => {
