@@ -4,6 +4,7 @@
  */
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 import "./AdminLogin.css";
 
 const AdminLogin = () => {
@@ -24,21 +25,22 @@ const AdminLogin = () => {
     }));
   };
 
+  const { signIn } = useAuth();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
-    // Mock login - ในโปรเจคจริงจะเชื่อมต่อ Firebase Auth
-    setTimeout(() => {
-      if (formData.email && formData.password) {
-        // Mock success - redirect to admin dashboard
-        navigate("/admin/dashboard");
-      } else {
-        setError("กรุณากรอกข้อมูลให้ครบถ้วน");
-      }
+    try {
+      const { error } = await signIn(formData.email, formData.password);
+      if (error) throw error;
+      navigate("/admin/dashboard");
+    } catch (err) {
+      setError(err.message || "อีเมลหรือรหัสผ่านไม่ถูกต้อง");
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (

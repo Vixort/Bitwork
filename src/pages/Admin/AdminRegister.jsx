@@ -4,6 +4,7 @@
  */
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 import "./AdminRegister.css";
 
 const AdminRegister = () => {
@@ -137,16 +138,46 @@ const AdminRegister = () => {
     }
   };
 
+  const { signUp } = useAuth(); // Destructure signUp from context
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateStep3()) return;
 
     setIsLoading(true);
-    // Mock registration
-    setTimeout(() => {
+    try {
+      // Prepare metadata
+      const metaData = {
+        full_name: formData.ownerName,
+        phone: formData.ownerPhone,
+        shop_name: formData.shopName,
+        shop_description: formData.shopDescription,
+        shop_category: formData.shopCategory,
+        shop_province: formData.shopProvince,
+        shop_address: formData.shopAddress,
+        business_type: formData.businessType,
+        tax_id: formData.taxId,
+        role: 'admin' // Mark as admin role request
+      };
+
+      const { data, error } = await signUp(formData.ownerEmail, formData.password, metaData);
+
+      if (error) throw error;
+
+      if (data?.session) {
+        navigate("/admin/dashboard");
+      } else {
+        // If email confirmation is enabled
+        navigate("/admin/login?registered=true");
+      }
+
+    } catch (err) {
+      console.error("Registration failed", err);
+      // Show error on appropriate step or general alert
+      alert(err.message || "การสมัครล้มเหลว กรุณาลองใหม่อีกครั้ง");
+    } finally {
       setIsLoading(false);
-      navigate("/admin/login?registered=true");
-    }, 1500);
+    }
   };
 
   return (
@@ -233,9 +264,8 @@ const AdminRegister = () => {
           {/* Progress Steps */}
           <div className="register-steps">
             <div
-              className={`step ${step >= 1 ? "active" : ""} ${
-                step > 1 ? "completed" : ""
-              }`}
+              className={`step ${step >= 1 ? "active" : ""} ${step > 1 ? "completed" : ""
+                }`}
             >
               <div className="step-number">
                 {step > 1 ? (
@@ -257,9 +287,8 @@ const AdminRegister = () => {
             </div>
             <div className="step-line" />
             <div
-              className={`step ${step >= 2 ? "active" : ""} ${
-                step > 2 ? "completed" : ""
-              }`}
+              className={`step ${step >= 2 ? "active" : ""} ${step > 2 ? "completed" : ""
+                }`}
             >
               <div className="step-number">
                 {step > 2 ? (
@@ -549,9 +578,8 @@ const AdminRegister = () => {
 
                 <div className="terms-section">
                   <label
-                    className={`checkbox-label ${
-                      errors.acceptTerms ? "error" : ""
-                    }`}
+                    className={`checkbox-label ${errors.acceptTerms ? "error" : ""
+                      }`}
                   >
                     <input
                       type="checkbox"
@@ -572,9 +600,8 @@ const AdminRegister = () => {
                   )}
 
                   <label
-                    className={`checkbox-label ${
-                      errors.acceptPolicy ? "error" : ""
-                    }`}
+                    className={`checkbox-label ${errors.acceptPolicy ? "error" : ""
+                      }`}
                   >
                     <input
                       type="checkbox"
