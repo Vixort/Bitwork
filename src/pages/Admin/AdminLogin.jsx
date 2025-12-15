@@ -25,7 +25,7 @@ const AdminLogin = () => {
     }));
   };
 
-  const { signIn } = useAuth();
+  const { signIn, signOut } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,8 +33,16 @@ const AdminLogin = () => {
     setError("");
 
     try {
-      const { error } = await signIn(formData.email, formData.password);
+      const { data, error } = await signIn(formData.email, formData.password);
       if (error) throw error;
+
+      // Strict Role Check for "Separate Database" feel
+      const role = data.user?.user_metadata?.role;
+      if (role !== 'admin') {
+        await signOut(); // Force logout if not admin
+        throw new Error("บัญชีนี้ไม่ใช่บัญชีร้านค้า กรุณาเข้าสู่ระบบที่หน้าลูกค้าทั่วไป");
+      }
+
       navigate("/admin/dashboard");
     } catch (err) {
       setError(err.message || "อีเมลหรือรหัสผ่านไม่ถูกต้อง");

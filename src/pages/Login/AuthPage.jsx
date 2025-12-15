@@ -163,13 +163,6 @@ const AuthPage = () => {
    * 1. e.preventDefault() - ป้องกัน Form reload หน้า
    * 2. ตรวจสอบว่าเป็น Login หรือ Register
    * 3. Log ข้อมูลไปที่ Console (สำหรับ Debug)
-   *
-   * TODO:
-   * - เชื่อมต่อ API สำหรับ Authentication
-   * - เพิ่ม Validation (password match, email format)
-   * - เพิ่ม Error Handling
-   * - เพิ่ม Loading State
-   * - Redirect หลัง Login/Register สำเร็จ
    */
   const { signIn, signUp } = useAuth();
   const [error, setError] = useState("");
@@ -183,21 +176,38 @@ const AuthPage = () => {
 
     try {
       if (isLogin) {
-        const { error } = await signIn(formData.email, formData.password);
+        const { data, error } = await signIn(formData.email, formData.password);
         if (error) throw error;
+
+        // Strict Role Check: Deny Admins on Normal Login
+        const role = data.user?.user_metadata?.role;
+        if (role === 'admin') {
+          await signOut();
+          throw new Error("บัญชีร้านค้ากรุณาเข้าสู่ระบบที่หน้า Admin");
+        }
+
         navigate("/");
       } else {
         if (formData.password !== formData.confirmPassword) {
           throw new Error("Passwords do not match");
         }
+        console.log("Attempting registration with:", formData.email);
+
+        // Explicitly set role as 'user'
         const { data, error } = await signUp(formData.email, formData.password, {
-          full_name: formData.fullname
+          full_name: formData.fullname,
+          role: 'user'
         });
+
+        console.log("Supabase SignUp Result:", { data, error });
+
         if (error) throw error;
 
         if (data?.session) {
+          console.log("Session active, redirecting...");
           navigate("/");
         } else {
+          console.log("No session. Check if Email Confirmation is enabled in Supabase.");
           alert("Registration successful! You can now log in.");
           setIsLogin(true);
           setFormData({
@@ -272,7 +282,7 @@ const AuthPage = () => {
               หมายเหตุ: มี $ ตรงหน้า h2 ซึ่งเป็น typo
               ควรลบออก
             */}
-            $<h2>{isLogin ? "ยินดีต้อนรับกลับมา" : "สร้างบัญชีใหม่"}</h2>
+            <h2>{isLogin ? "ยินดีต้อนรับกลับมา" : "สร้างบัญชีใหม่"}</h2>
             <p>
               {isLogin
                 ? "เข้าสู่ระบบเพื่อจัดการงานและร้านค้าของคุณ"
